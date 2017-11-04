@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using LanguageBuilder.Models;
+using LanguageBuilder.Data.Models;
 
 namespace LanguageBuilder.Data
 {
@@ -15,6 +15,7 @@ namespace LanguageBuilder.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

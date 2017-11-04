@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using LanguageBuilder.Data;
 using LanguageBuilder.Web.Models;
 using LanguageBuilder.Web.Services;
+using LanguageBuilder.Web.Infrastructure.Extensions;
+using LanguageBuilder.Data.Models;
 
 namespace LanguageBuilder.Web
 {
@@ -26,6 +28,7 @@ namespace LanguageBuilder.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -33,14 +36,14 @@ namespace LanguageBuilder.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                //password options
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 3;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-            });
+            //services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            //{
+            //    //password options
+            //    options.Password.RequireDigit = false;
+            //    options.Password.RequiredLength = 3;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //    options.Password.RequireUppercase = false;
+            //});
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -65,9 +68,11 @@ namespace LanguageBuilder.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseAuthentication();
+
             app.UseStaticFiles();
 
-            app.UseAuthentication();
+            app.UseDatabaseMigration();
 
             app.UseMvc(routes =>
             {
