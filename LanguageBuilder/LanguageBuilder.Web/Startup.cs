@@ -8,11 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using LanguageBuilder.Data;
-using LanguageBuilder.Web.Models;
 using LanguageBuilder.Web.Services;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Data.Models;
+using LanguageBuilder.Data;
 
 namespace LanguageBuilder.Web
 {
@@ -29,21 +28,19 @@ namespace LanguageBuilder.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<LanguageBuilderDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+            services
+                .AddIdentity<User, Role>(options =>
+                {
+                    //options.Password.RequireDigit = false;
+                    //options.Password.RequiredLength = 3;
+                    //options.Password.RequireNonAlphanumeric = false;
+                    //options.Password.RequireUppercase = false;
+                })
+                .AddEntityFrameworkStores<LanguageBuilderDbContext>()
                 .AddDefaultTokenProviders();
-
-            //services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            //{
-            //    //password options
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequiredLength = 3;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Password.RequireUppercase = false;
-            //});
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -52,7 +49,7 @@ namespace LanguageBuilder.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, LanguageBuilderDbContext context)
         {
             //debug
             //env.EnvironmentName = "Production";
@@ -80,6 +77,8 @@ namespace LanguageBuilder.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            DbInitializer.Initialize(context);
         }
     }
 }

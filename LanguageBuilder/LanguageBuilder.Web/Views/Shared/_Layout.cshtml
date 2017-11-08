@@ -2,11 +2,16 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LanguageBuilder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="Web app which helps you to commit new vocabulary to long term memory.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Petar Stoyanov">
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-reboot.min.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css" />
         <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -18,35 +23,20 @@
               integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-light bg-light navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button class="navbar-toggler navbar-toggler-right" type="button" 
-                        data-toggle="collapse" data-target="#navbarNav" 
-                        aria-controls="navbarTogglerDemo02" aria-expanded="false" 
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">LanguageBuilder</a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-                    <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
-            </div>
-        </div>
-    </nav>
+    
+    @Html.Partial("_Navigation")
+
     <div class="container body-content">
+        
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2017 - LanguageBuilder</p>
-        </footer>
+        
+        @Html.Partial("_Footer")
+
     </div>
 
     <environment include="Development">
@@ -72,5 +62,7 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+    @Html.Partial("_GoogleAnalytics")
 </body>
 </html>

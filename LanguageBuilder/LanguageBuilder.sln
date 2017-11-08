@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageBuilder.Web", "Lang
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageBuilder.Data", "LanguageBuilder.Data\LanguageBuilder.Data.csproj", "{E1EE893C-BC6E-41F3-BA2A-0ED384B4CDE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageBuilder.Tests", "LanguageBuilder.Tests\LanguageBuilder.Tests.csproj", "{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E1EE893C-BC6E-41F3-BA2A-0ED384B4CDE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1EE893C-BC6E-41F3-BA2A-0ED384B4CDE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1EE893C-BC6E-41F3-BA2A-0ED384B4CDE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
