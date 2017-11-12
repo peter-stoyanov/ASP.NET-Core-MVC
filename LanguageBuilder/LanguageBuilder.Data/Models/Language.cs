@@ -14,7 +14,7 @@ namespace LanguageBuilder.Data.Models
         [MaxLength(30)]
         public string Name { get; set; }
 
-        public bool IsUsed { get; set; }
+        public bool IsUsed { get; set; } = true;
 
         public List<UserLanguage> Users { get; set; } = new List<UserLanguage>();
 

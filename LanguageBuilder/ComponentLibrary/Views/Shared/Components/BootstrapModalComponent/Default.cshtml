@@ -1,0 +1,19 @@
+﻿@model ComponentLibrary.BootstrapModalViewModel
+
+<div class="modal fade" @{if (Model.Id != null) { <text>id="@Model.Id"</text> } } tabindex="-1" role="dialog" aria-labelledby="@Model.AriaLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="@Model.AriaLabel">@Model.Title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </div>
+            <div class="modal-body">
+                @Model.Body
+            </div>
+            <div class="modal-footer">
+                <button @{if (Model.CancelButtonId != null) { <text>id="@Model.CancelButtonId"</text> } } type="button" class="btn btn-secondary" data-dismiss="modal">@Model.CancelButtonName</button>
+                <button @{if (Model.ConfirmButtonId != null) { <text>id="@Model.ConfirmButtonId"</text> } } type="button" class="btn btn-default" data-dismiss="modal">@Model.ConfirmButtonName</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using LanguageBuilder.Web.Services;
+using LanguageBuilder.Services.Contracts;
 
 namespace LanguageBuilder.Web.Services
 {

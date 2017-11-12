@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageBuilder.Web", "LanguageBuilder.Web\LanguageBuilder.Web.csproj", "{8C6552EA-B7EB-455B-964C-5482EE09CB14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageBuilder.Web", "LanguageBuilder.Web\LanguageBuilder.Web.csproj", "{8C6552EA-B7EB-455B-964C-5482EE09CB14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageBuilder.Data", "LanguageBuilder.Data\LanguageBuilder.Data.csproj", "{E1EE893C-BC6E-41F3-BA2A-0ED384B4CDE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageBuilder.Data", "LanguageBuilder.Data\LanguageBuilder.Data.csproj", "{E1EE893C-BC6E-41F3-BA2A-0ED384B4CDE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageBuilder.Tests", "LanguageBuilder.Tests\LanguageBuilder.Tests.csproj", "{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageBuilder.Tests", "LanguageBuilder.Tests\LanguageBuilder.Tests.csproj", "{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageBuilder.Services", "LanguageBuilder.Services\LanguageBuilder.Services.csproj", "{DAD862CB-522C-4799-92E7-3C0F73BA2092}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentLibrary", "ComponentLibrary\ComponentLibrary.csproj", "{CA834B9D-B947-4381-A20C-9F22024B5DA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E10E76C-06BD-4D6E-8280-BA71A3911B1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD862CB-522C-4799-92E7-3C0F73BA2092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD862CB-522C-4799-92E7-3C0F73BA2092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD862CB-522C-4799-92E7-3C0F73BA2092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD862CB-522C-4799-92E7-3C0F73BA2092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA834B9D-B947-4381-A20C-9F22024B5DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA834B9D-B947-4381-A20C-9F22024B5DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA834B9D-B947-4381-A20C-9F22024B5DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA834B9D-B947-4381-A20C-9F22024B5DA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

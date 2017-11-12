@@ -12,6 +12,10 @@ using LanguageBuilder.Web.Services;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Data;
+using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Services.Implementations;
+using LanguageBuilder.Web.Infrastructure.Filters;
+using Microsoft.AspNetCore.Http;
 
 namespace LanguageBuilder.Web
 {
@@ -34,18 +38,65 @@ namespace LanguageBuilder.Web
             services
                 .AddIdentity<User, Role>(options =>
                 {
-                    //options.Password.RequireDigit = false;
-                    //options.Password.RequiredLength = 3;
-                    //options.Password.RequireNonAlphanumeric = false;
-                    //options.Password.RequireUppercase = false;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 3;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
                 })
                 .AddEntityFrameworkStores<LanguageBuilderDbContext>()
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
+            //services.AddTransient<IEmailSender, EmailSender>();
+            //services.AddTransient<IWordsService, WordsService>();
+            //services.AddTransient<IUsersService, UsersService>();
+            services.AddDomainServices();
 
-            services.AddMvc();
+            services.AddAutoMapper();
+            services.AddEmbededFileProviderServices();
+
+            services.AddMvc(config =>
+            {
+                config.Filters.Add(new ValidateModelAttribute());
+            });
+
+
+
+            services.AddSession(options =>
+            {
+                //options.Cookie.Name = ".LanguageBuilder.Session";
+                //options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
+            // This one's not working yet...
+            services.Configure<SessionOptions>(options =>
+            {
+                options.Cookie.HttpOnly = false;
+                options.Cookie.Name = "LOGIN_COOKIE";
+                options.Cookie.Domain = "asdf.com";
+                options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
+                options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
+            });
+
+            services.Configure<CookiePolicyOptions>(o =>
+            {
+                o.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.None;
+                o.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+                o.Secure = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
+            });
+
+            services
+                .AddAuthentication("CookieAuth")
+                .AddCookie("CookieAuth", options =>
+                {
+                    options.LoginPath = new PathString("/Home/Login/");
+                    options.AccessDeniedPath = new PathString("/Home/Error/");
+                    options.Cookie.HttpOnly = false;
+                    options.Cookie.Name = "LOGIN_COOKIE";
+                    options.Cookie.Domain = "asdf.com";
+                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
+                    options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,12 +116,21 @@ namespace LanguageBuilder.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseAuthentication();
-
             app.UseStaticFiles();
 
             app.UseDatabaseMigration();
 
+            app
+                .UseAuthentication()
+                .UseCookiePolicy(new CookiePolicyOptions
+                {
+                    Secure = Microsoft.AspNetCore.Http.CookieSecurePolicy.None,
+                    HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.None,
+                    MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None,
+
+                });
+
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

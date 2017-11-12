@@ -14,6 +14,7 @@ using LanguageBuilder.Web.Models;
 using LanguageBuilder.Web.Models.AccountViewModels;
 using LanguageBuilder.Web.Services;
 using LanguageBuilder.Data.Models;
+using LanguageBuilder.Services.Contracts;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -54,7 +55,7 @@ namespace LanguageBuilder.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
