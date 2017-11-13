@@ -88,17 +88,11 @@
 
             $('.btn-delete').on('click', function (event) {
                 event.preventDefault();
-
                 clickedWord = $(event.target)
-                //var wordId = clickedWord.data('id');
-
-                //$('#modal-confirm').data('id', wordId);
-
                 dialog.modal().show();
             });
 
             $('#modal-confirm').on('click', function (event) {
-                //clickedWord.click();
                 $.ajax({
                     type: "GET",
                     url: '/Words/DeleteConfirmed/' + clickedWord.data('id'),

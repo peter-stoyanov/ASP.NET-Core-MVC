@@ -19,5 +19,7 @@ namespace LanguageBuilder.Services.Contracts
         Task<Word> SoftDeleteAsync(int id);
         Task<bool> ExistInUserAsync(int id, string userId);
         Task<UserWord> SoftDeleteInUserAsync(int id, string userId);
+        Task AddWordsWithTranslation(Word source, Word target, string userId);
+        Task<IEnumerable<Word>> SearchAsync(string keywords, int rows = 10);
     }
 }

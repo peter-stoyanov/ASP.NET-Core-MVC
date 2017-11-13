@@ -1,0 +1,102 @@
+﻿@model LanguageBuilder.Web.Models.TranslationViewModels.TranslationBaseViewModel
+
+@{
+    User loggedUser = ViewBag.LoggedUser;
+    //var userNotes = Model.TargetWord
+    //    .Users
+    //    .Where(u => u.UserId == loggedUser.Id)
+    //    .FirstOrDefault();
+
+}
+
+@if (Model is TranslationEditViewModel)
+{
+    ViewData["Title"] = "Edit";
+    <h2>Edit translation</h2>
+
+    @Html.HiddenFor(model => ((TranslationEditViewModel)model).Id)
+}
+else
+{
+    ViewData["Title"] = "Create";
+    <h2>Create translation</h2>
+}
+
+
+
+
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Source word</h3>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.SourceWordId)
+            <div class="form-group">
+                <label asp-for="SourceWord.Gender" class="control-label">Gender</label>
+                <input asp-for="SourceWord.Gender" class="form-control" />
+                <span asp-validation-for="SourceWord.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SourceWord.SyntaxType" class="control-label"></label>
+                <input asp-for="SourceWord.SyntaxType" class="form-control" />
+                <span asp-validation-for="SourceWord.SyntaxType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SourceWord.Content" class="control-label"></label>
+                <textarea id="source-word" asp-for="SourceWord.Content" class="form-control"></textarea>
+                <span asp-validation-for="SourceWord.Content" class="text-danger"></span>
+                <small class="form-text text-muted">Start typing to find already created words ... </small>
+            </div>
+            <div class="form-group">
+                <label asp-for="SourceWord.LanguageId" class="control-label"></label>
+                <select asp-for="SourceWord.LanguageId" class="form-control" asp-items="Model.Languages.Select(l => new SelectListItem { Text = l.Name, Value = l.Id.ToString() })"></select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Target word</h3>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.TargetWordId)
+            <div class="form-group">
+                <label asp-for="TargetWord.Gender" class="control-label">Gender</label>
+                <input asp-for="TargetWord.Gender" class="form-control" />
+                <span asp-validation-for="TargetWord.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TargetWord.SyntaxType" class="control-label"></label>
+                <input asp-for="TargetWord.SyntaxType" class="form-control" />
+                <span asp-validation-for="TargetWord.SyntaxType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TargetWord.Content" class="control-label"></label>
+                <textarea id="target-word" asp-for="TargetWord.Content" class="form-control"></textarea>
+                <span asp-validation-for="TargetWord.Content" class="text-danger"></span>
+                <small class="form-text text-muted">Start typing to find already created words ... </small>
+            </div>
+            @foreach (var example in Model.TargetWord.Examples)
+            {
+                <p>@example.Content</p>
+            }
+            <div class="form-group">
+                <label asp-for="Example" class="control-label"></label>
+                <textarea asp-for="Example" class="form-control"></textarea>
+                <span asp-validation-for="Example" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TargetWord.LanguageId" class="control-label"></label>
+                <select asp-for="TargetWord.LanguageId" class="form-control" asp-items="Model.Languages.Select(l => new SelectListItem { Text = l.Name, Value = l.Id.ToString() })"></select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</form>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+

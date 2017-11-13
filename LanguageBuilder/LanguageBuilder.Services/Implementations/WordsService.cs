@@ -116,6 +116,41 @@ namespace LanguageBuilder.Services.Implementations
 
             return wordInUser;
         }
-        
+
+        public async Task AddWordsWithTranslation(Word source, Word target, string userId)
+        {
+            await _db
+                .Words
+                .AddRangeAsync(new[] { source, target });
+
+            await _db
+                .UserWords
+                .AddAsync(
+                    new UserWord
+                    {
+                        UserId = userId,
+                        WordId = target.Id,
+                        IsTargeted = true
+                    });
+
+            await _db
+                .Translations
+                .AddAsync(new Translation
+                {
+                    SourceWordId = source.Id,
+                    TargetWordId = target.Id
+                });
+
+            _db.SaveChanges();
+        }
+
+        public async Task<IEnumerable<Word>> SearchAsync(string keywords, int rows = 10)
+        {
+            return await _db
+                .Words
+                .Where(w => w.Content.Contains(keywords))
+                .Take(rows)
+                .ToListAsync();
+        }
     }
 }

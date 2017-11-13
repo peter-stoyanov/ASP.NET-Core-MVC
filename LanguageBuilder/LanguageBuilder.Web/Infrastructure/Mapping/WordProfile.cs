@@ -13,8 +13,13 @@ namespace LanguageBuilder.Web.Infrastructure.Mapping
         public WordProfile()
         {
             CreateMap<Word, DetailViewModel>();
+
             CreateMap<Word, WordCreateViewModel>();
+            CreateMap<WordCreateViewModel, Word>();
+
             CreateMap<Word, WordEditViewModel>();
+            CreateMap<WordEditViewModel, Word>();
+
             CreateMap<Word, SearchViewModel>();
         }
     }

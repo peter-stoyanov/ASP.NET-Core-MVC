@@ -29,6 +29,8 @@ namespace LanguageBuilder.Web.Models.WordViewModels
 
         public List<Example> Examples { get; set; } = new List<Example>();
 
+        public string Notes { get; set; }
+
         public List<Translation> SourceTranslations { get; set; } = new List<Translation>();
         public List<Translation> TargetTranslations { get; set; } = new List<Translation>();
     }

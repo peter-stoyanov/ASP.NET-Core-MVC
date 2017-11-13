@@ -27,6 +27,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\fonts\" />
+    <Folder Include="wwwroot\lib\jquery-ui\css\" />
+    <Folder Include="wwwroot\lib\jquery-ui\js\" />
   </ItemGroup>
 
 </Project>

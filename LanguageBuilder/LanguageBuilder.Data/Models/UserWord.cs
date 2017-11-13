@@ -15,15 +15,15 @@ namespace LanguageBuilder.Data.Models
         public int WordId { get; set; }
         public Word Word { get; set; }
 
-        public int StudyLevel { get; set; }
-        public int MatchLevel { get; set; }
-        public int ReproduceLevel { get; set; }
+        public int StudyLevel { get; set; } = 1;
+        public int MatchLevel { get; set; } = 1;
+        public int ReproduceLevel { get; set; } = 1;
 
         public bool IsTargeted { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
-        public DateTime NextReview { get; set; }
+        public DateTime NextReview { get; set; } = DateTime.Now.AddDays(2);
 
         [MaxLength(300)]
         public string Notes { get; set; }

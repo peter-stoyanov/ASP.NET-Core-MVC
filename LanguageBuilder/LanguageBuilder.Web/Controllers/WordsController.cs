@@ -11,6 +11,8 @@ using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Web.Models.WordViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using LanguageBuilder.Web.Models.TranslationViewModels;
+using LanguageBuilder.Web.Infrastructure.Extensions;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -18,12 +20,18 @@ namespace LanguageBuilder.Web.Controllers
     public class WordsController : BaseController
     {
         private readonly IWordsService _wordsService;
+        private readonly ILanguageService _languageService;
         private readonly IMapper _mapper;
 
-        public WordsController(IWordsService wordsService, IUsersService usersService, IMapper mapper)
+        public WordsController(
+            IWordsService wordsService, 
+            IUsersService usersService,
+            ILanguageService languageService,
+            IMapper mapper)
             : base(usersService)
         {
             _wordsService = wordsService;
+            _languageService = languageService;
             _mapper = mapper;
         }
 
@@ -60,29 +68,38 @@ namespace LanguageBuilder.Web.Controllers
             return View(model);
         }
 
-        //// GET: Words/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name");
-        //    return View();
-        //}
+        // GET: Words/Create
+        public async Task<IActionResult> Create()
+        {
+            var model = new TranslationBaseViewModel();
 
-        //// POST: Words/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Gender,SyntaxType,Content,LanguageId,IsDeleted")] Word word)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(word);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Name", word.LanguageId);
-        //    return View(word);
-        //}
+            model.Languages = await _languageService.GetAllAsync();
+
+            return View(model);
+        }
+
+        // POST: Words/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(TranslationCreateViewModel model)
+        {
+            //try-catch ?
+
+            if (ModelState.IsValid)
+            {
+                await _wordsService.AddWordsWithTranslation(
+                    _mapper.Map<WordCreateViewModel, Word>(model.SourceWord),
+                    _mapper.Map<WordCreateViewModel, Word>(model.TargetWord),
+                    this.LoggedUser.Id);    
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            model.Languages = await _languageService.GetAllAsync();
+            return View(model);
+        }
 
         //// GET: Words/Edit/5
         //public async Task<IActionResult> Edit(int? id)
@@ -161,7 +178,7 @@ namespace LanguageBuilder.Web.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (!await _wordsService.ExistInUserAsync(id, this.LoggedUser.Id))
+            if ((await _wordsService.ExistInUserAsync(id, this.LoggedUser.Id)) == false)
             {
                 TempData["ErrorMsg"] = "This word is no more present in the database.";
             }
@@ -170,7 +187,7 @@ namespace LanguageBuilder.Web.Controllers
 
             TempData["SuccessMsg"] = "Word is successfully deleted.";
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToLocal(this.Request.BaseUrl());
         }
     }
 }

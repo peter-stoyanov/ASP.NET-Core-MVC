@@ -1,11 +1,13 @@
 ﻿using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LanguageBuilder.Web.Infrastructure.Extensions;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -36,38 +38,39 @@ namespace LanguageBuilder.Web.Controllers
             }
         }
 
-        //public override void OnActionExecuted(ActionExecutedContext filterContext)
-        //{
-        //    base.OnActionExecuted(filterContext);
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            base.OnActionExecuted(filterContext);
 
-        //    ViewBag.LoggedUser = this.LoggedUser;
-        //    ViewBag.BuildVersion = this.GetType().Assembly.GetName().Version.ToString();
-        //}
+            ViewBag.LoggedUser = this.LoggedUser;
+            //ViewBag.BuildVersion = this.GetType().Assembly.GetName().Version.ToString();
+        }
 
 
-        //protected ActionResult RedirectToReferrer(string defaultActionName = null, string defaultControllerName = null, object defaultRouteValues = null)
-        //{
-        //    string url = this.Request.UrlReferrer != null ? this.Request.UrlReferrer.PathAndQuery : null;
+        protected IActionResult RedirectToReferrer(string defaultActionName = null, string defaultControllerName = null, object defaultRouteValues = null)
+        {
+            string url = this.Request.UrlReferrer() != null ? this.Request.UrlReferrer().PathAndQuery : null;
 
-        //    return this.RedirectToLocal(url, defaultActionName, defaultControllerName: defaultControllerName, defaultRouteValues: defaultRouteValues);
-        //}
+            return this.RedirectToLocal(url, defaultActionName, defaultControllerName: defaultControllerName, defaultRouteValues: defaultRouteValues);
+        }
 
-        //protected ActionResult RedirectToLocal(string url, string defaultActionName = null, string defaultControllerName = null, object defaultRouteValues = null)
-        //{
-        //    var baseUrl = Url.BaseUrl(addTrailingSlash: false);
+        protected IActionResult RedirectToLocal(string url, string defaultActionName = null, string defaultControllerName = null, object defaultRouteValues = null)
+        {
+            var baseUrl = this.Request.BaseUrl(addTrailingSlash: false);
 
-        //    url = url != null && url.StartsWith(baseUrl) ? url.Substring(baseUrl.Length) : url;
+            url = url != null && url.StartsWith(baseUrl) ? url.Substring(baseUrl.Length) : url;
 
-        //    if (!String.IsNullOrWhiteSpace(url) && Url.IsLocalUrl(url))
-        //    {
-        //        return Redirect(url);
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction(defaultActionName, defaultControllerName, defaultRouteValues);
-        //    }
-        //}
+            if (!String.IsNullOrWhiteSpace(url) && Url.IsLocalUrl(url))
+            {
+                return Redirect(url);
+            }
+            else
+            {
+                return RedirectToAction(defaultActionName, defaultControllerName, defaultRouteValues);
+            }
+        }
 
+        
         //protected ActionResult RedirectToHttpNotFound()
         //{
         //    return this.RedirectToAction("NotFound", "Errors", new { path = this.Request.Path });
