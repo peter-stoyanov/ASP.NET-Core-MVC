@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LanguageBuilder.Data.Configurations;
+using LanguageBuilder.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using LanguageBuilder.Data.Models;
-using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using LanguageBuilder.Data.Configurations;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace LanguageBuilder.Data
 {
@@ -23,11 +22,9 @@ namespace LanguageBuilder.Data
         public DbSet<UserWordExample> UserWordExamples { get; set; }
         public DbSet<WordList> WordLists { get; set; }
 
-
         public LanguageBuilderDbContext(DbContextOptions<LanguageBuilderDbContext> options)
             : base(options)
         {
-            
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -47,7 +44,6 @@ namespace LanguageBuilder.Data
             builder.ApplyConfiguration(new WordListConfiguration());
 
             SetupTableNamesAndCascadeDelete(builder);
-
         }
 
         private static void SetupTableNamesAndCascadeDelete(ModelBuilder modelBuilder)

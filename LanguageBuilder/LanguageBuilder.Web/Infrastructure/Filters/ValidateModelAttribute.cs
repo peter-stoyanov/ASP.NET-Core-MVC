@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Infrastructure.Filters
 {
@@ -18,6 +15,28 @@ namespace LanguageBuilder.Web.Infrastructure.Filters
                         .SelectMany(e => e.Errors)
                         .Select(e => e.ErrorMessage));
             }
+
+            //if (!actionContext.ModelState.IsValid)
+            //{
+            //    var controller = actionContext.Controller as Controller;
+
+            //    if (controller == null)
+            //    {
+            //        return;
+            //    }
+
+            //    var model = actionContext
+            //        .ActionArguments
+            //        .FirstOrDefault(a => a.Key.ToLower().Contains("model"))
+            //        .Value;
+
+            //    if (model == null)
+            //    {
+            //        return;
+            //    }
+
+            //    actionContext.Result = controller.View(model);
+            //}
         }
     }
 }

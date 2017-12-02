@@ -96,11 +96,16 @@ namespace LanguageBuilder.Data.Migrations
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.Translation", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<int>("SourceWordId");
 
                     b.Property<int>("TargetWordId");
 
-                    b.HasKey("SourceWordId", "TargetWordId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("SourceWordId");
 
                     b.HasIndex("TargetWordId");
 
@@ -113,6 +118,8 @@ namespace LanguageBuilder.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<DateTime?>("Birthdate");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -127,6 +134,8 @@ namespace LanguageBuilder.Data.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -222,13 +231,18 @@ namespace LanguageBuilder.Data.Migrations
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.UserWordExample", b =>
                 {
-                    b.Property<int>("UserWordId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("ExampleId");
 
-                    b.HasKey("UserWordId", "ExampleId");
+                    b.Property<int>("UserWordId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ExampleId");
+
+                    b.HasIndex("UserWordId");
 
                     b.ToTable("tbl_UserWordExample");
                 });

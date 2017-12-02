@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LanguageBuilder.Data.Models
 {
     public class User : IdentityUser<string>
     {
         public bool IsActive { get; set; }
+
+        public string Name { get; set; }
+
+        public DateTime? Birthdate { get; set; }
 
         public List<UserLanguage> Languages { get; set; } = new List<UserLanguage>();
 

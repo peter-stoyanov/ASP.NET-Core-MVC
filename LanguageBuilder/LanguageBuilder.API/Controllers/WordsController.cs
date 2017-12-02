@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LanguageBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using LanguageBuilder.Services.Contracts;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.API.Controllers
 {
@@ -23,7 +21,7 @@ namespace LanguageBuilder.API.Controllers
         {
             return await _wordsService.SearchAsync(keywords, rows);
         }
-        
+
         //// GET api/values
         //[HttpGet]
         //public IEnumerable<string> Get()

@@ -1,5 +1,3 @@
-using Moq;
-using System;
 using Xunit;
 
 namespace LanguageBuilder.Tests
@@ -9,8 +7,6 @@ namespace LanguageBuilder.Tests
         [Fact]
         public void Test1()
         {
-            
-
         }
     }
 }

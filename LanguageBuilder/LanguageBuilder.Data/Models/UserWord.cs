@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace LanguageBuilder.Data.Models
 {
-    public class UserWord
+    public class UserWord : BaseEntity<int>
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         public string UserId { get; set; }
         public User User { get; set; }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageBuilder.Data.Models
+﻿namespace LanguageBuilder.Data.Models
 {
-    public class Translation
+    public class Translation : BaseEntity<int>
     {
         public int SourceWordId { get; set; }
         public Word SourceWord { get; set; }

@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Contracts\IIdentifiable.cs" />
+    <Compile Remove="Implementations\CrudServiceBase.cs" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <Compile Include="Implementations\BaseRepository.cs" />
+  </ItemGroup>-->
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
   </ItemGroup>
 
@@ -13,7 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Admin\" />
+    <Folder Include="Blog\" />
   </ItemGroup>
 
 </Project>

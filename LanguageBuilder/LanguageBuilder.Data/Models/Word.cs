@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace LanguageBuilder.Data.Models
 {
-    public class Word
+    public class Word : BaseEntity<int>
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         [MaxLength(15)]
         public string Gender { get; set; }

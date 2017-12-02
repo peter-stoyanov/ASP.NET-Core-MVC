@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComponentLibrary
@@ -9,13 +7,13 @@ namespace ComponentLibrary
     public class BootstrapModalComponent : ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync(BootstrapModalViewModel model)
-            //string body,
-            //string title = null,
-            //string id = null,
-            //string buttonName = null,
-            //string cancelButtonName = null,
-            //string confirmButtonId = null,
-            //string cancelButtonId = null)
+        //string body,
+        //string title = null,
+        //string id = null,
+        //string buttonName = null,
+        //string cancelButtonName = null,
+        //string confirmButtonId = null,
+        //string cancelButtonId = null)
         {
             var viewmodel = new BootstrapModalViewModel()
             {

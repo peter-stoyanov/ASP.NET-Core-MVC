@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using LanguageBuilder.Data.Models;
+using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Web.Models.ManageViewModels;
+using LanguageBuilder.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using LanguageBuilder.Web.Models;
-using LanguageBuilder.Web.Models.ManageViewModels;
-using LanguageBuilder.Web.Services;
-using LanguageBuilder.Data.Models;
-using LanguageBuilder.Services.Contracts;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -502,6 +499,6 @@ namespace LanguageBuilder.Web.Controllers
                 unformattedKey);
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

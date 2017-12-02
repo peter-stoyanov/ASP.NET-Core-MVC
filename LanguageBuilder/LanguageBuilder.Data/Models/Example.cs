@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace LanguageBuilder.Data.Models
 {
-    public class Example
+    public class Example : BaseEntity<int>
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         public int WordId { get; set; }
         public Word Word { get; set; }
@@ -19,6 +17,5 @@ namespace LanguageBuilder.Data.Models
         public string Content { get; set; }
 
         public List<UserWordExample> UserWords { get; set; } = new List<UserWordExample>();
-
     }
 }

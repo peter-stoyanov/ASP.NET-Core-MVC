@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ComponentLibrary
+﻿namespace ComponentLibrary
 {
     public class BootstrapModalViewModel
     {

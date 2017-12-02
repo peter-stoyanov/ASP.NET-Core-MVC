@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Web.Models.WordViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Infrastructure.Mapping
 {

@@ -1,8 +1,5 @@
 ﻿using LanguageBuilder.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LanguageBuilder.Data.Configurations
@@ -11,8 +8,8 @@ namespace LanguageBuilder.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<UserWordExample> builder)
         {
-            builder
-                .HasKey(uw => new { uw.UserWordId, uw.ExampleId});
+            //builder
+            //    .HasKey(uw => new { uw.UserWordId, uw.ExampleId});
 
             builder
                 .HasOne(uwe => uwe.Example)

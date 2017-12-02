@@ -1,35 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
-using LanguageBuilder.Data;
+using LanguageBuilder.Data.Services;
 using LanguageBuilder.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace LanguageBuilder.Services.Implementations
 {
-    public class WordsService : IWordsService
+    public class WordsService : BaseRepository<Word, int>, IWordsService
     {
         private readonly LanguageBuilderDbContext _db;
 
         public WordsService(LanguageBuilderDbContext context)
+            : base(context)
         {
             _db = context;
-        }
-
-        public void Add(Word word)
-        {
-            _db.Words.Add(word);
-            _db.SaveChanges();
-        }
-
-        public async Task AddAsync(Word word)
-        {
-            // todo: should this be done like that ?
-            await _db.Words.AddAsync(word);
-            await _db.SaveChangesAsync();
         }
 
         public async Task<Word> FindByIdAsync(int id)
@@ -91,11 +79,6 @@ namespace LanguageBuilder.Services.Implementations
             return word;
         }
 
-        public async Task<bool> ExistAsync(int id)
-        {
-            return await _db.Words.AnyAsync(w => w.Id == id);
-        }
-
         public async Task<bool> ExistInUserAsync(int id, string userId)
         {
             return await _db.UserWords.AnyAsync(uw => uw.WordId == id && uw.UserId == userId);
@@ -117,7 +100,7 @@ namespace LanguageBuilder.Services.Implementations
             return wordInUser;
         }
 
-        public async Task AddWordsWithTranslation(Word source, Word target, string userId)
+        public async Task AddWordsWithTranslationAsync(Word source, Word target, string userId)
         {
             await _db
                 .Words
@@ -151,6 +134,11 @@ namespace LanguageBuilder.Services.Implementations
                 .Where(w => w.Content.Contains(keywords))
                 .Take(rows)
                 .ToListAsync();
+        }
+
+        public Task AddInUserAsync(Word word, User user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

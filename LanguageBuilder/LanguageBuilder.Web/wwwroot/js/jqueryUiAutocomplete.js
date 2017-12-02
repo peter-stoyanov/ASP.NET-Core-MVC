@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-
     $('#TeamLeader').autocomplete({
         source: function (request, response) {
             pipeline.ajaxGetJson({
@@ -26,5 +25,4 @@
         },
         minLength: 1
     });
-
 });

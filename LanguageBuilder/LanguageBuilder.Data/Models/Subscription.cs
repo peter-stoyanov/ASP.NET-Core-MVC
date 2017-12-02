@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace LanguageBuilder.Data.Models
 {
-    public class Subscription
+    public class Subscription : BaseEntity<int>
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]

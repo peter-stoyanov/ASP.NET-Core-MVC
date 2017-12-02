@@ -1,9 +1,3 @@
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,23 +10,16 @@
   <link rel="dns-prefetch" href="https://github-cloud.s3.amazonaws.com">
   <link rel="dns-prefetch" href="https://user-images.githubusercontent.com/">
 
-
-
   <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-d7137690e30123bade38abb082ac79f36cc7a105ff92e602405f53b725465cab.css" integrity="sha256-1xN2kOMBI7reOKuwgqx582zHoQX/kuYCQF9TtyVGXKs=" media="all" rel="stylesheet" />
   <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-642bd765f3bed5b8d50b203d42abb1a55e055f2bc31bd975c2944cde1a83a233.css" integrity="sha256-ZCvXZfO+1bjVCyA9QquxpV4FXyvDG9l1wpRM3hqDojM=" media="all" rel="stylesheet" />
-  
-  
-  
-  
 
   <meta name="viewport" content="width=device-width">
-  
+
   <title>jquery-validation-unobtrusive/jquery.validate.unobtrusive.js at master · aspnet/jquery-validation-unobtrusive</title>
   <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
   <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
   <meta property="fb:app_id" content="1401488693436528">
 
-    
     <meta content="https://avatars3.githubusercontent.com/u/6476660?s=400&amp;v=4" property="og:image" /><meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="aspnet/jquery-validation-unobtrusive" property="og:title" /><meta content="https://github.com/aspnet/jquery-validation-unobtrusive" property="og:url" /><meta content="jquery-validation-unobtrusive - Add-on to jQuery Validation to enable unobtrusive validation options in data-* attributes." property="og:description" />
 
   <link rel="assets" href="https://assets-cdn.github.com/">
@@ -40,7 +27,6 @@
   <meta name="pjax-timeout" content="1000">
   <link rel="sudo-modal" href="/sessions/sudo_modal">
   <meta name="request-id" content="E08A:785B:9E7AB9:EDC21E:59FD8CEC" data-pjax-transient>
-  
 
   <meta name="selected-link" value="repo_source" data-pjax-transient>
 
@@ -51,13 +37,7 @@
 <meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="https://collector.githubapp.com/github-external/browser_event" name="octolytics-event-url" /><meta content="E08A:785B:9E7AB9:EDC21E:59FD8CEC" name="octolytics-dimension-request_id" /><meta content="iad" name="octolytics-dimension-region_edge" /><meta content="iad" name="octolytics-dimension-region_render" /><meta content="13362666" name="octolytics-actor-id" /><meta content="peter-stoyanov" name="octolytics-actor-login" /><meta content="e3aa8e67c427902d871395c38a3c6ff358f9f5c885d9bc7e7f2c04fedd0b010c" name="octolytics-actor-hash" />
 <meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" />
 
-
-
-
   <meta class="js-ga-set" name="dimension1" content="Logged In">
-
-
-  
 
       <meta name="hostname" content="github.com">
   <meta name="user-login" content="peter-stoyanov">
@@ -70,7 +50,6 @@
   <meta name="html-safe-nonce" content="4890578ddb7824b17408565ecb43716504e5e696">
 
   <meta http-equiv="x-pjax-version" content="8f6a2c7ea0d1b6f8918b4b949724e0b5">
-  
 
       <link href="https://github.com/aspnet/jquery-validation-unobtrusive/commits/master.atom" rel="alternate" title="Recent Commits to jquery-validation-unobtrusive:master" type="application/atom+xml">
 
@@ -79,9 +58,7 @@
 
   <meta content="6476660" name="octolytics-dimension-user_id" /><meta content="aspnet" name="octolytics-dimension-user_login" /><meta content="25214729" name="octolytics-dimension-repository_id" /><meta content="aspnet/jquery-validation-unobtrusive" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="25214729" name="octolytics-dimension-repository_network_root_id" /><meta content="aspnet/jquery-validation-unobtrusive" name="octolytics-dimension-repository_network_root_nwo" /><meta content="false" name="octolytics-dimension-repository_explore_github_marketplace_ci_cta_shown" />
 
-
     <link rel="canonical" href="https://github.com/aspnet/jquery-validation-unobtrusive/blob/master/dist/jquery.validate.unobtrusive.js" data-pjax-transient>
-
 
   <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
 
@@ -92,32 +69,22 @@
 
 <meta name="theme-color" content="#1e2327">
 
-
   <meta name="u2f-support" content="true">
 
   </head>
 
   <body class="logged-in env-production page-blob">
-    
 
   <div class="position-relative js-header-wrapper ">
     <a href="#start-of-content" tabindex="1" class="bg-black text-white p-3 show-on-focus js-skip-to-content">Skip to content</a>
     <div id="js-pjax-loader-bar" class="pjax-loader-bar"><div class="progress"></div></div>
 
-    
-    
-    
-
-
-
-        
 <header class="Header  f5" role="banner">
   <div class="d-flex px-3 flex-justify-between container-lg">
     <div class="d-flex flex-justify-between">
       <a class="header-logo-invertocat" href="https://github.com/" data-hotkey="g d" aria-label="Homepage" data-ga-click="Header, go to dashboard, icon:logo">
   <svg aria-hidden="true" class="octicon octicon-mark-github" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
 </a>
-
 
     </div>
 
@@ -165,11 +132,11 @@
       </div>
 
       <div class="d-flex">
-        
+
 <ul class="user-nav d-flex flex-items-center list-style-none" id="user-links">
   <li class="dropdown js-menu-container js-header-notifications">
     <span class="d-inline-block  px-2">
-      
+
       <a href="/notifications" aria-label="You have unread notifications" class="notification-indicator tooltipped tooltipped-s  js-socket-channel js-notification-indicator" data-channel="notification-changed:13362666" data-ga-click="Header, go to notifications, icon:unread" data-hotkey="g n">
           <span class="mail-status unread"></span>
           <svg aria-hidden="true" class="octicon octicon-bell" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 12v1H0v-1l.73-.58c.77-.77.81-2.55 1.19-4.42C2.69 3.23 6 2 6 2c0-.55.45-1 1-1s1 .45 1 1c0 0 3.39 1.23 4.16 5 .38 1.88.42 3.66 1.19 4.42l.66.58H14zm-7 4c1.11 0 2-.89 2-2H5c0 1.11.89 2 2 2z"/></svg>
@@ -187,7 +154,7 @@
       </summary>
 
       <ul class="dropdown-menu dropdown-menu-sw">
-        
+
 <a class="dropdown-item" href="/new" data-ga-click="Header, create new repository">
   New repository
 </a>
@@ -203,8 +170,6 @@
   <a class="dropdown-item" href="/organizations/new" data-ga-click="Header, create new organization">
     New organization
   </a>
-
-
 
   <div class="dropdown-divider"></div>
   <div class="dropdown-header">
@@ -263,7 +228,6 @@
   </li>
 </ul>
 
-
         <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/logout" class="sr-only right-0" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="LehmSYcifw9NkZlGti4Q5s3dxQtRBi4Z87niD+W05ViddhII3Ra3EMTiZGCHL2J1u4FyHqBQTsy8XsrVpdF8fQ==" /></div>
           <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout">
             Sign out
@@ -273,9 +237,6 @@
   </div>
 </header>
 
-
-      
-
   </div>
 
   <div id="start-of-content" class="show-on-focus"></div>
@@ -283,18 +244,9 @@
     <div id="js-flash-container">
 </div>
 
-
-
   <div role="main">
         <div itemscope itemtype="http://schema.org/SoftwareSourceCode">
     <div id="js-repo-pjax-container" data-pjax-container>
-      
-
-
-
-  
-
-
 
     <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav ">
       <div class="repohead-details-container clearfix container ">
@@ -379,7 +331,7 @@
   </li>
 
   <li>
-    
+
   <div class="js-toggler-container js-social-container starring-container ">
     <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/aspnet/jquery-validation-unobtrusive/unstar" class="starred js-social-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="txkv4+CX1pLzO8k+RwrUvUrAOaRUzgG2IJVqRZUl/GbIe/ztAzRIm/xDAZfYe9O+mueRypNnFgmP2md/uNuzEw==" /></div>
       <input type="hidden" name="context" value="repository"></input>
@@ -442,7 +394,7 @@
 </h1>
 
       </div>
-      
+
 <nav class="reponav js-repo-nav js-sidenav-container-pjax container"
      itemscope
      itemtype="http://schema.org/BreadcrumbList"
@@ -489,22 +441,20 @@
 
 </nav>
 
-
     </div>
 
 <div class="container new-discussion-timeline experiment-repo-nav">
   <div class="repository-content">
 
-    
   <a href="/aspnet/jquery-validation-unobtrusive/blob/e7444c9ab5512d455069815e23b954ce2e7b2518/dist/jquery.validate.unobtrusive.js" class="d-none js-permalink-shortcut" data-hotkey="y">Permalink</a>
 
   <!-- blob contrib key: blob_contributors:v21:803833a15c2a5520ab73ee587ce6592a -->
 
   <div class="file-navigation js-zeroclipboard-container">
-    
+
 <div class="select-menu branch-select-menu js-menu-container js-select-menu float-left">
   <button class=" btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
-    
+
     type="button" aria-label="Switch branches or tags" aria-expanded="false" aria-haspopup="true">
       <i>Branch:</i>
       <span class="js-select-button css-truncate-target">master</span>
@@ -537,7 +487,6 @@
       <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches" role="menu">
 
         <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
-
 
             <a class="select-menu-item js-navigation-item js-navigation-open "
                href="/aspnet/jquery-validation-unobtrusive/blob/kichalla/fileextensions/dist/jquery.validate.unobtrusive.js"
@@ -617,7 +566,6 @@
       <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
         <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
 
-
             <a class="select-menu-item js-navigation-item js-navigation-open "
               href="/aspnet/jquery-validation-unobtrusive/tree/v3.2.6/dist/jquery.validate.unobtrusive.js"
               data-name="v3.2.6"
@@ -691,8 +639,6 @@
     </div>
   </div>
 
-
-  
   <div class="commit-tease">
       <span class="float-right">
         <a class="commit-tease-sha" href="/aspnet/jquery-validation-unobtrusive/commit/e7444c9ab5512d455069815e23b954ce2e7b2518" data-pjax>
@@ -715,7 +661,6 @@
     <a class="avatar-link tooltipped tooltipped-s" aria-label="kichalla" href="/aspnet/jquery-validation-unobtrusive/commits/master/dist/jquery.validate.unobtrusive.js?author=kichalla"><img alt="@kichalla" class="avatar" height="20" src="https://avatars2.githubusercontent.com/u/6559784?s=40&amp;v=4" width="20" /> </a>
     <a class="avatar-link tooltipped tooltipped-s" aria-label="ryanbrandenburg" href="/aspnet/jquery-validation-unobtrusive/commits/master/dist/jquery.validate.unobtrusive.js?author=ryanbrandenburg"><img alt="@ryanbrandenburg" class="avatar" height="20" src="https://avatars0.githubusercontent.com/u/14987221?s=40&amp;v=4" width="20" /> </a>
 
-
     </div>
 
     <div id="blob_contributors_box" style="display:none">
@@ -736,7 +681,6 @@
       </ul>
     </div>
   </div>
-
 
   <div class="file">
     <div class="file-header">
@@ -773,8 +717,6 @@
     18.9 KB
   </div>
 </div>
-
-    
 
   <div itemprop="text" class="blob-wrapper data type-javascript">
       <table class="highlight tab-size js-file-line-container" data-tab-size="8">
@@ -2597,7 +2539,6 @@
 
   </div>
 
-      
 <div class="footer container-lg px-3" role="contentinfo">
   <div class="position-relative d-flex flex-justify-between py-6 mt-6 f6 text-gray border-top border-gray-light ">
     <ul class="list-style-none d-flex flex-wrap ">
@@ -2624,8 +2565,6 @@
   </div>
 </div>
 
-
-
   <div id="ajax-error-message" class="ajax-error-message flash flash-error">
     <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"/></svg>
     <button type="button" class="flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
@@ -2634,15 +2573,10 @@
     You can't perform that action at this time.
   </div>
 
-
-    
     <script crossorigin="anonymous" integrity="sha256-GoUeLgXvDx7KOOVOmxrZCBAE84EuZPv9+f1M84OmbFU=" src="https://assets-cdn.github.com/assets/frameworks-1a851e2e05ef0f1eca38e54e9b1ad9081004f3812e64fbfdf9fd4cf383a66c55.js"></script>
-    
+
     <script async="async" crossorigin="anonymous" integrity="sha256-/n7veMx4SNA6DVgRwNG5wFitAMrSusaLm3xbrAg7hBA=" src="https://assets-cdn.github.com/assets/github-fe7eef78cc7848d03a0d5811c0d1b9c058ad00cad2bac68b9b7c5bac083b8410.js"></script>
-    
-    
-    
-    
+
   <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner d-none">
     <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"/></svg>
     <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
@@ -2658,7 +2592,5 @@
   </div>
 </div>
 
-
   </body>
 </html>
-

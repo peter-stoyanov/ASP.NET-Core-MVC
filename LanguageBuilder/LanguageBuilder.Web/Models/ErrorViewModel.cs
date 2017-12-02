@@ -1,5 +1,3 @@
-using System;
-
 namespace LanguageBuilder.Web.Models
 {
     public class ErrorViewModel

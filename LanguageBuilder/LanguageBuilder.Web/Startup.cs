@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LanguageBuilder.Data;
+using LanguageBuilder.Data.Models;
+using LanguageBuilder.Web.Infrastructure.Extensions;
+using LanguageBuilder.Web.Infrastructure.Filters;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using LanguageBuilder.Web.Services;
-using LanguageBuilder.Web.Infrastructure.Extensions;
-using LanguageBuilder.Data.Models;
-using LanguageBuilder.Data;
-using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Services.Implementations;
-using LanguageBuilder.Web.Infrastructure.Filters;
-using Microsoft.AspNetCore.Http;
 
 namespace LanguageBuilder.Web
 {
@@ -31,7 +25,6 @@ namespace LanguageBuilder.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddDbContext<LanguageBuilderDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -58,9 +51,10 @@ namespace LanguageBuilder.Web
             services.AddMvc(config =>
             {
                 config.Filters.Add(new ValidateModelAttribute());
+                config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
-
+            services.AddRouting(routing => routing.LowercaseUrls = true);
 
             services.AddSession(options =>
             {
@@ -120,6 +114,8 @@ namespace LanguageBuilder.Web
 
             app.UseDatabaseMigration();
 
+            DbInitializer.Initialize(context);
+
             app
                 .UseAuthentication()
                 .UseCookiePolicy(new CookiePolicyOptions
@@ -127,18 +123,24 @@ namespace LanguageBuilder.Web
                     Secure = Microsoft.AspNetCore.Http.CookieSecurePolicy.None,
                     HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.None,
                     MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None,
-
                 });
 
             app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "blog",
+                    template: "blog/articles/{id}/{title}",
+                    defaults: new { area = "Blog", controller = "Articles", action = "Details" });
+
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            DbInitializer.Initialize(context);
         }
     }
 }

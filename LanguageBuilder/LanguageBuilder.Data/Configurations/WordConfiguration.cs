@@ -1,8 +1,5 @@
 ﻿using LanguageBuilder.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LanguageBuilder.Data.Configurations
@@ -15,7 +12,7 @@ namespace LanguageBuilder.Data.Configurations
                 .HasOne(w => w.Language)
                 .WithMany(lan => lan.Words)
                 .HasForeignKey(w => w.LanguageId);
-                //.OnDelete(DeleteBehavior.Cascade);
+            //.OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -16,9 +16,9 @@
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" 
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
               integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
@@ -32,7 +32,7 @@
             <link rel="stylesheet" href="~/lib/jquery-ui/css/jquery-ui.theme.css" />
         </environment>
         <environment exclude="Development">
-            <link rel="stylesheet" href="~/lib/jquery-ui/css/jquery-ui.min.css"/>
+            <link rel="stylesheet" href="~/lib/jquery-ui/css/jquery-ui.min.css" />
             <link rel="stylesheet" href="~/lib/jquery-ui/css/jquery-ui.structure.min.css" />
             <link rel="stylesheet" href="~/lib/jquery-ui/css/jquery-ui.theme.min.css" />
         </environment>
@@ -42,15 +42,14 @@
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
-    
+
     @Html.Partial("_Navigation")
 
     <div class="container">
-        
-        @RenderBody()
-        
-        @Html.Partial("_Footer")
 
+        @RenderBody()
+
+        @Html.Partial("_Footer")
     </div>
 
     <environment include="Development">
@@ -66,7 +65,7 @@
                 crossorigin="anonymous"
                 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=">
         </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
@@ -76,7 +75,7 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
-    
+
     @RenderSection("BodyScripts", false)
 
     @if (ViewBag.RegisterJqueryUi == true)

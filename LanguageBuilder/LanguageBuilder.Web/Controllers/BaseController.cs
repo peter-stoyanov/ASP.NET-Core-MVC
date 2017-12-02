@@ -1,13 +1,9 @@
 ﻿using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
-using Microsoft.AspNetCore.Http;
+using LanguageBuilder.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LanguageBuilder.Web.Infrastructure.Extensions;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -30,7 +26,6 @@ namespace LanguageBuilder.Web.Controllers
                     if (this.User != null && this.User.Identity != null && !String.IsNullOrEmpty(this.User.Identity.Name))
                     {
                         this._loggedUser = _usersService.GetByIdentity(this.User.Identity.Name);
-
                     }
                 }
 
@@ -45,7 +40,6 @@ namespace LanguageBuilder.Web.Controllers
             ViewBag.LoggedUser = this.LoggedUser;
             //ViewBag.BuildVersion = this.GetType().Assembly.GetName().Version.ToString();
         }
-
 
         protected IActionResult RedirectToReferrer(string defaultActionName = null, string defaultControllerName = null, object defaultRouteValues = null)
         {
@@ -70,7 +64,6 @@ namespace LanguageBuilder.Web.Controllers
             }
         }
 
-        
         //protected ActionResult RedirectToHttpNotFound()
         //{
         //    return this.RedirectToAction("NotFound", "Errors", new { path = this.Request.Path });

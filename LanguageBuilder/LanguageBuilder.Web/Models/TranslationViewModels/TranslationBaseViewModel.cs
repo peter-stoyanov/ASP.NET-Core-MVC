@@ -1,9 +1,6 @@
 ﻿using LanguageBuilder.Data.Models;
 using LanguageBuilder.Web.Models.WordViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Models.TranslationViewModels
 {
@@ -17,6 +14,6 @@ namespace LanguageBuilder.Web.Models.TranslationViewModels
 
         public Example Example { get; set; }
 
-        public IEnumerable<Language> Languages { get; set; } = new List<Language>(); 
+        public IEnumerable<Language> Languages { get; set; } = new List<Language>();
     }
 }

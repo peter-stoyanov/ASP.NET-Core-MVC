@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using LanguageBuilder.Data;
+﻿using AutoMapper;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Web.Models.WordViewModels;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using LanguageBuilder.Web.Models.TranslationViewModels;
 using LanguageBuilder.Web.Infrastructure.Extensions;
+using LanguageBuilder.Web.Models.TranslationViewModels;
+using LanguageBuilder.Web.Models.WordViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -24,7 +18,7 @@ namespace LanguageBuilder.Web.Controllers
         private readonly IMapper _mapper;
 
         public WordsController(
-            IWordsService wordsService, 
+            IWordsService wordsService,
             IUsersService usersService,
             ILanguageService languageService,
             IMapper mapper)
@@ -56,7 +50,7 @@ namespace LanguageBuilder.Web.Controllers
                 return NotFound();
             }
 
-            var word = await _wordsService.FindByIdAsync(id.Value);
+            var word = await _wordsService.GetAsync(id.Value);
 
             if (word == null)
             {
@@ -79,7 +73,7 @@ namespace LanguageBuilder.Web.Controllers
         }
 
         // POST: Words/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -89,10 +83,10 @@ namespace LanguageBuilder.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                await _wordsService.AddWordsWithTranslation(
+                await _wordsService.AddWordsWithTranslationAsync(
                     _mapper.Map<WordCreateViewModel, Word>(model.SourceWord),
                     _mapper.Map<WordCreateViewModel, Word>(model.TargetWord),
-                    this.LoggedUser.Id);    
+                    this.LoggedUser.Id);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -119,7 +113,7 @@ namespace LanguageBuilder.Web.Controllers
         //}
 
         //// POST: Words/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]

@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using LanguageBuilder.Services.Contracts;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
-using System;
+using Microsoft.Extensions.FileProviders;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using AutoMapper.Configuration;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace LanguageBuilder.Web.Infrastructure.Extensions
 {
