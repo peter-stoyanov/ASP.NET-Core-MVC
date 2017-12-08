@@ -7,7 +7,7 @@ using static LanguageBuilder.Data.DataConstants;
 
 namespace LanguageBuilder.Web.Areas.Blog.Models.Articles
 {
-    public class PublishArticleFormModel
+    public class ArticleBaseViewModel
     {
         [Required]
         [MinLength(ArticleTitleMinLength)]

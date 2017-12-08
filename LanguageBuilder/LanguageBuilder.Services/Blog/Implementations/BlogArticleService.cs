@@ -1,6 +1,7 @@
 ﻿using AutoMapper.QueryableExtensions;
 using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
+using LanguageBuilder.Data.Services;
 using LanguageBuilder.Services.Blog.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,11 +14,12 @@ using static LanguageBuilder.Services.ServiceConstants;
 
 namespace LanguageBuilder.Services.Blog.Implementations
 {
-    public class BlogArticleService : IBlogArticleService
+    public class BlogArticleService : BaseRepository<Article, int>, IBlogArticleService
     {
         private readonly LanguageBuilderDbContext db;
 
         public BlogArticleService(LanguageBuilderDbContext db)
+            : base(db)
         {
             this.db = db;
         }

@@ -51,7 +51,7 @@ namespace LanguageBuilder.Web
 
             services.AddMvc(config =>
             {
-                config.Filters.Add(new ValidateModelAttribute());
+                config.Filters.Add(new ValidateModelStateAttributeAttribute());
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
@@ -131,8 +131,8 @@ namespace LanguageBuilder.Web
             {
                 routes.MapRoute(
                     name: "blog",
-                    template: "blog/articles/{id}/{title}",
-                    defaults: new { area = "Blog", controller = "Articles", action = "Details" });
+                    template: "blog/articles/{action}/{id}/{title}",
+                    defaults: new { area = "Blog", controller = "Articles", action = "Index" });
 
                 routes.MapRoute(
                     name: "areas",

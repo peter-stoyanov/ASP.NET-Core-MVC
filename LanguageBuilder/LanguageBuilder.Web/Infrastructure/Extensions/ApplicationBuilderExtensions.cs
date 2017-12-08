@@ -76,7 +76,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                             var user = new User { UserName = adminEmail, Email = adminEmail, SubscriptionId = 1 };
 
                             await userManager.CreateAsync(user, "admin123456");
-                            await userManager.AddToRoleAsync(user, adminRole);
+                            await userManager.AddToRolesAsync(user, new[] { adminRole, WebConstants.UserRole, WebConstants.BlogAuthorRole });
                         }
 
                         // seed languages
