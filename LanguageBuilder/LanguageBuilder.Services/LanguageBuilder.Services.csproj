@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Admin\" />
-    <Folder Include="Blog\" />
   </ItemGroup>
 
 </Project>

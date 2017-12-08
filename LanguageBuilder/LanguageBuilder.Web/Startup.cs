@@ -26,7 +26,8 @@ namespace LanguageBuilder.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LanguageBuilderDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("AzureConnection")));
 
             services
                 .AddIdentity<User, Role>(options =>
@@ -112,9 +113,9 @@ namespace LanguageBuilder.Web
 
             app.UseStaticFiles();
 
-            app.UseDatabaseMigration();
+            app.UseDatabaseMigration(context);
 
-            DbInitializer.Initialize(context);
+            //DbInitializer.Initialize(context);
 
             app
                 .UseAuthentication()

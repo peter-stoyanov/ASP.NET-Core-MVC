@@ -21,6 +21,7 @@ namespace LanguageBuilder.Data
         public DbSet<UserWord> UserWords { get; set; }
         public DbSet<UserWordExample> UserWordExamples { get; set; }
         public DbSet<WordList> WordLists { get; set; }
+        public DbSet<Article> Articles { get; set; }
 
         public LanguageBuilderDbContext(DbContextOptions<LanguageBuilderDbContext> options)
             : base(options)
@@ -29,10 +30,9 @@ namespace LanguageBuilder.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            base.OnModelCreating(builder);
+
             builder.ApplyConfiguration(new ExampleConfiguration());
             builder.ApplyConfiguration(new LanguageConfiguration());
             builder.ApplyConfiguration(new SubscriptionConfiguration());
@@ -42,6 +42,7 @@ namespace LanguageBuilder.Data
             builder.ApplyConfiguration(new UserWordExampleConfiguration());
             builder.ApplyConfiguration(new WordConfiguration());
             builder.ApplyConfiguration(new WordListConfiguration());
+            builder.ApplyConfiguration(new ArticleConfiguration());
 
             SetupTableNamesAndCascadeDelete(builder);
         }
@@ -50,7 +51,12 @@ namespace LanguageBuilder.Data
         {
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
-                entity.Relational().TableName = "tbl_" + entity.ClrType.Name;
+                var typeName = entity.ClrType.Name;
+
+                // cut off generic clr type names `1 suffix
+                if (typeName.Contains('`')) { typeName = typeName.Substring(0, typeName.IndexOf("`")); }
+
+                entity.Relational().TableName = "tbl_" + typeName;
 
                 foreach (var fk in entity.GetForeignKeys())
                 {
@@ -59,7 +65,7 @@ namespace LanguageBuilder.Data
             }
         }
 
-        // enforces data validation with attributes before saving changes to Db
+        // enforce data validation with attributes before saving changes to Db
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             var serviceProvider = this.GetService<IServiceProvider>();

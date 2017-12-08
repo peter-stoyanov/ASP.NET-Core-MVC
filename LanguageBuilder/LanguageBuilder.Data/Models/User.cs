@@ -16,6 +16,8 @@ namespace LanguageBuilder.Data.Models
 
         public List<UserWord> Words { get; set; } = new List<UserWord>();
 
+        public List<Article> Articles { get; set; } = new List<Article>();
+
         public int SubscriptionId { get; set; }
         public Subscription Subscription { get; set; }
     }

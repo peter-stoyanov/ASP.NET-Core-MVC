@@ -11,9 +11,10 @@ using System;
 namespace LanguageBuilder.Data.Migrations
 {
     [DbContext(typeof(LanguageBuilderDbContext))]
-    partial class LanguageBuilderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171208163837_GenericTypesNameEndingCutoff")]
+    partial class GenericTypesNameEndingCutoff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

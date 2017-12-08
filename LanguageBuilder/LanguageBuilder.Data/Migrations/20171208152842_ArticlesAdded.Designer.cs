@@ -11,9 +11,10 @@ using System;
 namespace LanguageBuilder.Data.Migrations
 {
     [DbContext(typeof(LanguageBuilderDbContext))]
-    partial class LanguageBuilderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171208152842_ArticlesAdded")]
+    partial class ArticlesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,8 +26,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AuthorId")
-                        .IsRequired();
+                    b.Property<string>("AuthorId");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -339,7 +339,7 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("tbl_IdentityRoleClaim");
+                    b.ToTable("tbl_IdentityRoleClaim`1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -358,7 +358,7 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tbl_IdentityUserClaim");
+                    b.ToTable("tbl_IdentityUserClaim`1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -376,7 +376,7 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tbl_IdentityUserLogin");
+                    b.ToTable("tbl_IdentityUserLogin`1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -389,7 +389,7 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("tbl_IdentityUserRole");
+                    b.ToTable("tbl_IdentityUserRole`1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -404,7 +404,7 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("tbl_IdentityUserToken");
+                    b.ToTable("tbl_IdentityUserToken`1");
                 });
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.Article", b =>
