@@ -29,19 +29,20 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
             return services;
         }
 
-        public static IServiceCollection AddEmbededFileProviderServices(this IServiceCollection services)
-        {
-            var assembly = typeof(ComponentLibrary.BootstrapModalComponent).GetTypeInfo().Assembly;
+        //public static IServiceCollection AddEmbededFileProviderServices(this IServiceCollection services)
+        //{
+        //    var assembly = typeof(ComponentLibrary.BootstrapModalComponent).GetTypeInfo().Assembly;
 
-            var embededFileProvider = new EmbeddedFileProvider(assembly, "ComponentLibrary");
+        //    var embededFileProvider = new EmbeddedFileProvider(assembly, "ComponentLibrary");
 
-            services.Configure<RazorViewEngineOptions>(options =>
-            {
-                options.FileProviders.Add(embededFileProvider);
-            });
+        //    services.Configure<RazorViewEngineOptions>(options =>
+        //    {
+        //        options.FileProviders.Add(embededFileProvider);
+        //        //options.PageViewLocationFormats
+        //    });
 
-            return services;
-        }
+        //    return services;
+        //}
 
         public static IServiceCollection AddAutoMapper(this IServiceCollection services)
         {

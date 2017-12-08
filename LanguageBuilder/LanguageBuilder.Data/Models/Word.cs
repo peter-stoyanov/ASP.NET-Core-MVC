@@ -5,13 +5,11 @@ namespace LanguageBuilder.Data.Models
 {
     public class Word : BaseEntity<int>
     {
-        //public int Id { get; set; }
-
         [MaxLength(15)]
         public string Gender { get; set; }
 
-        [MaxLength(15)]
-        public string SyntaxType { get; set; }
+        [MaxLength(1000)]
+        public string Definition { get; set; }
 
         [Required]
         [MinLength(1)]
@@ -20,6 +18,9 @@ namespace LanguageBuilder.Data.Models
 
         public int LanguageId { get; set; }
         public Language Language { get; set; }
+
+        public int? SyntaxTypeId { get; set; }
+        public SyntaxType SyntaxType { get; set; }
 
         public bool IsDeleted { get; set; }
 

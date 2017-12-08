@@ -2,11 +2,13 @@
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Web.Infrastructure.Extensions;
-using LanguageBuilder.Web.Models.TranslationViewModels;
-using LanguageBuilder.Web.Models.WordViewModels;
+using LanguageBuilder.Web.ViewModels.TranslationViewModels;
+using LanguageBuilder.Web.ViewModels.WordViewModels;
+using LanguageBuilder.Web.ViewComponents;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -34,9 +36,33 @@ namespace LanguageBuilder.Web.Controllers
         {
             var words = await _wordsService.GetByUserIdAsync(this.LoggedUser.Id);
 
-            var model = new SearchViewModel
+            var model = new WordsSearchViewModel
             {
-                Words = words
+                //Words = words
+            };
+
+            TempData[WebConstants.AlertKey] = new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Test", "Strong", false);
+
+            return View(model);
+        }
+
+        // GET: Words
+        public async Task<IActionResult> Search(WordsSearchFormViewModel searchForm)
+        {
+            var request = searchForm.ToSearchRequest();
+
+            var response = await _wordsService.Search(
+                request, 
+                sortColumnSelector: w => w.Content,
+                criteria: w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()));
+
+            searchForm.Languages = (await _languageService.GetAllAsync()).ToList();
+
+            var model = new WordsSearchViewModel
+            {
+                Response = response,
+                SearchForm = searchForm
+                
             };
 
             return View(model);
@@ -57,7 +83,7 @@ namespace LanguageBuilder.Web.Controllers
                 return NotFound();
             }
 
-            var model = _mapper.Map<Word, DetailViewModel>(word);
+            var model = _mapper.Map<Word, WordDetailViewModel>(word);
 
             return View(model);
         }

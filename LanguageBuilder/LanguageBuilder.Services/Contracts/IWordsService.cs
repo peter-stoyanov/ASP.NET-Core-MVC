@@ -1,5 +1,10 @@
-﻿using LanguageBuilder.Data.Models;
+﻿using cloudscribe.Pagination.Models;
+using LanguageBuilder.Data.Models;
+using LanguageBuilder.Services.Models.WordsSearch;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Contracts
@@ -25,5 +30,7 @@ namespace LanguageBuilder.Services.Contracts
         Task<IEnumerable<Word>> SearchAsync(string keywords, int rows = 10);
 
         Task AddInUserAsync(Word word, User user);
+
+        Task<Response> Search(Request request, Expression<Func<Word, object>> sortColumnSelector = null, Expression<Func<Word, bool>> criteria = null);
     }
 }

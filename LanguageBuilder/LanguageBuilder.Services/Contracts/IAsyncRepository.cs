@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,9 +13,9 @@ namespace LanguageBuilder.Services.Contracts
 
         Task<TEntity> GetAsync(TKey id);
 
-        Task<IQueryable<TEntity>> GetAllAsync();
+        Task<ICollection<TEntity>> GetAllAsync();
 
-        Task<IQueryable<TEntity>> GetAllAsync(TKey[] ids);
+        Task<ICollection<TEntity>> GetAllAsync(TKey[] ids);
 
         Task UpdateAsync(TEntity modifiedType);
 

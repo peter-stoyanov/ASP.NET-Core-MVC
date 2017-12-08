@@ -2,6 +2,7 @@
 using LanguageBuilder.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -81,32 +82,35 @@ namespace LanguageBuilder.Data.Services
                 .FirstOrDefault(e => e.Id.CompareTo(id) == 0);
         }
 
-        public virtual IQueryable<TEntity> GetAll()
+        public virtual ICollection<TEntity> GetAll()
         {
-            return _db.Set<TEntity>().AsNoTracking();
+            return _db.Set<TEntity>().AsNoTracking().ToList();
         }
 
-        public virtual IQueryable<TEntity> GetAll(TKey[] ids)
+        public virtual ICollection<TEntity> GetAll(TKey[] ids)
         {
             return _db
                 .Set<TEntity>()
                 .AsNoTracking()
-                .Where(e => ids.Contains(e.Id));
+                .Where(e => ids.Contains(e.Id))
+                .ToList();
         }
 
-        public virtual async Task<IQueryable<TEntity>> GetAllAsync()
+        public virtual async Task<ICollection<TEntity>> GetAllAsync()
         {
-            return await Task.Run(() => _db
-                .Set<TEntity>()
-                .AsNoTracking());
-        }
-
-        public virtual async Task<IQueryable<TEntity>> GetAllAsync(TKey[] ids)
-        {
-            return await Task.Run(() => _db
+            return await _db
                 .Set<TEntity>()
                 .AsNoTracking()
-                .Where(e => ids.Contains(e.Id)));
+                .ToListAsync();
+        }
+
+        public virtual async Task<ICollection<TEntity>> GetAllAsync(TKey[] ids)
+        {
+            return await _db
+                .Set<TEntity>()
+                .AsNoTracking()
+                .Where(e => ids.Contains(e.Id))
+                .ToListAsync();
         }
 
         public virtual async Task<TEntity> GetAsync(TKey id)

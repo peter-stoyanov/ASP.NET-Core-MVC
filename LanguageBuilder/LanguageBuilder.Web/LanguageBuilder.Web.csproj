@@ -5,11 +5,18 @@
     <UserSecretsId>aspnet-LanguageBuilder.Web-A38E2AFA-0825-4BEF-B3C6-E3130290153D</UserSecretsId>
   </PropertyGroup>
 
+  <!--<ItemGroup>
+    <Compile Include="ViewModels\WordViewModels\WordDetailViewModel.cs" />
+    <Compile Include="ViewModels\WordViewModels\WordsSearchViewModel.cs" />
+  </ItemGroup>-->
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.1" />
+    <PackageReference Include="cloudscribe.Web.Pagination" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="NPOI" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,18 +26,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ComponentLibrary\ComponentLibrary.csproj" />
     <ProjectReference Include="..\LanguageBuilder.Data\LanguageBuilder.Data.csproj" />
     <ProjectReference Include="..\LanguageBuilder.Services\LanguageBuilder.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\" />
     <Folder Include="Areas\Blog\" />
+    <Folder Include="Helpers\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\lib\jquery-ui\css\" />
     <Folder Include="wwwroot\lib\jquery-ui\js\" />
+    <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 
 </Project>

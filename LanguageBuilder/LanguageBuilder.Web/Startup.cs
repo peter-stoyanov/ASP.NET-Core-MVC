@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace LanguageBuilder.Web
 {
@@ -46,7 +48,11 @@ namespace LanguageBuilder.Web
             services.AddDomainServices();
 
             services.AddAutoMapper();
-            services.AddEmbededFileProviderServices();
+
+            //services.AddEmbededFileProviderServices();
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
             services.AddMvc(config =>
             {
@@ -91,6 +97,8 @@ namespace LanguageBuilder.Web
                     options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
                     options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
                 });
+
+            services.AddCloudscribePagination();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

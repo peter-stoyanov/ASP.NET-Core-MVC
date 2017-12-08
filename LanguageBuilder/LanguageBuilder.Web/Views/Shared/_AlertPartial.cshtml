@@ -1,0 +1,16 @@
+﻿
+@if (Model != null && Model is BootstrapAlertViewModel)
+{
+    @Html.Raw(await Component.InvokeAsync(
+        nameof(BootstrapAlertComponent), Model));
+
+    return;
+}
+
+@if (TempData[WebConstants.AlertKey] != null)
+{
+    await Component.InvokeAsync(
+        nameof(BootstrapAlertComponent),
+        TempData[WebConstants.AlertKey] as BootstrapAlertViewModel);
+}
+

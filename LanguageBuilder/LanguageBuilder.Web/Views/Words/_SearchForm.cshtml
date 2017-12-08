@@ -1,0 +1,23 @@
+﻿@model WordsSearchFormViewModel
+
+<form class="autosubmit form-inline" role="form" asp-controller="Words" asp-action="Search" method="get" asp-antiforgery="false">
+    <div class="form-group">
+        <label asp-for="Keywords"></label>
+        <input asp-for="Keywords" placeholder="type keyword ..." title="Search in dictionaries" class="form-control my-3 mx-3" type="text"/>
+        <span asp-validation-for="Keywords"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LanguageId"></label>
+        <select asp-for="LanguageId" class="form-control my-3 mx-3" asp-items="Model.Languages.Select(l => new SelectListItem() { Value = l.Id.ToString(), Text = l.Name })"></select>
+        <span asp-validation-for="LanguageId"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RowCount"></label>
+        <select asp-for="RowCount" class="form-control my-3 mx-3" asp-items="Model.RowCounts.Select(r => new SelectListItem() { Value = r.ToString(), Text = r.ToString() })"></select>
+        <span asp-validation-for="RowCount"></span>
+    </div>
+    
+    <a class = "btn btn-warning" asp-controller="Words" asp-action="Search">Reset</a>
+</form>

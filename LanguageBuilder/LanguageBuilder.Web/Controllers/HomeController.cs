@@ -1,4 +1,4 @@
-﻿using LanguageBuilder.Web.Models;
+﻿using LanguageBuilder.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LanguageBuilder.Data.Models;
-using LanguageBuilder.Web.Models.WordViewModels;
+using LanguageBuilder.Web.ViewModels.WordViewModels;
 
 namespace LanguageBuilder.Web.Infrastructure.Mapping
 {
@@ -8,7 +8,7 @@ namespace LanguageBuilder.Web.Infrastructure.Mapping
     {
         public WordProfile()
         {
-            CreateMap<Word, DetailViewModel>();
+            CreateMap<Word, WordDetailViewModel>();
 
             CreateMap<Word, WordCreateViewModel>();
             CreateMap<WordCreateViewModel, Word>();
@@ -16,7 +16,7 @@ namespace LanguageBuilder.Web.Infrastructure.Mapping
             CreateMap<Word, WordEditViewModel>();
             CreateMap<WordEditViewModel, Word>();
 
-            CreateMap<Word, SearchViewModel>();
+            CreateMap<Word, WordsSearchViewModel>();
         }
     }
 }

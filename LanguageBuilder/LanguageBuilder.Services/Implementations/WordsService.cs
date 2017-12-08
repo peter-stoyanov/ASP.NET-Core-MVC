@@ -1,12 +1,16 @@
-﻿using LanguageBuilder.Data;
+﻿using cloudscribe.Pagination.Models;
+using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Data.Services;
 using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Services.Models.WordsSearch;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace LanguageBuilder.Services.Implementations
 {
@@ -139,6 +143,40 @@ namespace LanguageBuilder.Services.Implementations
         public Task AddInUserAsync(Word word, User user)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Response> Search(
+            Request request, 
+            Expression<Func<Word, object>> sortColumnSelector = null,
+            Expression<Func<Word, bool>> criteria = null)
+        {
+            request.CancellationToken.ThrowIfCancellationRequested();
+
+            int offset = (request.PageSize * request.PageNumber) - request.PageSize;
+            if (offset < 0) { offset = 0; }
+
+            var query = _db.Words
+                .OrderBy(sortColumnSelector)
+                .Where(criteria)
+                .Select(p => p)
+                .Skip(offset)
+                .Take(request.PageSize);
+
+            var pagedResult = new PagedResult<Word>
+            {
+                Data = await query.AsNoTracking().ToListAsync(request.CancellationToken),
+                TotalItems = await _db.Words.CountAsync(),
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize
+            };
+
+            var response = new Response()
+            {
+                Records = pagedResult
+            };
+
+            return response;
+
         }
     }
 }

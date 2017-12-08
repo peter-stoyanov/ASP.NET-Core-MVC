@@ -1,5 +1,6 @@
 ﻿using LanguageBuilder.Data.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LanguageBuilder.Services.Contracts
@@ -12,9 +13,9 @@ namespace LanguageBuilder.Services.Contracts
 
         TEntity Get(TKey id);
 
-        IQueryable<TEntity> GetAll();
+        ICollection<TEntity> GetAll();
 
-        IQueryable<TEntity> GetAll(TKey[] ids);
+        ICollection<TEntity> GetAll(TKey[] ids);
 
         void Update(TEntity modifiedType);
 

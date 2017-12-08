@@ -1,6 +1,6 @@
 ﻿using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Web.Models.ManageViewModels;
+using LanguageBuilder.Web.ViewModels.ManageViewModels;
 using LanguageBuilder.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;

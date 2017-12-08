@@ -21,6 +21,7 @@ namespace LanguageBuilder.Data
         public DbSet<UserWord> UserWords { get; set; }
         public DbSet<UserWordExample> UserWordExamples { get; set; }
         public DbSet<WordList> WordLists { get; set; }
+        public DbSet<SyntaxType> SyntaxTypes { get; set; }
 
         public LanguageBuilderDbContext(DbContextOptions<LanguageBuilderDbContext> options)
             : base(options)
@@ -42,6 +43,7 @@ namespace LanguageBuilder.Data
             builder.ApplyConfiguration(new UserWordExampleConfiguration());
             builder.ApplyConfiguration(new WordConfiguration());
             builder.ApplyConfiguration(new WordListConfiguration());
+            builder.ApplyConfiguration(new SyntaxTypeConfiguration());
 
             SetupTableNamesAndCascadeDelete(builder);
         }
