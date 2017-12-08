@@ -4,7 +4,8 @@
     {
         public const string AdministratorRole = "Administrator";
         public const string BlogAuthorRole = "BlogAuthor";
-        public const string TrainerRole = "Trainer";
+        public const string UserRole = "User";
+        //public const string TrainerRole = "Trainer";
 
         public const string AlertKey = "alertKey";
         public const string AlertInfo = "info";

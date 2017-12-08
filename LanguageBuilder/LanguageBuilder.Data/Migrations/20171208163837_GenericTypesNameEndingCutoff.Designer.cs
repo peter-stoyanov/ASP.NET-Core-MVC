@@ -11,9 +11,10 @@ using System;
 namespace LanguageBuilder.Data.Migrations
 {
     [DbContext(typeof(LanguageBuilderDbContext))]
-    partial class LanguageBuilderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171208163837_GenericTypesNameEndingCutoff")]
+    partial class GenericTypesNameEndingCutoff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,22 +118,6 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbl_Subscription");
-                });
-
-            modelBuilder.Entity("LanguageBuilder.Data.Models.SyntaxType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tbl_SyntaxType");
                 });
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.Translation", b =>
@@ -297,9 +282,6 @@ namespace LanguageBuilder.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(300);
 
-                    b.Property<string>("Definition")
-                        .HasMaxLength(1000);
-
                     b.Property<string>("Gender")
                         .HasMaxLength(15);
 
@@ -307,13 +289,12 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.Property<int>("LanguageId");
 
-                    b.Property<int?>("SyntaxTypeId");
+                    b.Property<string>("SyntaxType")
+                        .HasMaxLength(15);
 
                     b.HasKey("Id");
 
                     b.HasIndex("LanguageId");
-
-                    b.HasIndex("SyntaxTypeId");
 
                     b.ToTable("tbl_Word");
                 });
@@ -513,11 +494,6 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.Language", "Language")
                         .WithMany("Words")
                         .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("LanguageBuilder.Data.Models.SyntaxType", "SyntaxType")
-                        .WithMany("Words")
-                        .HasForeignKey("SyntaxTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

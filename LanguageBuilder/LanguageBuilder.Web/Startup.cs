@@ -28,7 +28,8 @@ namespace LanguageBuilder.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LanguageBuilderDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("AzureConnection")));
 
             services
                 .AddIdentity<User, Role>(options =>
@@ -56,7 +57,7 @@ namespace LanguageBuilder.Web
 
             services.AddMvc(config =>
             {
-                config.Filters.Add(new ValidateModelAttribute());
+                config.Filters.Add(new ValidateModelStateAttributeAttribute());
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
@@ -120,9 +121,9 @@ namespace LanguageBuilder.Web
 
             app.UseStaticFiles();
 
-            app.UseDatabaseMigration();
+            app.UseDatabaseMigration(context);
 
-            DbInitializer.Initialize(context);
+            //DbInitializer.Initialize(context);
 
             app
                 .UseAuthentication()
@@ -138,8 +139,8 @@ namespace LanguageBuilder.Web
             {
                 routes.MapRoute(
                     name: "blog",
-                    template: "blog/articles/{id}/{title}",
-                    defaults: new { area = "Blog", controller = "Articles", action = "Details" });
+                    template: "blog/articles/{action}/{id}/{title}",
+                    defaults: new { area = "Blog", controller = "Articles", action = "Index" });
 
                 routes.MapRoute(
                     name: "areas",

@@ -76,8 +76,6 @@
 
     @RenderSection("Scripts", required: false)
 
-    @RenderSection("BodyScripts", false)
-
     @if (ViewBag.RegisterJqueryUi == true)
     {
         <environment include="Development">
@@ -86,6 +84,11 @@
         <environment exclude="Development">
             <script src="~/lib/jquery-ui/js/jquery-ui.min.js"></script>
         </environment>
+    }
+    
+    @if (ViewBag.RegisterTinyMce == true)
+    {
+        <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     }
 
     @Html.Partial("_GoogleAnalytics")
