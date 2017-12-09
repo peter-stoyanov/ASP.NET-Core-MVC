@@ -1016,3 +1016,53 @@ Query: (null)
 
 
 
+Date: 2017-12-09 18:47:01,210 
+
+Host: Petar 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [2] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception:  
+Message: Host started 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
+Date: 2017-12-09 18:48:22,273 
+
+Host: Petar 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [2] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception:  
+Message: Host started 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+

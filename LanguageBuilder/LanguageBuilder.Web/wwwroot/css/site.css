@@ -3,7 +3,7 @@
 }
 
 .container {
-    max-width: 1140px;
+    /*max-width: 1140px;*/
     overflow: hidden;
 }
 
@@ -33,3 +33,17 @@ h2 {
 .small-icon {
     margin-left: 1em;
 }
+
+/* ----------------------------------------- */
+/* Home page */
+/* ----------------------------------------- */
+
+.landing-section {
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/landing-page.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
