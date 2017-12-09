@@ -21,7 +21,7 @@ namespace LanguageBuilder.Web
 
             var logger = LogManager.GetLogger(typeof(Program));
 
-            logger.Error("Hello World!");
+            logger.Error("Host started");
 
             BuildWebHost(args).Run();
 
