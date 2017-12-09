@@ -14,6 +14,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.1" />
     <PackageReference Include="cloudscribe.Web.Pagination" Version="2.1.1" />
+    <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
     <PackageReference Include="NPOI" Version="2.3.0" />
@@ -40,6 +41,12 @@
     <Folder Include="wwwroot\lib\jquery-ui\css\" />
     <Folder Include="wwwroot\lib\jquery-ui\js\" />
     <Folder Include="wwwroot\Upload\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

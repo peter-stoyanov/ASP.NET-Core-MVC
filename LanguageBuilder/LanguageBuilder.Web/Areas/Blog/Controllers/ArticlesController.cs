@@ -1,21 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LanguageBuilder.Web;
-using LanguageBuilder.Web.Infrastructure.Filters;
-
-using static LanguageBuilder.Web.WebConstants;
+﻿using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Blog;
-using Microsoft.AspNetCore.Identity;
+using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Services.Html;
 using LanguageBuilder.Web.Areas.Blog.Models.Articles;
-using LanguageBuilder.Web.Infrastructure.Extensions;
-using LanguageBuilder.Data.Models;
 using LanguageBuilder.Web.Controllers;
-using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Web.Infrastructure.Extensions;
+using LanguageBuilder.Web.Infrastructure.Filters;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using static LanguageBuilder.Web.WebConstants;
 
 namespace LanguageBuilder.Web.Areas.Blog.Controllers
 {
@@ -24,17 +19,14 @@ namespace LanguageBuilder.Web.Areas.Blog.Controllers
     public class ArticlesController : BaseController
     {
         private readonly IBlogArticleService _articles;
-        private readonly UserManager<User> _userManager;
         private readonly IHtmlService _html;
 
         public ArticlesController(
             IBlogArticleService articles,
-            UserManager<User> userManager,
-            IUsersService userService, 
+            IUsersService userService,
             IHtmlService html) : base(userService)
         {
             this._articles = articles;
-            this._userManager = userManager;
             this._html = html;
         }
 
@@ -68,10 +60,16 @@ namespace LanguageBuilder.Web.Areas.Blog.Controllers
         {
             var article = await this._articles.GetAsync(id);
 
+            if (article.AuthorId != LoggedUser.Id)
+            {
+                Unauthorized();
+            }
+
             if (article == null)
             {
                 NotFound();
             }
+
 
             var model = new ArticleCreateViewModel
             {
@@ -95,7 +93,7 @@ namespace LanguageBuilder.Web.Areas.Blog.Controllers
 
             article.Title = model.Title;
             article.Content = this._html.Sanitize(model.Content);
-            
+
             await this._articles.UpdateAsync(article);
 
             return RedirectToAction(nameof(Index));

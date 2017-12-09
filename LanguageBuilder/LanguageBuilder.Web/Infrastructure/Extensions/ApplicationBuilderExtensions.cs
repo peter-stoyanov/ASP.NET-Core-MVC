@@ -21,7 +21,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
         {
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<LanguageBuilderDbContext>().Database.Migrate();
+                //serviceScope.ServiceProvider.GetService<LanguageBuilderDbContext>().Database.Migrate();
 
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
                 var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<Role>>();
@@ -54,7 +54,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                         }
 
                         // seed subscription types
-                        var subscriptionCount = await (await subscriptionService.GetAllAsync()).CountAsync();
+                        var subscriptionCount = (await subscriptionService.GetAllAsync()).Count;
                         if (subscriptionCount == 0)
                         {
                             var subscriptions = new List<Subscription>()
@@ -80,7 +80,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                         }
 
                         // seed languages
-                        var languageCount = await (await languageService.GetAllAsync()).CountAsync();
+                        var languageCount = (await languageService.GetAllAsync()).Count;
                         if (languageCount == 0)
                         {
                             var languages = new List<Language>()

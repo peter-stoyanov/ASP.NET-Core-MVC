@@ -64,15 +64,15 @@ namespace LanguageBuilder.Web.Controllers
             }
         }
 
-        //protected ActionResult RedirectToHttpNotFound()
-        //{
-        //    return this.RedirectToAction("NotFound", "Errors", new { path = this.Request.Path });
-        //}
+        protected ActionResult RedirectToHttpNotFound()
+        {
+            return this.RedirectToAction("NotFound", "Errors", new { path = this.Request.Path });
+        }
 
-        //protected ActionResult RedirectToHttpForbidden()
-        //{
-        //    return this.RedirectToAction("NoAccess", "Errors", new { path = this.Request.Path });
-        //}
+        protected ActionResult RedirectToHttpForbidden()
+        {
+            return this.RedirectToAction("NoAccess", "Errors", new { path = this.Request.Path });
+        }
 
         //public string RootUrl
         //{

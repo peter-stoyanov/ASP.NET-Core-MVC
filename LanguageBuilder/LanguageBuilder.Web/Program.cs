@@ -1,9 +1,13 @@
 ﻿using LanguageBuilder.Data;
+using log4net;
+using log4net.Config;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace LanguageBuilder.Web
 {
@@ -11,6 +15,14 @@ namespace LanguageBuilder.Web
     {
         public static void Main(string[] args)
         {
+            var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+
+            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+
+            var logger = LogManager.GetLogger(typeof(Program));
+
+            logger.Error("Hello World!");
+
             BuildWebHost(args).Run();
 
             //var host = BuildWebHost(args);
