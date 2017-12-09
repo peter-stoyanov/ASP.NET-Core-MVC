@@ -1,0 +1,100 @@
+Date: 2017-12-09 10:52:29,489 
+
+Host: Petar 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [2] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception:  
+Message: Host started 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
+Date: 2017-12-09 11:19:46,822 
+
+Host: Petar 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [2] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception:  
+Message: Host started 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
+Date: 2017-12-09 11:49:44,147 
+
+Host: Petar 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [2] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception:  
+Message: Host started 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
+Date: 2017-12-09 12:09:01,909 
+
+Host: Petar 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [2] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception:  
+Message: Host started 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
