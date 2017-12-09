@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 namespace LanguageBuilder.Services.Contracts
 {
     public interface IUsersService
-    {
+    { 
         User GetByIdentity(string identityName);
 
         Task<User> GetByIdentityAsync(string identityName);
+
+        User GetById(string id);
+
+        Task<User> GetByIdAsync(string id);
 
         Task<Response> Search(
             Request request,

@@ -1,17 +1,31 @@
-﻿using System;
+﻿using log4net;
+using log4net.Config;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Infrastructure.Extensions
 {
     public static class ExceptionExtensions
     {
-        //private static ILog Log = LogManager.GetLogger("Pipeline");
+        private static ILog logger;
+
+        static ExceptionExtensions()
+        {
+            var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+
+            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+
+            logger = LogManager.GetLogger(typeof(Program));
+
+        }
 
         public static void SaveToLog(this Exception ex)
         {
-          //  ExceptionExtensions.Log.Error(ex.Message, ex);
+            ExceptionExtensions.logger.Error(ex.Message, ex);
         }
 
         public static void SaveToLog(this Exception ex, string query)
@@ -20,7 +34,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
 
             log4net.ThreadContext.Properties[key] = query;
 
-            //ExceptionExtensions.Log.Error(ex.Message, ex);
+            ExceptionExtensions.logger.Error(ex.Message, ex);
 
             log4net.ThreadContext.Properties[key] = null;
         }

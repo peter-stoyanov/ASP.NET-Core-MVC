@@ -43,9 +43,6 @@ namespace LanguageBuilder.Web
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            //services.AddTransient<IEmailSender, EmailSender>();
-            //services.AddTransient<IWordsService, WordsService>();
-            //services.AddTransient<IUsersService, UsersService>();
             services.AddDomainServices();
 
             services.AddAutoMapper();

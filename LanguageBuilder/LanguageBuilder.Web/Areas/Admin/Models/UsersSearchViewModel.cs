@@ -12,11 +12,8 @@ namespace LanguageBuilder.Web.Areas.Admin.Models
         public UsersSearchFormViewModel SearchForm { get; set; }
 
         public List<User> Data { get; set; }
-        public int TotalItems { get; set; }
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
 
-        public PaginationSettings Paging { get; set; }
+        public PaginationSettings Paging { get; set; } = new PaginationSettings();
 
         public Response Response
         {
@@ -29,9 +26,10 @@ namespace LanguageBuilder.Web.Areas.Admin.Models
                 if (value != null && value.Records != null)
                 {
                     this.Data = value.Records.Data;
-                    this.TotalItems = value.Records.TotalItems;
-                    this.PageSize = value.Records.PageSize;
-                    this.PageNumber = value.Records.PageNumber;
+                    this.Paging.CurrentPage = value.Records.PageNumber;
+                    this.Paging.TotalItems = value.Records.TotalItems;
+                    this.Paging.ItemsPerPage = value.Records.PageSize;
+                    this.Paging.MaxPagerItems = 100; // value.Records.TotalItems
                 }
             }
         }

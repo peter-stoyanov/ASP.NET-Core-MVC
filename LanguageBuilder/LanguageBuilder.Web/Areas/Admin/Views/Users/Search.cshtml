@@ -32,7 +32,7 @@
                     <td>@user.Name </td>
                     <td>@user.Email </td>
                     <td>
-                        <a asp-controller="Users" asp-action="Edit" title="Edit User"><i class="fa fa-pencil contact small-icon" aria-hidden="true"></i></a>
+                        <a asp-controller="Users" asp-action="EditRoles" title="Edit User" asp-route-id="@user.Id"><i class="fa fa-pencil contact small-icon" aria-hidden="true"></i></a>
                         <a asp-controller="Users" asp-action="Clone" title="Clone User"><i class="fa fa-files-o contact small-icon" aria-hidden="true"></i></a>
                         <a asp-controller="Users" asp-action="Delete" title="Delete User"><i class="fa fa-trash contact small-icon btn-delete" aria-hidden="true"></i></a>
                     </td>

@@ -1,8 +1,14 @@
 ﻿@model BootstrapAlertViewModel
 
+@if (Model == null)
+{
+    return;
+}
+
 @{
     string bootstrapClass = $"alert alert-{Model.Type.ToString().ToLower()} alert-dismissible fade show";
 }
+
 
 <div class="@bootstrapClass" role="alert">
 

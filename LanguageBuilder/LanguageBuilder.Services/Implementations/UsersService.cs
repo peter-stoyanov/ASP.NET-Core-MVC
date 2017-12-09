@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Implementations
 {
-    public class UsersService : IUsersService
+    public class UsersService :  IUsersService
     {
         private readonly LanguageBuilderDbContext _db;
 
@@ -33,6 +33,22 @@ namespace LanguageBuilder.Services.Implementations
             return await _db
                 .Users
                 .Where(u => u.UserName == identityName)
+                .FirstOrDefaultAsync();
+        }
+
+        public User GetById(string id)
+        {
+            return _db
+                .Users
+                .Where(u => u.Id == id)
+                .FirstOrDefault();
+        }
+
+        public async Task<User> GetByIdAsync(string id)
+        {
+            return await _db
+                .Users
+                .Where(u => u.Id == id)
                 .FirstOrDefaultAsync();
         }
 

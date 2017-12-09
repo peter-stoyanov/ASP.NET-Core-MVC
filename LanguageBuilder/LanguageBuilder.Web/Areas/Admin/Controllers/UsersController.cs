@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using LanguageBuilder.Web.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -27,15 +30,21 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
     public class UsersController : BaseController
     {
         private readonly IUsersService _userService;
+        private readonly RoleManager<Role> _roleManager;
+        private readonly IRolesService _roleService;
         private readonly UserManager<User> _userManager;
 
         public UsersController(
             IUsersService usersService,
+            RoleManager<Role> roleManager,
+            IRolesService roleService,
             UserManager<User> userManager)
             : base(usersService)
         {
             this._userManager = userManager;
             this._userService = usersService;
+            this._roleService = roleService; ;
+            this._roleManager = roleManager;
         }
 
         [HttpGet]
@@ -51,17 +60,10 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             var model = new UsersSearchViewModel
             {
                 Response = response,
-                SearchForm = searchForm,
-                Paging = new cloudscribe.Web.Pagination.PaginationSettings
-                {
-                    CurrentPage = response.Records.PageNumber,
-                    TotalItems = 100, //response.Records.TotalItems,
-                    ItemsPerPage = response.Records.PageSize,
-                    MaxPagerItems = response.Records.TotalItems
-                }
+                SearchForm = searchForm
             };
 
-            if (!model.Response.Records.Data.Any())
+            if (!model.Data.Any())
             {
                 TempData[WebConstants.AlertKey] = new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true);
             }
@@ -69,10 +71,48 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult User(WordsUploadViewModel model)
+        [HttpGet]
+        public async Task<IActionResult> EditRoles(string id)
         {
-           
+            if (String.IsNullOrEmpty(id)) { return BadRequest(); }
+
+            var user = await _userService.GetByIdAsync(id);
+
+            if (user == null) { return NotFound(); }
+
+            var model = new UserRolesViewModel
+            {
+                Roles = (await _roleService.GetAllAsync()).ToList(),
+                SelectedRoles = (await _roleService.GetByUserIdAsync(id)).Select(r => r.Name).ToList(),
+                User = user,
+                UserId = user.Id,
+                //Caller = Request.UrlReferrer()?.AbsoluteUri
+        };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRoles(UserRolesViewModel model)
+        {
+            try
+            {
+                await _roleService.UpdateAsync(model.UserId, model.SelectedRoles);
+
+                TempData[WebConstants.AlertKey] = new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true);
+
+                return RedirectToLocal(model.Caller, "Search");
+
+            }
+            catch (Exception ex)
+            {
+                ex.SaveToLog();
+            }
+
+            model.Roles = (await _roleService.GetAllAsync()).ToList();
+            model.SelectedRoles = (await _roleService.GetByUserIdAsync(model.UserId)).Select(r => r.Name).ToList();
+
+            TempData[WebConstants.AlertKey] = new BootstrapAlertViewModel(BootstrapAlertType.Danger, "We are sorry, but it seems that an error occured.", hasDismissButton: true);
 
             return View(model);
         }
