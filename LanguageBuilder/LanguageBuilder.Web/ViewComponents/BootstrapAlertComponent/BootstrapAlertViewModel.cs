@@ -10,7 +10,7 @@ namespace LanguageBuilder.Web.ViewComponents
             : this(type, text, String.Empty, hasDismissButton: true)
         { }
 
-        public BootstrapAlertViewModel(BootstrapAlertType type, string text, string strongText, bool hasDismissButton = true)
+        public BootstrapAlertViewModel(BootstrapAlertType type, string text, string strongText = "", bool hasDismissButton = true)
         {
             this.Type = type;
             this.Text = text;

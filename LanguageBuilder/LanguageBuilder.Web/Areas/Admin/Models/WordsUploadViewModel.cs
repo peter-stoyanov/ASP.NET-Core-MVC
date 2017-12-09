@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LanguageBuilder.Web.Areas.Admin.ViewModels
+namespace LanguageBuilder.Web.Areas.Admin.Models
 {
     public class WordsUploadViewModel
     {

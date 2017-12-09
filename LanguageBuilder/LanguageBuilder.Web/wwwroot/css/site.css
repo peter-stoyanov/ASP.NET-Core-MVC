@@ -7,6 +7,29 @@
     overflow: hidden;
 }
 
+main {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+footer {
+    margin-top: 3em;
+}
+
 footer .contact {
     font-size: 150%;
+}
+
+h2 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.page-heading {
+    font-weight: 200;
+    font-size: 3.5em;
+}
+
+.small-icon {
+    margin-left: 1em;
 }

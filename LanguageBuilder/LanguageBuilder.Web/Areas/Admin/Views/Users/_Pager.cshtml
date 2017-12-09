@@ -1,0 +1,23 @@
+﻿@model cloudscribe.Web.Pagination.PaginationSettings
+
+<div class="mt-5 mb-2">
+    <cs-pager cs-paging-pagesize="@Model.ItemsPerPage"
+              cs-paging-pagenumber="@Model.CurrentPage"
+              cs-paging-totalitems="@Model.TotalItems"
+              cs-pagenumber-param="page"
+              cs-show-first-last="@Model.ShowFirstLast"
+              cs-suppress-empty-nextprev="@Model.SuppressEmptyNextPrev"
+              cs-suppress-inactive-firstlast="@Model.SuppressInActiveFirstLast"
+              cs-first-page-text="First"
+              cs-last-page-text="Last"
+              cs-pager-ul-class="pagination"
+              cs-pager-li-current-class="page-item active"
+              cs-pager-li-other-class="page-item"
+              cs-pager-li-non-active-class="page-item disabled"
+              cs-pager-link-current-class="page-link"
+              cs-pager-link-other-class="page-link"
+              asp-route="areas"
+              asp-controller="Users"
+              asp-action="Search">
+    </cs-pager>
+</div>

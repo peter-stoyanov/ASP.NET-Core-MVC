@@ -14,7 +14,7 @@ namespace LanguageBuilder.Services.Models.Search
 
         //public int? Offset { get; set; }
         public int PageSize { get; set; } = 50;
-        public int PageNumber { get; set; }
+        public int PageNumber { get; set; } = 1;
         public CancellationToken CancellationToken { get; set; }
          
 

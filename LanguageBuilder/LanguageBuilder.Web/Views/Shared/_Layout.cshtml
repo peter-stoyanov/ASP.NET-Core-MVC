@@ -10,8 +10,8 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-reboot.min.css" />
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css" />
+        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-reboot.min.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css" />*@
         <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -38,7 +38,7 @@
         </environment>
     }
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400" rel="stylesheet">
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -47,9 +47,18 @@
 
     <div class="container">
 
-        @RenderBody()
+        <main>
 
-        @Html.Partial("_Footer")
+            @RenderBody()
+        
+        </main>
+
+        <footer>
+
+            @Html.Partial("_Footer")
+
+        </footer>
+
     </div>
 
     <environment include="Development">
@@ -92,5 +101,7 @@
     }
 
     @Html.Partial("_GoogleAnalytics")
+
 </body>
+
 </html>

@@ -12,6 +12,8 @@ namespace LanguageBuilder.Services.Blog
     {
         Task<IEnumerable<BlogArticleListingServiceModel>> AllAsync(int page = 1);
 
+        Task<IEnumerable<BlogArticleListingServiceModel>> ByAuthorIdAsync(string authorId, int page = 1);
+
         Task<int> TotalAsync();
 
         Task<BlogArticleDetailsServiceModel> ById(int id);

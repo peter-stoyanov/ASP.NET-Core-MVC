@@ -33,6 +33,16 @@ namespace LanguageBuilder.Services.Blog.Implementations
                 .ProjectTo<BlogArticleListingServiceModel>()
                 .ToListAsync();
 
+        public async Task<IEnumerable<BlogArticleListingServiceModel>> ByAuthorIdAsync(string authorId, int page = 1)
+            => await this.db
+                .Articles
+                .Where(a => a.AuthorId == authorId)
+                .OrderByDescending(a => a.PublishDate)
+                .Skip((page - 1) * BlogArticlesPageSize)
+                .Take(BlogArticlesPageSize)
+                .ProjectTo<BlogArticleListingServiceModel>()
+                .ToListAsync();
+
         public async Task<int> TotalAsync()
             => await this.db.Articles.CountAsync();
 

@@ -30,6 +30,14 @@ namespace LanguageBuilder.Web.Areas.Blog.Controllers
             this._html = html;
         }
 
+        public async Task<IActionResult> My(int page = 1)
+            => View(new ArticleListingViewModel
+            {
+                Articles = await this._articles.ByAuthorIdAsync(LoggedUser.Id),
+                TotalArticles = await this._articles.TotalAsync(),
+                CurrentPage = page
+            });
+
         [AllowAnonymous]
         public async Task<IActionResult> Index(int page = 1)
             => View(new ArticleListingViewModel

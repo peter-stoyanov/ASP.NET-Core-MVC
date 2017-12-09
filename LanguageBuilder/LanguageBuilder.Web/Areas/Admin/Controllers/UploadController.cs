@@ -1,5 +1,5 @@
 ﻿using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Web.Areas.Admin.ViewModels;
+using LanguageBuilder.Web.Areas.Admin.Models;
 using LanguageBuilder.Web.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
