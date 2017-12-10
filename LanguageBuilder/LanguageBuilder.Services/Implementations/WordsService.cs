@@ -44,6 +44,15 @@ namespace LanguageBuilder.Services.Implementations
                 .ToList();
         }
 
+        public IEnumerable<Word> GetByUserId(string userId)
+        {
+            return _db
+                .UserWords
+                .Where(uw => uw.UserId == userId)
+                .Select(uw => uw.Word)
+                .ToList();
+        }
+
         public IEnumerable<Word> GetByUserAndLanguage(User user, Language language)
         {
             return _db
@@ -157,7 +166,14 @@ namespace LanguageBuilder.Services.Implementations
 
             var query = _db.Words
                 .OrderBy(sortColumnSelector)
-                .Where(criteria)
+                .Where(criteria);
+                
+            if (request.LanguageIds.Any())
+            {
+                query = query.Where(w => request.LanguageIds.Contains(w.LanguageId));
+            }
+
+            query = query
                 .Select(p => p)
                 .Skip(offset)
                 .Take(request.PageSize);

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LanguageBuilder.Data\LanguageBuilder.Data.csproj" />
     <ProjectReference Include="..\LanguageBuilder.Services\LanguageBuilder.Services.csproj" />
   </ItemGroup>
 

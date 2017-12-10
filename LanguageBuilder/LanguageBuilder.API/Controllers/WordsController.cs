@@ -15,19 +15,24 @@ namespace LanguageBuilder.API.Controllers
             _wordsService = wordsService;
         }
 
+        //[HttpGet]
+        //public async Task<IEnumerable<object>> Search([FromBody]string keywords, [FromBody]int rows)
+        //{
+        //    return await _wordsService.SearchAsync(keywords, rows);
+        //}
+
+        //[HttpGet]
+        //public async Task<IEnumerable<object>> GetByUser(string userId)
+        //{
+        //    return await _wordsService.GetByUserIdAsync(userId);
+        //}
+
         // GET api/values
         [HttpGet]
-        public async Task<IEnumerable<object>> Search([FromBody]string keywords, [FromBody]int rows)
+        public IEnumerable<string> Get()
         {
-            return await _wordsService.SearchAsync(keywords, rows);
+            return new string[] { "value1", "value2" };
         }
-
-        //// GET api/values
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
 
         //// GET api/values/5
         //[HttpGet("{id}")]

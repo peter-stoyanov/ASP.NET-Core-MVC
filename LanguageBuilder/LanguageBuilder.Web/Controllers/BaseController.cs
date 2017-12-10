@@ -8,7 +8,7 @@ using System;
 
 namespace LanguageBuilder.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = WebConstants.UserRole)]
     public class BaseController : Controller
     {
         private readonly IUsersService _usersService;

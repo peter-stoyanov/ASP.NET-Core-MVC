@@ -32,7 +32,6 @@ namespace LanguageBuilder.Web.Controllers
             _mapper = mapper;
         }
 
-        // GET: Words
         public async Task<IActionResult> Index()
         {
             var words = await _wordsService.GetByUserIdAsync(this.LoggedUser.Id);
@@ -47,7 +46,6 @@ namespace LanguageBuilder.Web.Controllers
             return View(model);
         }
 
-        // GET: Words
         public async Task<IActionResult> Search(WordsSearchFormViewModel searchForm)
         {
             var request = searchForm.ToSearchRequest();
@@ -63,13 +61,16 @@ namespace LanguageBuilder.Web.Controllers
             {
                 Response = response,
                 SearchForm = searchForm
-                
             };
+
+            if (!model.Data.Any())
+            {
+                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
+            }
 
             return View(model);
         }
 
-        // GET: Words/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -89,7 +90,6 @@ namespace LanguageBuilder.Web.Controllers
             return View(model);
         }
 
-        // GET: Words/Create
         public async Task<IActionResult> Create()
         {
             var model = new TranslationBaseViewModel();
@@ -99,9 +99,6 @@ namespace LanguageBuilder.Web.Controllers
             return View(model);
         }
 
-        // POST: Words/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TranslationCreateViewModel model)

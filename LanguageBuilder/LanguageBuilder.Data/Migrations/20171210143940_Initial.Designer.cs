@@ -11,8 +11,8 @@ using System;
 namespace LanguageBuilder.Data.Migrations
 {
     [DbContext(typeof(LanguageBuilderDbContext))]
-    [Migration("20171205175504_WordDefinitionMaxLengthIncreased")]
-    partial class WordDefinitionMaxLengthIncreased
+    [Migration("20171210143940_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,31 @@ namespace LanguageBuilder.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("LanguageBuilder.Data.Models.Article", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired();
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(10000);
+
+                    b.Property<DateTime>("PublishDate");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("tbl_Article");
+                });
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.Example", b =>
                 {
@@ -165,6 +190,8 @@ namespace LanguageBuilder.Data.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("PhotoUrl");
 
                     b.Property<string>("SecurityStamp");
 
@@ -335,7 +362,7 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("tbl_IdentityRoleClaim`1");
+                    b.ToTable("tbl_IdentityRoleClaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -354,7 +381,7 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tbl_IdentityUserClaim`1");
+                    b.ToTable("tbl_IdentityUserClaim");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -372,7 +399,7 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tbl_IdentityUserLogin`1");
+                    b.ToTable("tbl_IdentityUserLogin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -385,7 +412,7 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("tbl_IdentityUserRole`1");
+                    b.ToTable("tbl_IdentityUserRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -400,7 +427,15 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("tbl_IdentityUserToken`1");
+                    b.ToTable("tbl_IdentityUserToken");
+                });
+
+            modelBuilder.Entity("LanguageBuilder.Data.Models.Article", b =>
+                {
+                    b.HasOne("LanguageBuilder.Data.Models.User", "Author")
+                        .WithMany("Articles")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.Example", b =>

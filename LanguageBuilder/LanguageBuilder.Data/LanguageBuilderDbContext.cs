@@ -21,13 +21,16 @@ namespace LanguageBuilder.Data
         public DbSet<UserWord> UserWords { get; set; }
         public DbSet<UserWordExample> UserWordExamples { get; set; }
         public DbSet<WordList> WordLists { get; set; }
-		 public DbSet<SyntaxType> SyntaxTypes { get; set; }
+		public DbSet<SyntaxType> SyntaxTypes { get; set; }
 		public DbSet<Article> Articles { get; set; }
 
         public LanguageBuilderDbContext(DbContextOptions<LanguageBuilderDbContext> options)
             : base(options)
         {
         }
+
+        public LanguageBuilderDbContext()
+        { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

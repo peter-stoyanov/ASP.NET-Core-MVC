@@ -2,29 +2,27 @@
 
 @{
     User loggedUser = ViewBag.LoggedUser;
-    //var userNotes = Model.TargetWord
-    //    .Users
-    //    .Where(u => u.UserId == loggedUser.Id)
-    //    .FirstOrDefault();
 
 }
 
 @if (Model is TranslationEditViewModel)
 {
-    ViewData["Title"] = "Edit";
-    <h2>Edit translation</h2>
+    ViewBag.Title = "Edit";
 
     @Html.HiddenFor(model => ((TranslationEditViewModel)model).Id)
 }
 else
 {
-    ViewData["Title"] = "Create";
-    <h2>Create translation</h2>
+    ViewBag.Title = "Create";
 }
 
-<form asp-action="Create">
+<h2 class="mx-5">@ViewBag.Title</h2>
+
+<form asp-action="Create" class="mx-5">
     <div class="row">
-        <div class="col-md-4">
+        
+        <div class="col-md-4 mr-5">
+
             <h3>Source word</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(model => model.SourceWordId)
@@ -75,22 +73,20 @@ else
                 <p>@example.Content</p>
             }
             <div class="form-group">
+                <label asp-for="TargetWord.LanguageId" class="control-label"></label>
+                <select asp-for="TargetWord.LanguageId" class="form-control" asp-items="Model.Languages.Select(l => new SelectListItem { Text = l.Name, Value = l.Id.ToString() })"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="Example" class="control-label"></label>
                 <textarea asp-for="Example" class="form-control"></textarea>
                 <span asp-validation-for="Example" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="TargetWord.LanguageId" class="control-label"></label>
-                <select asp-for="TargetWord.LanguageId" class="form-control" asp-items="Model.Languages.Select(l => new SelectListItem { Text = l.Name, Value = l.Id.ToString() })"></select>
-            </div>
         </div>
 
         <div class="form-group col-md-12">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-info" />
+            <a asp-action="Index"  class="btn btn-info">Back to List</a>
         </div>
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>

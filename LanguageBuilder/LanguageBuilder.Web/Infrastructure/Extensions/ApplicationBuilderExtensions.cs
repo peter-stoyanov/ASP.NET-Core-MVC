@@ -21,7 +21,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
         {
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                //serviceScope.ServiceProvider.GetService<LanguageBuilderDbContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetService<LanguageBuilderDbContext>().Database.Migrate();
 
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
                 var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<Role>>();
@@ -32,10 +32,9 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                     .Run(async () =>
                     {
                         // feed roles
-                        var adminRole = WebConstants.AdministratorRole;
                         var roles = new[]
                         {
-                            adminRole,
+                            WebConstants.AdministratorRole,
                             WebConstants.UserRole,
                             WebConstants.BlogAuthorRole
                         };
@@ -67,6 +66,8 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                             context.SubscriptionTypes.AddRange(subscriptions);
                         }
 
+                        context.SaveChanges();
+
                         // insert admin user
                         var adminEmail = "admin@languagebuilder.com";
                         var adminUser = await userManager.FindByEmailAsync(adminEmail);
@@ -76,7 +77,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                             var user = new User { UserName = adminEmail, Email = adminEmail, SubscriptionId = 1 };
 
                             await userManager.CreateAsync(user, "admin123456");
-                            await userManager.AddToRolesAsync(user, new[] { adminRole, WebConstants.UserRole, WebConstants.BlogAuthorRole });
+                            await userManager.AddToRolesAsync(user, new[] { WebConstants.AdministratorRole, WebConstants.UserRole, WebConstants.BlogAuthorRole });
                         }
 
                         // seed languages
@@ -90,6 +91,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                             };
 
                             context.Languages.AddRange(languages);
+                            context.SaveChanges();
                         }
 
                     })

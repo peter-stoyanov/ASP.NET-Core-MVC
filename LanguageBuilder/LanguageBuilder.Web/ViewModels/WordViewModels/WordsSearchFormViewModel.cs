@@ -14,7 +14,7 @@ namespace LanguageBuilder.Web.ViewModels.WordViewModels
         public string Keywords { get; set; }
 
         [DisplayName("Language")]
-        public int LanguageId { get; set; }
+        public int LanguageId { get; set; } = 1;
         public List<Language> Languages { get; set; }
 
         public string SelectedLetter { get; set; } = "";

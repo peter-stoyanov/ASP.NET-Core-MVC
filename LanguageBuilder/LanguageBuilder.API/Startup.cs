@@ -1,4 +1,5 @@
-﻿using LanguageBuilder.Services.Contracts;
+﻿using LanguageBuilder.Data;
+using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,7 @@ namespace LanguageBuilder.API
             services.AddMvc();
             services.AddCors();
             services.AddTransient<IWordsService, WordsService>();
+            //services.AddTransient<LanguageBuilderDbContext, Lang>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

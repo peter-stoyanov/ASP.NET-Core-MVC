@@ -88,7 +88,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                 User = user,
                 UserId = user.Id,
                 //Caller = Request.UrlReferrer()?.AbsoluteUri
-        };
+            };
 
             return View(model);
         }

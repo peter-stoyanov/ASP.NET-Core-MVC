@@ -1,4 +1,4 @@
-﻿@model SearchViewModel
+﻿@model WordsSearchViewModel
 
 @{
     ViewData["Title"] = "Words";
@@ -30,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Words) {
+@foreach (var item in Model.Data) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Gender)

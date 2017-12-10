@@ -88,7 +88,7 @@ namespace LanguageBuilder.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbl_IdentityRoleClaim`1",
+                name: "tbl_IdentityRoleClaim",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -99,9 +99,9 @@ namespace LanguageBuilder.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_IdentityRoleClaim`1", x => x.Id);
+                    table.PrimaryKey("PK_tbl_IdentityRoleClaim", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_tbl_IdentityRoleClaim`1_tbl_Role_RoleId",
+                        name: "FK_tbl_IdentityRoleClaim_tbl_Role_RoleId",
                         column: x => x.RoleId,
                         principalTable: "tbl_Role",
                         principalColumn: "Id",
@@ -127,6 +127,7 @@ namespace LanguageBuilder.Data.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubscriptionId = table.Column<int>(type: "int", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
@@ -150,7 +151,7 @@ namespace LanguageBuilder.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Definition = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Definition = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     LanguageId = table.Column<int>(type: "int", nullable: false),
@@ -174,7 +175,29 @@ namespace LanguageBuilder.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbl_IdentityUserClaim`1",
+                name: "tbl_Article",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AuthorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
+                    PublishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_Article", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_tbl_Article_tbl_User_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "tbl_User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbl_IdentityUserClaim",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -185,9 +208,9 @@ namespace LanguageBuilder.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_IdentityUserClaim`1", x => x.Id);
+                    table.PrimaryKey("PK_tbl_IdentityUserClaim", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_tbl_IdentityUserClaim`1_tbl_User_UserId",
+                        name: "FK_tbl_IdentityUserClaim_tbl_User_UserId",
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
@@ -195,7 +218,7 @@ namespace LanguageBuilder.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbl_IdentityUserLogin`1",
+                name: "tbl_IdentityUserLogin",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -205,9 +228,9 @@ namespace LanguageBuilder.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_IdentityUserLogin`1", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_tbl_IdentityUserLogin", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_tbl_IdentityUserLogin`1_tbl_User_UserId",
+                        name: "FK_tbl_IdentityUserLogin_tbl_User_UserId",
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
@@ -215,7 +238,7 @@ namespace LanguageBuilder.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbl_IdentityUserRole`1",
+                name: "tbl_IdentityUserRole",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -223,15 +246,15 @@ namespace LanguageBuilder.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_IdentityUserRole`1", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_tbl_IdentityUserRole", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_tbl_IdentityUserRole`1_tbl_Role_RoleId",
+                        name: "FK_tbl_IdentityUserRole_tbl_Role_RoleId",
                         column: x => x.RoleId,
                         principalTable: "tbl_Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_tbl_IdentityUserRole`1_tbl_User_UserId",
+                        name: "FK_tbl_IdentityUserRole_tbl_User_UserId",
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
@@ -239,7 +262,7 @@ namespace LanguageBuilder.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbl_IdentityUserToken`1",
+                name: "tbl_IdentityUserToken",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -249,9 +272,9 @@ namespace LanguageBuilder.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_IdentityUserToken`1", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_tbl_IdentityUserToken", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_tbl_IdentityUserToken`1_tbl_User_UserId",
+                        name: "FK_tbl_IdentityUserToken_tbl_User_UserId",
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
@@ -398,28 +421,33 @@ namespace LanguageBuilder.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_tbl_Article_AuthorId",
+                table: "tbl_Article",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tbl_Example_WordId",
                 table: "tbl_Example",
                 column: "WordId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_IdentityRoleClaim`1_RoleId",
-                table: "tbl_IdentityRoleClaim`1",
+                name: "IX_tbl_IdentityRoleClaim_RoleId",
+                table: "tbl_IdentityRoleClaim",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_IdentityUserClaim`1_UserId",
-                table: "tbl_IdentityUserClaim`1",
+                name: "IX_tbl_IdentityUserClaim_UserId",
+                table: "tbl_IdentityUserClaim",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_IdentityUserLogin`1_UserId",
-                table: "tbl_IdentityUserLogin`1",
+                name: "IX_tbl_IdentityUserLogin_UserId",
+                table: "tbl_IdentityUserLogin",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_IdentityUserRole`1_RoleId",
-                table: "tbl_IdentityUserRole`1",
+                name: "IX_tbl_IdentityUserRole_RoleId",
+                table: "tbl_IdentityUserRole",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
@@ -510,19 +538,22 @@ namespace LanguageBuilder.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "tbl_IdentityRoleClaim`1");
+                name: "tbl_Article");
 
             migrationBuilder.DropTable(
-                name: "tbl_IdentityUserClaim`1");
+                name: "tbl_IdentityRoleClaim");
 
             migrationBuilder.DropTable(
-                name: "tbl_IdentityUserLogin`1");
+                name: "tbl_IdentityUserClaim");
 
             migrationBuilder.DropTable(
-                name: "tbl_IdentityUserRole`1");
+                name: "tbl_IdentityUserLogin");
 
             migrationBuilder.DropTable(
-                name: "tbl_IdentityUserToken`1");
+                name: "tbl_IdentityUserRole");
+
+            migrationBuilder.DropTable(
+                name: "tbl_IdentityUserToken");
 
             migrationBuilder.DropTable(
                 name: "tbl_Translation");
