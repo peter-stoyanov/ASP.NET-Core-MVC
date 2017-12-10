@@ -16,6 +16,10 @@ namespace LanguageBuilder.Services.Contracts
 
         Task<User> GetByIdAsync(string id);
 
+        Task<User> GetByUsernameAsync(string username);
+
+        Task UpdateAsync(User user);
+
         Task<Response> Search(
             Request request,
             Expression<Func<User, object>> sortColumnSelector = null);

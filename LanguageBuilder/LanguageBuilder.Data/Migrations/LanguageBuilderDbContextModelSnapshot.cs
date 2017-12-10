@@ -190,6 +190,8 @@ namespace LanguageBuilder.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    //b.Property<string>("PhotoUrl");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<int>("SubscriptionId");

@@ -1,12 +1,14 @@
 ﻿using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Web.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 
 namespace LanguageBuilder.Web.Controllers
 {
+    [Authorize]
     public class BaseController : Controller
     {
         private readonly IUsersService _usersService;

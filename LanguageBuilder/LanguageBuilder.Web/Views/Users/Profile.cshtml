@@ -1,0 +1,52 @@
+﻿@model UserProfileViewModel
+
+@{
+    ViewBag.Title = "Profile page";
+    var loggedUser = (User)ViewBag.Loggeduser;
+    //var value = TempData.Get<ClassA>("key")
+}
+
+<div class="row px-5">
+    <div class="col-6">
+
+        <h2>@ViewBag.Title</h2>
+    
+        @await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
+        
+        <img src="~/images/empty_profile.png" class="img-thumbnail my-3" />
+
+        <table class="table table-striped my-3">
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Username</th>
+                    <td>@Model.Username</td>
+                </tr>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>@Model.Name</td>
+                </tr>
+                <tr>
+                    <th scope="row">Birthday</th>
+                    <td>@(Model.Birthdate.HasValue ? Model.Birthdate.Value.ToShortDateString() : String.Empty)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Languages</th>
+                    <td>
+                        @String.Join("; ", Model.Languages.Select(l => l.Name))
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        @if (Model.Username == loggedUser.UserName)
+        {
+            <a asp-controller="Users" asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-info my-3">Edit Profile</a>
+        }
+
+    </div>
+
+</div>
+
+
+

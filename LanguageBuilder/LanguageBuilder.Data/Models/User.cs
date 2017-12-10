@@ -12,6 +12,8 @@ namespace LanguageBuilder.Data.Models
 
         public DateTime? Birthdate { get; set; }
 
+        //public string PhotoUrl { get; set; }
+
         public List<UserLanguage> Languages { get; set; } = new List<UserLanguage>();
 
         public List<UserWord> Words { get; set; } = new List<UserWord>();

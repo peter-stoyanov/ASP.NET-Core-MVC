@@ -5,6 +5,8 @@ namespace LanguageBuilder.Web.ViewComponents
     public class BootstrapAlertViewModel
     {
         //private BootstrapAlertType _type;
+        public BootstrapAlertViewModel()
+        { }
 
         public BootstrapAlertViewModel(BootstrapAlertType type, string text)
             : this(type, text, String.Empty, hasDismissButton: true)

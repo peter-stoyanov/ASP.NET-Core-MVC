@@ -7,7 +7,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData[WebConstants.AlertKey] as BootstrapAlertViewModel)
+@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
 
 @Html.Partial("_SearchForm", Model.SearchForm)
 

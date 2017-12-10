@@ -98,5 +98,27 @@ namespace LanguageBuilder.Services.Implementations
             return response;
 
         }
+
+        public async Task<User> GetByUsernameAsync(string username)
+        {
+            return await _db
+               .Users
+               .Where(u => u.UserName == username)
+               .FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateAsync(User user)
+        {
+            var model = await GetByIdAsync(user.Id);
+
+            if (model == null)
+            {
+                return;
+            }
+
+            _db.Users.Update(model);
+
+            _db.SaveChanges();
+        }
     }
 }

@@ -6,8 +6,7 @@
 
 <h2>Index</h2>
 
-@await Component.InvokeAsync(nameof(BootstrapAlertComponent), 
-    TempData[WebConstants.AlertKey] as BootstrapAlertViewModel)
+@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
 
 <p>
     <a asp-action="Create">Create New</a>

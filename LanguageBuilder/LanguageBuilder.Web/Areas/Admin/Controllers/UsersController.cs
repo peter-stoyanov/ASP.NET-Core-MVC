@@ -22,6 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using static LanguageBuilder.Web.WebConstants;
+using LanguageBuilder.Web.Extensions;
 
 namespace LanguageBuilder.Web.Areas.Admin.Controllers
 {
@@ -65,7 +66,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
 
             if (!model.Data.Any())
             {
-                TempData[WebConstants.AlertKey] = new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true);
+                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
             }
 
             return View(model);
@@ -99,9 +100,9 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             {
                 await _roleService.UpdateAsync(model.UserId, model.SelectedRoles);
 
-                TempData[WebConstants.AlertKey] = new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true);
+                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true));
 
-                return RedirectToLocal(model.Caller, "Search");
+                return RedirectToLocal(model.Caller, nameof(UsersController.Search), "Users");
 
             }
             catch (Exception ex)
@@ -112,7 +113,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             model.Roles = (await _roleService.GetAllAsync()).ToList();
             model.SelectedRoles = (await _roleService.GetByUserIdAsync(model.UserId)).Select(r => r.Name).ToList();
 
-            TempData[WebConstants.AlertKey] = new BootstrapAlertViewModel(BootstrapAlertType.Danger, "We are sorry, but it seems that an error occured.", hasDismissButton: true);
+            TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "We are sorry, but it seems that an error occured.", hasDismissButton: true));
 
             return View(model);
         }

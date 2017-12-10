@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
+using LanguageBuilder.Web.Extensions;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -41,7 +42,7 @@ namespace LanguageBuilder.Web.Controllers
                 //Words = words
             };
 
-            TempData[WebConstants.AlertKey] = new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Test", "Strong", false);
+            TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Test", "Strong", false));
 
             return View(model);
         }
