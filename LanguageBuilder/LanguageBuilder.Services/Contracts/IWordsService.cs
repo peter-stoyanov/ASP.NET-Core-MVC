@@ -19,6 +19,8 @@ namespace LanguageBuilder.Services.Contracts
 
         IEnumerable<Word> GetByUserAndLanguage(User user, Language language);
 
+        
+
         Task<Word> SoftDeleteAsync(int id);
 
         Task<bool> ExistInUserAsync(int id, string userId);

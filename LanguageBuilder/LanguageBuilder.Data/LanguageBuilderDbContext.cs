@@ -26,11 +26,10 @@ namespace LanguageBuilder.Data
 
         public LanguageBuilderDbContext(DbContextOptions<LanguageBuilderDbContext> options)
             : base(options)
-        {
-        }
-
-        public LanguageBuilderDbContext()
         { }
+
+        //public LanguageBuilderDbContext()
+        //{ }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

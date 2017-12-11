@@ -58,6 +58,8 @@ namespace LanguageBuilder.Web
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
+            services.AddCors();
+
             services.AddRouting(routing => routing.LowercaseUrls = true);
 
             services.AddSession(options =>
@@ -147,6 +149,10 @@ namespace LanguageBuilder.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseCors(
+                options => options.WithOrigins("*").AllowAnyMethod()
+            );
         }
     }
 }
