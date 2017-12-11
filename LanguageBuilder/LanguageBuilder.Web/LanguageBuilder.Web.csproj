@@ -37,6 +37,7 @@
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\lib\jquery-ui\css\" />
     <Folder Include="wwwroot\lib\jquery-ui\js\" />
+    <Folder Include="wwwroot\lib\knockout\" />
     <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 

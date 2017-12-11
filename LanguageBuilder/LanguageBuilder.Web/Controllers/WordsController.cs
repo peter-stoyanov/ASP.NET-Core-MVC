@@ -119,6 +119,12 @@ namespace LanguageBuilder.Web.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Train()
+        {
+
+            return View();
+        }
+
         //// GET: Words/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{

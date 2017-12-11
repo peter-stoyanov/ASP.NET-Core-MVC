@@ -106,6 +106,11 @@
         <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     }
 
+    @if (ViewBag.RegisterKnockout == true)
+    {
+        <script src="~/lib/knockout/knockout-3.4.2.js"></script>
+    }
+
     @Html.Partial("_GoogleAnalytics")
 
 </body>

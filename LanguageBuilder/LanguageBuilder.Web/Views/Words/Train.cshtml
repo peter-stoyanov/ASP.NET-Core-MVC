@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Study";
+    ViewBag.RegisterKnockout = true;
+
+    User loggedUser = (User)ViewBag.LoggedUser;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div id="train-cards" class="row">
+    <div class="col">
+        
+        <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
+
+        <div class="text-danger" data-bind="visible: hasError() && !isLoading()">
+            Sorry, it seems that an error has occured.
+        </div>
+
+        <div data-bind="visible: !hasError() && !isLoading()">
+            
+            <div>Words left: <span data-bind="text: wordsLeft"></span></div>
+            
+            <button data-bind="text: selectedWord, click: toogle"></button>
+        
+            <button class="btn btn-info" data-bind="click: loadNext" >
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        function TrainViewModel() {
+            var self = this;
+
+            this.isLoading = ko.observable(true);
+            this.hasError = ko.observable(false);
+            this.trainEnded = ko.observable(false);
+
+            this.words = ko.observableArray();
+            this.wordsLeft = ko.observable();
+            this.words.subscribe(function (value) {
+                self.wordsLeft(self.words().length);
+            });
+
+            this.sourceWord = ko.observable();
+            this.targetWord = ko.observable();
+            this.selectedWord = ko.observable();
+
+            this.loadNext = function () {
+                //randomize
+                if (self.words().length > 0) {
+                    var next = self.words.pop();
+
+                    self.sourceWord(next.content);
+                    self.selectedWord(next.content);
+                    self.sourceWord(next.translation);
+                } else {
+                    self.trainEnded(true);
+                }
+            };
+
+            this.toogle = function () {
+                var temp = self.sourceWord();
+                self.sourceWord(self.targetWord());
+                self.targetWord(temp);
+            };
+
+            this.init = function () {
+                self.loadData(self.loadNext);
+            };
+
+            this.loadData = function (callback) {
+
+                // debug
+                self.words([
+                    { content: 'a dog', translation: 'das Hund' },
+                    { content: 'a house', translation: 'das Haus' }
+                ]);
+                setTimeout(function () { self.isLoading(false); }, 1000);
+                if (callback !== undefined) { callback(); }
+
+                @*$.getJSON({
+                    url: '@Url.Action("", "")',
+                    data: { id : '@loggedUser.Id' },
+                    success: function (response, status, xhr) {
+
+                        self.words(response);
+                        self.isLoading(false);
+
+                        if (callback !== undefined) { callback(response, request); }
+                    },
+                    error: function () {
+                        self.isLoading(false);
+                        self.hasError(true);
+                    }
+                });*@
+            };
+
+            this.postData = function (word, userId, callback) {
+
+                // debug
+                self.words.remove(word);
+
+                @*$.getJSON({
+                    url: '@Url.Action("", "")',
+                    data: { word: word, userId: userId },
+                    success: function (response, status, xhr) {
+                        self.words.remove(word);
+                        if (callback !== undefined) { callback(response, request); }
+                    },
+                    error: function () {
+                        self.hasError(true);
+                    }
+                });*@
+            };
+        };
+
+        trainModel = new TrainViewModel();
+
+        trainModel.init();
+
+        ko.applyBindings(trainModel, $('#train-cards').get(0));
+
+    });
+
+</script>
+}
