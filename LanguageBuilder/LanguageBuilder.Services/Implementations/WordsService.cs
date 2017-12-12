@@ -8,9 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Implementations
 {
@@ -155,7 +154,7 @@ namespace LanguageBuilder.Services.Implementations
         }
 
         public async Task<Response> Search(
-            Request request, 
+            Request request,
             Expression<Func<Word, object>> sortColumnSelector = null,
             Expression<Func<Word, bool>> criteria = null)
         {
@@ -167,7 +166,7 @@ namespace LanguageBuilder.Services.Implementations
             var query = _db.Words
                 .OrderBy(sortColumnSelector)
                 .Where(criteria);
-                
+
             if (request.LanguageIds.Any())
             {
                 query = query.Where(w => request.LanguageIds.Contains(w.LanguageId));
@@ -192,7 +191,6 @@ namespace LanguageBuilder.Services.Implementations
             };
 
             return response;
-
         }
     }
 }

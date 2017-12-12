@@ -1,10 +1,6 @@
-﻿using LanguageBuilder.Data.Models;
-using LanguageBuilder.Services.Models.UsersSearch;
-using System;
+﻿using LanguageBuilder.Services.Models.UsersSearch;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Areas.Admin.Models
 {
@@ -15,6 +11,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Models
 
         [DisplayName("Page size")]
         public int RowCount { get; set; }
+
         public List<int> RowCounts = new List<int>() { 10, 20, 50, 100 };
 
         public UsersSearchFormViewModel()

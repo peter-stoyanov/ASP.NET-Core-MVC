@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-8">
-        
+
         @foreach (var article in Model.Articles)
         {
             <article class="my-5">
@@ -18,9 +18,8 @@
                         <i class="fa fa-calendar mx-2" aria-hidden="true"></i>
                         <time class="text-muted" datetime="@article.PublishDate.ToShortDateString()" pubdate>@article.PublishDate.ToShortDateString()</time>
                     </div>
-                    
                 </header>
-                
+
                 <p>
                     @Html.Raw(article.Content)
                 </p>
@@ -51,7 +50,6 @@
                 <hr>
             </article>
         }
-
 </div>
 </div>
 

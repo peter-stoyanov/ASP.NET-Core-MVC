@@ -1,7 +1,7 @@
 ﻿using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Web.ViewModels.AccountViewModels;
 using LanguageBuilder.Web.Services;
+using LanguageBuilder.Web.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

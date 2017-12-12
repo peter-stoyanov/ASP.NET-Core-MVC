@@ -1,16 +1,14 @@
-﻿using LanguageBuilder.Web.ViewModels;
+﻿using AutoMapper;
+using LanguageBuilder.Data.Models;
+using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Web.Extensions;
+using LanguageBuilder.Web.Infrastructure.Extensions;
+using LanguageBuilder.Web.ViewComponents;
+using LanguageBuilder.Web.ViewModels.UserViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Web.ViewModels.UserViewModels;
-using System.Threading.Tasks;
-using AutoMapper;
-using LanguageBuilder.Data.Models;
-using LanguageBuilder.Web.ViewComponents;
 using System;
-using LanguageBuilder.Web.Infrastructure.Extensions;
-using LanguageBuilder.Web.Extensions;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -71,8 +69,7 @@ namespace LanguageBuilder.Web.Controllers
 
                 TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User profile was successfully updated.", hasDismissButton: true));
 
-                return RedirectToLocal(null, nameof(UsersController.Profile), "Users", new { area = "", id = model.Username } );
-
+                return RedirectToLocal(null, nameof(UsersController.Profile), "Users", new { area = "", id = model.Username });
             }
             catch (Exception ex)
             {
@@ -82,6 +79,5 @@ namespace LanguageBuilder.Web.Controllers
 
             return View(model);
         }
-
     }
 }

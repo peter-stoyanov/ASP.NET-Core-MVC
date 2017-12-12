@@ -1,7 +1,4 @@
-﻿using cloudscribe.Web.Pagination;
-using LanguageBuilder.Data.Models;
-using LanguageBuilder.Services.Models.UsersSearch;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using LanguageBuilder.Data.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,8 +8,9 @@ namespace LanguageBuilder.Web.Areas.Admin.Models
     {
         [Required]
         public string UserId { get; set; }
+
         public User User { get; set; }
-           
+
         // at least 1 role ?
         public List<string> SelectedRoles { get; set; }
 

@@ -1,12 +1,6 @@
 ﻿using LanguageBuilder.Web.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Web.ViewModels.UserViewModels;
-using System.Threading.Tasks;
-using AutoMapper;
-using LanguageBuilder.Data.Models;
 
 namespace LanguageBuilder.Web.Controllers
 {

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using LanguageBuilder.Services.Contracts;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
-using Microsoft.Extensions.FileProviders;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;

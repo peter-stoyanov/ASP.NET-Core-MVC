@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageBuilder.Services.Html
+﻿namespace LanguageBuilder.Services.Html
 {
     public interface IHtmlService
     {

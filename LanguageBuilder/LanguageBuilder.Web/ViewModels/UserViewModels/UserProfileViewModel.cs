@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.ViewModels.UserViewModels
 {
@@ -20,7 +18,5 @@ namespace LanguageBuilder.Web.ViewModels.UserViewModels
         public DateTime? Birthdate { get; set; }
 
         public List<Language> Languages { get; set; } = new List<Language>();
-
     }
 }
-

@@ -1,5 +1,4 @@
-﻿using LanguageBuilder.Data.Models;
-using LanguageBuilder.Services.Blog;
+﻿using LanguageBuilder.Services.Blog;
 using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Services.Html;
 using LanguageBuilder.Web.Areas.Blog.Models.Articles;
@@ -7,7 +6,6 @@ using LanguageBuilder.Web.Controllers;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.Infrastructure.Filters;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using static LanguageBuilder.Web.WebConstants;
@@ -77,7 +75,6 @@ namespace LanguageBuilder.Web.Areas.Blog.Controllers
             {
                 NotFound();
             }
-
 
             var model = new ArticleCreateViewModel
             {

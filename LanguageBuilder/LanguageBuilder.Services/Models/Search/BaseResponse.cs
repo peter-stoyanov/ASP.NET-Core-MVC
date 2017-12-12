@@ -1,7 +1,4 @@
 ﻿using cloudscribe.Pagination.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LanguageBuilder.Services.Models.Search
 {

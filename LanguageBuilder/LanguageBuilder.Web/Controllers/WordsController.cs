@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Web.Extensions;
 using LanguageBuilder.Web.Infrastructure.Extensions;
+using LanguageBuilder.Web.ViewComponents;
 using LanguageBuilder.Web.ViewModels.TranslationViewModels;
 using LanguageBuilder.Web.ViewModels.WordViewModels;
-using LanguageBuilder.Web.ViewComponents;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using System.Linq;
-using LanguageBuilder.Web.Extensions;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers
 {
@@ -51,7 +51,7 @@ namespace LanguageBuilder.Web.Controllers
             var request = searchForm.ToSearchRequest();
 
             var response = await _wordsService.Search(
-                request, 
+                request,
                 sortColumnSelector: w => w.Content,
                 criteria: w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()));
 
@@ -121,7 +121,6 @@ namespace LanguageBuilder.Web.Controllers
 
         public async Task<IActionResult> Train()
         {
-
             return View();
         }
 

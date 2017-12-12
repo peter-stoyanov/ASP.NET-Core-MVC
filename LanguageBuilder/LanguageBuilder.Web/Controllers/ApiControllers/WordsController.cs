@@ -1,8 +1,6 @@
-﻿using LanguageBuilder.Data.Models;
-using LanguageBuilder.Services.Contracts;
+﻿using LanguageBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers.ApiControllers
@@ -14,7 +12,7 @@ namespace LanguageBuilder.Web.Controllers.ApiControllers
         private readonly ITranslationService _translationService;
 
         public WordsController(IWordsService wordsService, ITranslationService translationService, IUsersService userService)
-            : base (userService)
+            : base(userService)
         {
             _wordsService = wordsService;
             _translationService = translationService;

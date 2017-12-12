@@ -10,9 +10,9 @@
     <div class="col-6">
 
         <h2>@ViewBag.Title</h2>
-    
+
         @await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
-        
+
         <img src="~/images/empty_profile.png" class="img-thumbnail my-3" />
 
         <table class="table table-striped my-3">
@@ -43,10 +43,5 @@
         {
             <a asp-controller="Users" asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-info my-3">Edit Profile</a>
         }
-
     </div>
-
 </div>
-
-
-

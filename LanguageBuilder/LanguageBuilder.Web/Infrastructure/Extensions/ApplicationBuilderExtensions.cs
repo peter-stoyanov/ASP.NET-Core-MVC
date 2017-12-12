@@ -1,12 +1,10 @@
 ﻿using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Web.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -93,7 +91,6 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                             context.Languages.AddRange(languages);
                             context.SaveChanges();
                         }
-
                     })
                     .Wait();
             }

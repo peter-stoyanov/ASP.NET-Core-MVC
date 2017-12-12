@@ -12,7 +12,7 @@ namespace LanguageBuilder.Web.ViewModels.WordViewModels
         public WordsSearchFormViewModel SearchForm { get; set; }
 
         public List<Word> Data { get; set; }
-       
+
         public char SelectedLetter { get; set; }
 
         public PaginationSettings Paging { get; set; } = new PaginationSettings();

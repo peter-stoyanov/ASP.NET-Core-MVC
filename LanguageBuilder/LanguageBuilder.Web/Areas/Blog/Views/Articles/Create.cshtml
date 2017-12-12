@@ -6,13 +6,11 @@
     ViewBag.RegisterTinyMce = true;
 }
 
-
 @Html.Partial("_FormPartial")
 
+@section Scripts {
 
-@section Scripts { 
-
-    @await Html.PartialAsync("_ValidationScriptsPartial") 
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 
     @await Html.PartialAsync("_FormPartial_Articles_Scripts")
 

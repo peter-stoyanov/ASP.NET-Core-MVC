@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Implementations
 {
-    public class UsersService :  IUsersService
+    public class UsersService : IUsersService
     {
         private readonly LanguageBuilderDbContext _db;
 
@@ -96,7 +96,6 @@ namespace LanguageBuilder.Services.Implementations
             };
 
             return response;
-
         }
 
         public async Task<User> GetByUsernameAsync(string username)

@@ -9,7 +9,6 @@
     string bootstrapClass = $"alert alert-{Model.Type.ToString().ToLower()} alert-dismissible fade show";
 }
 
-
 <div class="@bootstrapClass" role="alert">
 
     @if (!String.IsNullOrWhiteSpace(Model.StrongText))

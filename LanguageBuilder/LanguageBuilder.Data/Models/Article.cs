@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static LanguageBuilder.Data.DataConstants;
 
@@ -21,6 +20,7 @@ namespace LanguageBuilder.Data.Models
 
         [Required]
         public string AuthorId { get; set; }
+
         public User Author { get; set; }
     }
 }

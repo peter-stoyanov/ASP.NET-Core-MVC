@@ -1,16 +1,10 @@
-﻿using cloudscribe.Pagination.Models;
-using LanguageBuilder.Data;
+﻿using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
-using LanguageBuilder.Data.Services;
 using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Services.Models.WordsSearch;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Linq.Expressions;
 
 namespace LanguageBuilder.Services.Implementations
 {

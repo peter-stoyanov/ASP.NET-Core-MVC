@@ -1,9 +1,7 @@
 ﻿using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Blog.Models;
 using LanguageBuilder.Services.Contracts;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Blog

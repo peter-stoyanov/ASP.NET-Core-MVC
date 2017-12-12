@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Study";
     ViewBag.RegisterKnockout = true;
 
@@ -10,7 +9,7 @@
 
 <div id="train-cards" class="row">
     <div class="col">
-        
+
         <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
 
         <div class="text-danger" data-bind="visible: hasError() && !isLoading()">
@@ -18,26 +17,21 @@
         </div>
 
         <div data-bind="visible: !hasError() && !isLoading()">
-            
+
             <div>Words left: <span data-bind="text: wordsLeft"></span></div>
-            
+
             <button data-bind="text: selectedWord, click: toogle"></button>
-        
-            <button class="btn btn-info" data-bind="click: loadNext" >
+
+            <button class="btn btn-info" data-bind="click: loadNext">
                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </button>
-
         </div>
     </div>
 </div>
 
-
-
-
-
 @section Scripts {
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
     $(document).ready(function () {
 
@@ -134,6 +128,5 @@
         ko.applyBindings(trainModel, $('#train-cards').get(0));
 
     });
-
-</script>
+    </script>
 }

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Petar Stoyanov">
 
-    @{ 
+    @{
         var loggedUser = (User)ViewBag.LoggedUser;
         var currController = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
         var currAction = ViewContext.RouteData.Values["Action"].ToString().ToLower();
@@ -56,15 +56,12 @@
         <main class="@(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" && ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "landing-section" : String.Empty)">
 
             @RenderBody()
-        
         </main>
 
         <footer>
 
             @Html.Partial("_Footer")
-
         </footer>
-
     </div>
 
     <environment include="Development">
@@ -100,7 +97,7 @@
             <script src="~/lib/jquery-ui/js/jquery-ui.min.js"></script>
         </environment>
     }
-    
+
     @if (ViewBag.RegisterTinyMce == true)
     {
         <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
@@ -112,7 +109,5 @@
     }
 
     @Html.Partial("_GoogleAnalytics")
-
 </body>
-
 </html>

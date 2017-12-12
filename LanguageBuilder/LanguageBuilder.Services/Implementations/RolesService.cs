@@ -1,19 +1,16 @@
-﻿using cloudscribe.Pagination.Models;
-using LanguageBuilder.Data;
+﻿using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Services.Models.UsersSearch;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Implementations
 {
-    public class RolesService :  IRolesService
+    public class RolesService : IRolesService
     {
         private readonly LanguageBuilderDbContext _db;
 
@@ -50,7 +47,7 @@ namespace LanguageBuilder.Services.Implementations
             return await _db
                 .UserRoles
                 .Where(ur => ur.UserId == id)
-                .Select( ur => new Role
+                .Select(ur => new Role
                 {
                     Id = ur.RoleId,
                     Name = _db.Roles.Where(r => r.Id == ur.RoleId).FirstOrDefault().Name
@@ -147,8 +144,6 @@ namespace LanguageBuilder.Services.Implementations
                     throw ex;
                 }
             }
-            
-            
         }
     }
 }

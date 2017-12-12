@@ -11,8 +11,6 @@
 
 @Html.Partial("_SearchForm", Model.SearchForm)
 
-
-
 @if (Model.Data.Any())
 {
     <table class="table table-striped table-bordered">
@@ -40,7 +38,7 @@
             }
         </tbody>
     </table>
-    
+
     @Html.Partial("_Pager", Model.Paging)
 
     @await Component.InvokeAsync(

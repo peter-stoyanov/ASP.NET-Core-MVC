@@ -2,27 +2,16 @@
 using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Web.Areas.Admin.Models;
 using LanguageBuilder.Web.Controllers;
+using LanguageBuilder.Web.Extensions;
+using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.ViewComponents;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using LanguageBuilder.Web.Infrastructure.Extensions;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using static LanguageBuilder.Web.WebConstants;
-using LanguageBuilder.Web.Extensions;
 
 namespace LanguageBuilder.Web.Areas.Admin.Controllers
 {
@@ -103,7 +92,6 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                 TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true));
 
                 return RedirectToLocal(model.Caller, nameof(UsersController.Search), "Users");
-
             }
             catch (Exception ex)
             {

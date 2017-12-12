@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,7 +44,6 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-
         [HttpPost]
         public IActionResult Words(WordsUploadViewModel model)
         {
@@ -70,13 +67,13 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                     stream.Position = 0;
                     if (sFileExtension == ".xls")
                     {
-                        HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read the Excel 97-2000 formats  
-                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook  
+                        HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read the Excel 97-2000 formats
+                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook
                     }
                     else
                     {
-                        XSSFWorkbook hssfwb = new XSSFWorkbook(stream); //This will read 2007 Excel format  
-                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook   
+                        XSSFWorkbook hssfwb = new XSSFWorkbook(stream); //This will read 2007 Excel format
+                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook
                     }
                     IRow headerRow = sheet.GetRow(0); //Get Header Row
                     int cellCount = headerRow.LastCellNum;

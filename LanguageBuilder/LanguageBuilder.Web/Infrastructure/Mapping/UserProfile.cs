@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using LanguageBuilder.Data.Models;
-using LanguageBuilder.Web.ViewModels;
 using LanguageBuilder.Web.ViewModels.UserViewModels;
-using LanguageBuilder.Web.ViewModels.WordViewModels;
 
 namespace LanguageBuilder.Web.Infrastructure.Mapping
 {

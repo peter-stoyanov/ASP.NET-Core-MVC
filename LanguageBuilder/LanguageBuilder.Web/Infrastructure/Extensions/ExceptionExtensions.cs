@@ -1,11 +1,8 @@
 ﻿using log4net;
 using log4net.Config;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Infrastructure.Extensions
 {
@@ -20,7 +17,6 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
             XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
 
             logger = LogManager.GetLogger(typeof(Program));
-
         }
 
         public static void SaveToLog(this Exception ex)

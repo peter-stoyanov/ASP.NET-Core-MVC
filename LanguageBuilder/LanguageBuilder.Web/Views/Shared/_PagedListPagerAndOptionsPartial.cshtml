@@ -2,11 +2,11 @@
 @using PagedList.Mvc
 
 <div class="pagination-and-options-container clearfix @(ViewData["class"] != null ? " " + ViewData["class"].ToString() : "")">
-    
+
     <div class="pull-left">@(Html.PagedListPager(Model, page => Url.Action(Url.CurrentAction(), null, queryString: this.Request.QueryString.Clone().AddOrSet("page", page.ToString())), PagedListRenderOptions.ClassicPlusFirstAndLast))</div>
 
-    @if (ViewData["showCreateButton"] == null || (bool)ViewData["showCreateButton"] == true) 
+    @if (ViewData["showCreateButton"] == null || (bool)ViewData["showCreateButton"] == true)
     {
-        <div class="pull-left" style="margin-left:20px;">@Html.ActionLink("Create New", "Create", ViewData["createNewLinkParams"], new { @class = "btn btn-info" })</div>    
+        <div class="pull-left" style="margin-left:20px;">@Html.ActionLink("Create New", "Create", ViewData["createNewLinkParams"], new { @class = "btn btn-info" })</div>
     }
 </div>

@@ -1,10 +1,8 @@
-﻿using cloudscribe.Pagination.Models;
-using LanguageBuilder.Data.Models;
+﻿using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Models.WordsSearch;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Contracts
@@ -18,8 +16,6 @@ namespace LanguageBuilder.Services.Contracts
         Task<IEnumerable<Word>> GetByUserIdAsync(string userId);
 
         IEnumerable<Word> GetByUserAndLanguage(User user, Language language);
-
-        
 
         Task<Word> SoftDeleteAsync(int id);
 
