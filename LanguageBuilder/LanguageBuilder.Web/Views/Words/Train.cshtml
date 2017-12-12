@@ -5,27 +5,62 @@
     User loggedUser = (User)ViewBag.LoggedUser;
 }
 
-<h2>@ViewBag.Title</h2>
+@section Styles{
 
-<div id="train-cards" class="row">
-    <div class="col">
+    <style>
+        .card-btn {
+            background-color: #008CBA;
+            border: 3px solid #000;
+            color: white;
+            padding: 2em 2em;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 5em;
+            width: 100%;
+            height: 50%;
+        }
 
-        <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
+        .control {
+            font-size: 2em;
+        }
+    </style>
+}
 
-        <div class="text-danger" data-bind="visible: hasError() && !isLoading()">
-            Sorry, it seems that an error has occured.
+
+<div id="train-cards" class="container d-flex h-100">
+
+    <div class="row justify-content-center align-self-center align-items-center">
+
+        <div class="col-8 align-self-center">
+
+            <h2>@ViewBag.Title</h2>
+
+            <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
+
+            <div data-bind="visible: hasError() && !isLoading()">
+                Sorry, it seems that an error has occured.
+            </div>
+
+            <div data-bind="visible: !hasError() && !isLoading()">
+
+                <div class="card-btn" data-bind="text: frontWord, click: toogle"></div>
+
+            </div>
         </div>
 
-        <div data-bind="visible: !hasError() && !isLoading()">
+        <div class="col-4 align-self-center">
+            <div>Words left: <span class="control" data-bind="text: wordsLeft"></span></div>
 
-            <div>Words left: <span data-bind="text: wordsLeft"></span></div>
+            <button class="btn btn-info control" data-bind="click: loadPrevious">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </button>
 
-            <button data-bind="text: selectedWord, click: toogle"></button>
-
-            <button class="btn btn-info" data-bind="click: loadNext">
+            <button class="btn btn-info control" data-bind="click: loadNext">
                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </button>
         </div>
+
     </div>
 </div>
 
@@ -48,27 +83,40 @@
                 self.wordsLeft(self.words().length);
             });
 
-            this.sourceWord = ko.observable();
-            this.targetWord = ko.observable();
-            this.selectedWord = ko.observable();
+            this.frontWord = ko.observable();
+            this.backWord = ko.observable();
+            this.currentIndex = ko.observable(-1);
 
-            this.loadNext = function () {
-                //randomize
-                if (self.words().length > 0) {
-                    var next = self.words.pop();
+            this.loadEntry = function (index) {
+                var word = self.words()[index];
 
-                    self.sourceWord(next.content);
-                    self.selectedWord(next.content);
-                    self.sourceWord(next.translation);
+                if (word) {
+                    self.frontWord(word.targetWord);
+                    self.backWord(word.sourceWord);
+                    self.currentIndex(index);
                 } else {
                     self.trainEnded(true);
-                }
+                };
+            };
+
+            this.loadNext = function () {
+                var index = self.currentIndex() + 1;
+
+                self.loadEntry(index);
+            };
+
+            this.loadPrevious = function () {
+                var index = self.currentIndex() - 1;
+
+                self.loadEntry(index);
             };
 
             this.toogle = function () {
-                var temp = self.sourceWord();
-                self.sourceWord(self.targetWord());
-                self.targetWord(temp);
+                var front = self.frontWord();
+                var back = self.backWord();
+
+                self.frontWord(back);
+                self.backWord(front);
             };
 
             this.init = function () {
@@ -77,29 +125,21 @@
 
             this.loadData = function (callback) {
 
-                // debug
-                self.words([
-                    { content: 'a dog', translation: 'das Hund' },
-                    { content: 'a house', translation: 'das Haus' }
-                ]);
-                setTimeout(function () { self.isLoading(false); }, 1000);
-                if (callback !== undefined) { callback(); }
-
-                @*$.getJSON({
-                    url: '@Url.Action("", "")',
-                    data: { id : '@loggedUser.Id' },
+                $.getJSON({
+                    url: '/api/words',
+                    data: { userId: '@loggedUser.Id', languageId: '2' },
                     success: function (response, status, xhr) {
 
                         self.words(response);
                         self.isLoading(false);
 
-                        if (callback !== undefined) { callback(response, request); }
+                        if (callback !== undefined) { callback(response); }
                     },
                     error: function () {
                         self.isLoading(false);
                         self.hasError(true);
                     }
-                });*@
+                });
             };
 
             this.postData = function (word, userId, callback) {

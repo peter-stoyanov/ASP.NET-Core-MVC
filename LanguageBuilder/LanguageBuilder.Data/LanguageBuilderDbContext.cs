@@ -3,6 +3,7 @@ using LanguageBuilder.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,7 +27,9 @@ namespace LanguageBuilder.Data
 
         public LanguageBuilderDbContext(DbContextOptions<LanguageBuilderDbContext> options)
             : base(options)
-        { }
+        {
+            
+        }
 
         //public LanguageBuilderDbContext()
         //{ }

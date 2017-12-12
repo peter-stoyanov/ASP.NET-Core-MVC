@@ -1,6 +1,11 @@
-﻿using LanguageBuilder.Services.Contracts;
+﻿using AutoMapper;
+using LanguageBuilder.Data.Models;
+using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Web.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers.ApiControllers
@@ -10,12 +15,18 @@ namespace LanguageBuilder.Web.Controllers.ApiControllers
     {
         private readonly IWordsService _wordsService;
         private readonly ITranslationService _translationService;
+        private readonly IMapper _mapper;
 
-        public WordsController(IWordsService wordsService, ITranslationService translationService, IUsersService userService)
+        public WordsController(
+            IWordsService wordsService, 
+            ITranslationService translationService, 
+            IUsersService userService,
+            IMapper mapper)
             : base(userService)
         {
             _wordsService = wordsService;
             _translationService = translationService;
+            _mapper = mapper;
         }
 
         //[HttpGet]
@@ -44,7 +55,16 @@ namespace LanguageBuilder.Web.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            return new ObjectResult(await _translationService.GetByUserAndLanguageAsync(userId, languageId));
+            var translations = await _translationService.GetByUserAndLanguageAsync(userId, languageId);
+
+            var response = new List<TranslationDTO>();
+
+            foreach (var translation in translations)
+            {
+                response.Add(_mapper.Map<Translation, TranslationDTO>(translation));
+            }
+
+            return Ok(response);
         }
 
         //// GET api/values/5
