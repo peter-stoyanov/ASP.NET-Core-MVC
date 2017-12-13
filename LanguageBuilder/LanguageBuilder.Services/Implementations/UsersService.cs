@@ -66,15 +66,6 @@ namespace LanguageBuilder.Services.Implementations
 
             if (keyword != null) { criteria = u => u.Email.Contains(keyword) || u.Name.Contains(keyword) || u.UserName.Contains(keyword); }
 
-            //var users = _db.Users
-            //    .OrderBy(sortColumnSelector)
-            //    .AsQueryable();
-
-            //if (keyword != null)
-            //{
-            //    users = users.Where(u => u.Email.Contains(keyword) || u.Name.Contains(keyword) || u.UserName.Contains(keyword));
-            //};
-
             var query = _db.Users
                 .OrderBy(sortColumnSelector)
                 .Where(criteria)

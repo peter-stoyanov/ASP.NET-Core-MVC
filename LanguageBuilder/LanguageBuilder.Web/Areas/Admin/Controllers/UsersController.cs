@@ -41,6 +41,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Search(UsersSearchFormViewModel searchForm, int? page)
         {
             var request = searchForm.ToSearchRequest();
+
             if (page.HasValue) { request.PageNumber = page.Value; }
 
             var response = await _userService.Search(
@@ -87,6 +88,13 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
         {
             try
             {
+                if (model.UserId == LoggedUser.Id)
+                {
+                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "Users can not update their own roles.", hasDismissButton: true));
+
+                    return RedirectToLocal(model.Caller, nameof(UsersController.Search), "Users");
+                }
+
                 await _roleService.UpdateAsync(model.UserId, model.SelectedRoles);
 
                 TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true));

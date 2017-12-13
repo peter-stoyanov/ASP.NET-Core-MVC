@@ -29,18 +29,6 @@ namespace LanguageBuilder.Web.Controllers.ApiControllers
             _mapper = mapper;
         }
 
-        //[HttpGet]
-        //public async Task<IEnumerable<object>> Search([FromBody]string keywords, [FromBody]int rows)
-        //{
-        //    return await _wordsService.SearchAsync(keywords, rows);
-        //}
-
-        //[HttpGet]
-        //public async Task<IEnumerable<object>> GetByUser(string userId)
-        //{
-        //    return await _wordsService.GetByUserIdAsync(userId);
-        //}
-
         // GET api/values
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery]string userId, [FromQuery]string languageId)

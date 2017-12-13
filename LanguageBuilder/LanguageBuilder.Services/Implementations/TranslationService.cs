@@ -28,10 +28,5 @@ namespace LanguageBuilder.Services.Implementations
 
             return Enumerable.Empty<Translation>();
         }
-
-        //public Task<Translation> GetByWordsAsync(Word source, Word target)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

@@ -5,8 +5,6 @@ namespace LanguageBuilder.Data.Models
 {
     public class Subscription : BaseEntity<int>
     {
-        //public int Id { get; set; }
-
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }

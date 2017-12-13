@@ -10,32 +10,12 @@ namespace LanguageBuilder.Web.Controllers
         { }
 
         [AllowAnonymous]
-        public IActionResult Unknown()
-        {
-            try
-            {
-                //Exception ex = IServer.GetLastError();
-
-                //if (ex != null)
-                //{
-                //    ex.SaveToLog();
-                //}
-            }
-            catch { }
-
-            return View();
-        }
+        public IActionResult Unknown() => View();
 
         [AllowAnonymous]
-        public ActionResult NotFound()
-        {
-            return View();
-        }
+        public ActionResult NotFound() => View();
 
         [AllowAnonymous]
-        public ActionResult NoAccess()
-        {
-            return View();
-        }
+        public ActionResult NoAccess() => View();
     }
 }

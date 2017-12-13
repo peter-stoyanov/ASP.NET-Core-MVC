@@ -4,7 +4,7 @@
 
 .container {
     /*max-width: 1140px;*/
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 main {
@@ -40,7 +40,7 @@ h2 {
 
 .landing-section {
     position: relative;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/landing-page.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("../images/landing-page.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

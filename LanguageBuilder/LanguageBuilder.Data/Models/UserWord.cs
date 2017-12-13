@@ -6,8 +6,6 @@ namespace LanguageBuilder.Data.Models
 {
     public class UserWord : BaseEntity<int>
     {
-        //public int Id { get; set; }
-
         public string UserId { get; set; }
         public User User { get; set; }
 

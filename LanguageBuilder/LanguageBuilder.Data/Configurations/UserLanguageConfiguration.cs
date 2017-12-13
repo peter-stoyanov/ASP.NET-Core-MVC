@@ -8,9 +8,6 @@ namespace LanguageBuilder.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<UserLanguage> builder)
         {
-            //builder
-            //    .HasKey(ul => new { ul.UserId, ul.LanguageId });
-
             builder
                 .HasOne(ul => ul.User)
                 .WithMany(u => u.Languages)

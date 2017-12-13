@@ -6,8 +6,6 @@ namespace LanguageBuilder.Data.Models
 {
     public class WordList : BaseEntity<int>
     {
-        //public int Id { get; set; }
-
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }

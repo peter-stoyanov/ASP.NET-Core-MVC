@@ -5,8 +5,6 @@ namespace LanguageBuilder.Data.Models
 {
     public class Example : BaseEntity<int>
     {
-        //public int Id { get; set; }
-
         public int WordId { get; set; }
         public Word Word { get; set; }
 

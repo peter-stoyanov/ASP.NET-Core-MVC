@@ -11,7 +11,6 @@ namespace LanguageBuilder.Web.Areas.Admin.Models
 
         public User User { get; set; }
 
-        // at least 1 role ?
         public List<string> SelectedRoles { get; set; }
 
         public List<Role> Roles { get; set; }

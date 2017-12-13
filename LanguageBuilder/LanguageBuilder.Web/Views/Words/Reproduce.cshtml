@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "Reproduce";
+    ViewBag.RegisterKnockout = true;
+
+    User loggedUser = (User)ViewBag.LoggedUser;
+}
+
+@section Styles{
+
+    <style>
+        .tile {
+            background-color: #008CBA;
+            border: 3px solid #000;
+            color: white;
+            padding: 1em 1em;
+            text-align: center;
+            text-decoration: none;
+            font-size: 2em;
+        }
+
+        .correct {
+            border: 3px solid #008CBA;
+            background-color: #d8fbb9;
+        }
+
+        .incorrect {
+            border: 3px solid #008CBA;
+            background-color: #ee8cc9;
+        }
+
+        
+    </style>
+}
+
+
+<div id="reproduce-cards">
+
+    <div class="row justify-content-center align-self-center align-items-center">
+
+        <div class="col-8 align-self-center">
+
+            <h2>@ViewBag.Title</h2>
+
+            <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
+
+            <div data-bind="visible: hasError() && !isLoading()">
+                Sorry, it seems that an error has occured.
+            </div>
+
+            <div class="row" data-bind="visible: !hasError() && !isLoading()">
+
+                    <div class="col-4 d-inline-block tile mr-5 text-center" data-bind="text: hint" style="width: 40em;"></div>
+                    
+                    <input class="mr-5 text-center" type="text" placeholder="type your guess..." data-bind="value: guess, css: status"/>
+
+            </div>
+        </div>
+
+        <div class="col-4 align-self-center">
+            <button class="btn btn-info" data-bind="click: check()">Check</button>
+            
+            <button class="btn btn-info control" data-bind="click: loadPrevious">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </button>
+
+            <button class="btn btn-info control" data-bind="click: loadNext">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+        function ReproduceViewModel() {
+            var self = this;
+
+            this.isLoading = ko.observable(true);
+            this.hasError = ko.observable(false);
+            this.trainEnded = ko.observable(false);
+            this.words = ko.observableArray([]);
+            this.guess = ko.observable();
+            this.activeTranslation = ko.observable();
+            this.isCorrect = ko.observable(null);
+            this.currentIndex = ko.observable(-1);
+
+            this.init = function (callback) {
+
+                $.when(self.loadData())
+                    .then(function () { self.randomize(); })
+                    .then(function () { self.loadNext(); })
+                    .then(function () { if (callback !== undefined) { callback(); } });
+            };
+
+            this.randomize = function () {
+                var array = self.words();
+
+                var currentIndex = array.length, temporaryValue, randomIndex;
+
+                // While there remain elements to shuffle...
+                while (0 !== currentIndex) {
+
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+
+                    // And swap it with the current element.
+                    temporaryValue = array[currentIndex];
+                    array[currentIndex] = array[randomIndex];
+                    array[randomIndex] = temporaryValue;
+                };
+
+                self.words(array);
+            };
+
+            this.status = ko.pureComputed(function () {
+                return self.isCorrect() === true ? "correct" : self.isCorrect() === false ? "incorrect" : "";
+            });
+
+            this.hint = ko.pureComputed(function () {
+                return self.activeTranslation() ? self.activeTranslation().sourceWord : '';
+            });
+
+            //this.hint = ko.pureComputed({
+            //    read: function () {
+            //        return self.activeTranslation() ? self.activeTranslation().sourceWord : '';
+            //    },
+            //    write: function (value) {
+            //        self.activeTranslation().
+            //    },
+            //    owner: this
+            //});
+
+            this.check = function (guess, event) {
+                if (!self.activeTranslation()) { return; }
+
+                var answer = self.activeTranslation() && self.activeTranslation().targetWord ? self.activeTranslation().targetWord.trim().toLowerCase() : '';
+                var userGuess = self.guess() ? self.guess().trim().toLowerCase() : '';
+
+                if (!self.activeTranslation()) { return; }
+
+                if (answer == userGuess) {
+                    self.isCorrect(true);
+                } else {
+                    self.isCorrect(false);
+                }
+
+                setTimeout(function () {
+                    self.isCorrect(null);
+                }, 1500)
+            };
+
+            this.loadEntry = function (index) {
+                var word = self.words()[index];
+
+                if (word) {
+                    self.activeTranslation(word);
+                    self.currentIndex(index);
+                } else {
+                    self.trainEnded(true);
+                };
+            };
+
+            this.loadNext = function () {
+                var index = self.currentIndex() + 1;
+
+                self.loadEntry(index);
+            };
+
+            this.loadPrevious = function () {
+                var index = self.currentIndex() - 1;
+
+                self.loadEntry(index);
+            };
+
+            this.loadData = function () {
+                var deferred = $.Deferred();
+
+                $.getJSON({
+                    url: '/api/words',
+                    data: { userId: '@loggedUser.Id', languageId: '2' },
+                    success: function (response, status, xhr) {
+                        self.words(response);
+                        self.words.valueHasMutated();
+                        self.isLoading(false);
+
+                        deferred.resolve(response);
+                        //if (callback !== undefined) { callback(response); }
+                    },
+                    error: function () {
+                        self.isLoading(false);
+                        self.hasError(true);
+                    }
+                });
+
+                return deferred.promise();
+            };
+
+            this.postData = function (word, userId, callback) {
+
+                // debug
+                self.words.remove(word);
+
+                @*$.getJSON({
+                    url: '@Url.Action("", "")',
+                    data: { word: word, userId: userId },
+                    success: function (response, status, xhr) {
+                        self.words.remove(word);
+                        if (callback !== undefined) { callback(response, request); }
+                    },
+                    error: function () {
+                        self.hasError(true);
+                    }
+                });*@
+            };
+        };
+
+        reproduceModel = new ReproduceViewModel();
+
+        reproduceModel.init(ko.applyBindings(reproduceModel, $('#reproduce-cards').get(0)));
+
+
+    });
+    </script>
+}

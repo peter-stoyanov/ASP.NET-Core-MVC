@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-reboot.min.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css" />*@
-        <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
+        @*<link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />*@
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -27,6 +27,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
               integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" />
+        @*<link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />*@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 
@@ -54,7 +55,7 @@
 
     @Html.Partial("_Navigation")
 
-    <div class="container-fluid">
+    <div class="container">
 
         <main class="@(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" && ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "landing-section" : String.Empty)">
 
@@ -80,6 +81,7 @@
                 crossorigin="anonymous"
                 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=">
         </script>
+        <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"

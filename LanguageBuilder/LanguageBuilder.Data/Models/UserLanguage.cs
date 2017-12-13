@@ -4,8 +4,6 @@ namespace LanguageBuilder.Data.Models
 {
     public class UserLanguage : BaseEntity<int>
     {
-        //public int Id { get; set; }
-
         [Required]
         public string UserId { get; set; }
 

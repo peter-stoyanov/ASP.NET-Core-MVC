@@ -13,7 +13,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
         public static IServiceCollection AddDomainServices(this IServiceCollection services)
         {
             Assembly
-                .GetAssembly(typeof(IService))
+                .GetAssembly(typeof(IUsersService))
                 .GetTypes()
                 .Where(t => t.IsClass && t.GetInterfaces().Any(i => i.Name == $"I{t.Name}"))
                 .Select(t => new

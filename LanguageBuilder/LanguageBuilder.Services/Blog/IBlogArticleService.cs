@@ -17,7 +17,5 @@ namespace LanguageBuilder.Services.Blog
         Task<BlogArticleDetailsServiceModel> ById(int id);
 
         Task CreateAsync(string title, string content, string authorId);
-
-        //Task UpdateAsync(int id, string title, string content, string authorId);
     }
 }

@@ -129,6 +129,11 @@ namespace LanguageBuilder.Web.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Reproduce()
+        {
+            return View();
+        }
+
         //// GET: Words/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{

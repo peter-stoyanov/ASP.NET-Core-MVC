@@ -135,8 +135,6 @@ namespace LanguageBuilder.Services.Implementations
 
                     await _db.SaveChangesAsync();
 
-                    // Commit transaction if all commands succeed, transaction will auto-rollback
-                    // when disposed if either commands fails
                     transaction.Commit();
                 }
                 catch (Exception ex)

@@ -5,7 +5,7 @@
          $('#TeamLeader').autocomplete({
             source: function (request, response) {
                 pipeline.ajaxGetJson({
-                    url: '@Url.Content("~/api/Words/Search")',
+                    url: '@Url.Content("~/api/Words")',
                     data: { keywords: $('#source-word').val(), rows: 10 },
                     success: function (data, status, xhr) {
                         var items = [];

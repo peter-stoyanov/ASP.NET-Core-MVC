@@ -40,7 +40,6 @@ namespace LanguageBuilder.Web.Controllers
             base.OnActionExecuted(filterContext);
 
             ViewBag.LoggedUser = this.LoggedUser;
-            //ViewBag.BuildVersion = this.GetType().Assembly.GetName().Version.ToString();
         }
 
         protected IActionResult RedirectToReferrer(string defaultActionName = null, string defaultControllerName = null, object defaultRouteValues = null)
@@ -75,13 +74,5 @@ namespace LanguageBuilder.Web.Controllers
         {
             return this.RedirectToAction("NoAccess", "Errors", new { path = this.Request.Path });
         }
-
-        //public string RootUrl
-        //{
-        //    get
-        //    {
-        //        return string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
-        //    }
-        //}
     }
 }
