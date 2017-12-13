@@ -112,7 +112,7 @@ namespace LanguageBuilder.Web.Controllers
                     _mapper.Map<WordCreateViewModel, Word>(model.TargetWord),
                     this.LoggedUser.Id);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Search));
             }
 
             model.Languages = await _languageService.GetAllAsync();
@@ -120,6 +120,11 @@ namespace LanguageBuilder.Web.Controllers
         }
 
         public async Task<IActionResult> Train()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Match()
         {
             return View();
         }

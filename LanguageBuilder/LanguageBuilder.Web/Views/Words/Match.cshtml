@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "Match";
+    ViewBag.RegisterKnockout = true;
+
+    User loggedUser = (User)ViewBag.LoggedUser;
+}
+
+@section Styles{
+
+    <style>
+        .card-btn {
+            background-color: #008CBA;
+            border: 3px solid #000;
+            color: white;
+            padding: 2em 2em;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 5em;
+            width: 100%;
+            height: 50%;
+        }
+
+        .control {
+            font-size: 2em;
+        }
+    </style>
+}
+
+
+<div id="match-cards" class="container d-flex h-100">
+
+    <div class="row justify-content-center align-self-center align-items-center">
+
+        <div class="col-8 align-self-center">
+
+            <h2>@ViewBag.Title</h2><span data-bind="text: test" ></span>
+
+            <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
+
+            <div data-bind="visible: hasError() && !isLoading()">
+                Sorry, it seems that an error has occured.
+            </div>
+
+            <div class="row" data-bind="visible: !hasError() && !isLoading()">
+
+                <div data-bind="foreach: words">
+                    <span class="col-4" data-bind="text: face">
+
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-4 align-self-center">
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+        function MatchViewModel() {
+            var self = this;
+
+            this.isLoading = ko.observable(true);
+            this.hasError = ko.observable(false);
+            this.trainEnded = ko.observable(false);
+            this.test = ko.observable('test');
+            this.words = ko.observableArray([]);
+            
+
+            this.init = function (callback) {
+                self.loadData(self.randomize);
+                if (callback !== undefined) { callback(); }
+            };
+
+            this.randomize = function () {
+                var array = self.words();
+
+                var currentIndex = array.length, temporaryValue, randomIndex;
+
+                // While there remain elements to shuffle...
+                while (0 !== currentIndex) {
+
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+
+                    // And swap it with the current element.
+                    temporaryValue = array[currentIndex];
+                    array[currentIndex] = array[randomIndex];
+                    array[randomIndex] = temporaryValue;
+                };
+            };
+
+            this.loadData = function (callback) {
+
+                $.getJSON({
+                    url: '/api/words',
+                    data: { userId: '@loggedUser.Id', languageId: '2' },
+                    success: function (response, status, xhr) {
+                        var tiles = [];
+
+                        for (var i = 0; i < response.length; i++) {
+                            var translation = response[i];
+
+                            var sourceTile = {
+                                face: translation.sourceWord,
+                                id: i
+                            };
+
+                            var targetTile = {
+                                face: translation.targetWord,
+                                id: i
+                            };
+
+                            tiles.push(sourceTile);
+                            tiles.push(targetTile);
+                        }
+
+                        self.words(tiles);
+                        self.words.valueHasMutated();
+                        self.isLoading(false);
+
+                        if (callback !== undefined) { callback(response); }
+                    },
+                    error: function () {
+                        self.isLoading(false);
+                        self.hasError(true);
+                    }
+                });
+            };
+
+            this.postData = function (word, userId, callback) {
+
+                // debug
+                self.words.remove(word);
+
+                @*$.getJSON({
+                    url: '@Url.Action("", "")',
+                    data: { word: word, userId: userId },
+                    success: function (response, status, xhr) {
+                        self.words.remove(word);
+                        if (callback !== undefined) { callback(response, request); }
+                    },
+                    error: function () {
+                        self.hasError(true);
+                    }
+                });*@
+            };
+        };
+
+        matchModel = new MatchViewModel();
+
+        matchModel.init(ko.applyBindings(matchModel, $('#match-cards').get(0)));
+
+
+    });
+    </script>
+}
