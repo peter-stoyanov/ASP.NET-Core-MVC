@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-LanguageBuilder.Web-A38E2AFA-0825-4BEF-B3C6-E3130290153D</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="Helpers\TagHelpers\CardAccordionTagHelper.cs" />
+  </ItemGroup>
+
   <!--<ItemGroup>
     <Compile Include="ViewModels\WordViewModels\WordDetailViewModel.cs" />
     <Compile Include="ViewModels\WordViewModels\WordsSearchViewModel.cs" />
@@ -33,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\lib\jquery-ui\css\" />

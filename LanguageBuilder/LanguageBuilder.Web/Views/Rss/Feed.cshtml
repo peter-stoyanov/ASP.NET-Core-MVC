@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Article>
+
+@{
+    Layout = null;
+    //Response.ContentType = "text/xml";
+}
+
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+    <channel>
+        <title>coreComponent - Petar Stoyanov's blog</title>
+        <link> http://www.petarstoyanov.eu </link>
+        <description>Blog of a junior .Net Web Developer</description>
+        <lastBuildDate>@DateTime.Now.ToUniversalTime()</lastBuildDate>
+        <language>en-us</language>
+        @foreach(var article in Model)
+        {
+            var postLink = "/Articles/" + article.Id;
+
+            @:<item>
+                <title>@Html.Encode(article.Title)</title>
+                <link>@postLink@:</link>
+                <guid>test</guid>
+                <pubDate>@article.PublishDate.ToShortDateString()</pubDate>
+                @*<description>@Html.Encode(post.Extract)</description>*@
+            @:</item>
+        }
+    </channel>
+</rss>

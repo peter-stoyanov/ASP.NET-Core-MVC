@@ -1,6 +1,103 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title</h2>
+﻿@using LanguageBuilder.Web.Helpers.TagHelpers
+@addTagHelper LanguageBuilder.Web.Helpers.TagHelpers, LanguageBuilder.Web
 
-<p>Use this area to provide additional information.</p>
+@{
+    ViewBag.Title = "About me";
+}
+
+<h1 class="display-4 text-center">@ViewBag.Title</h1>
+
+<div class="row">
+    <div class="col-12 col-lg-3">
+        <div class="row">
+            <img class="img-thumbnail img-responsive rounded-circle" src="http://i.imgur.com/b6hewAe.jpg" />
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center mt-5 mb-2">
+                <a href="https://github.com/peter-stoyanov" class="btn btn-primary w-75">My GitHub Account</a>
+            </div>
+            <div class="col-12 d-flex justify-content-center my-2">
+                <a href="https://www.linkedin.com/in/peshostoyanov/" class="btn btn-primary w-75">My LinkedIn Profile</a>
+            </div>
+            <div class="col-12 d-flex justify-content-center my-2">
+                <a href="mailto:pesho.stoyanov@gmail.com" class="btn btn-primary w-75">Send me an email</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-9 mb-5">
+        <p>
+            My name is Petar Stoyanov and I work as a Junior .Net Web Developer.
+        </p>
+        <p>
+            I have a Masters degree in Structural Engineering from the University of Architecture, Civil Engineering and Geodesy in Sofia, Bulgaria.
+            I am currently enrolled in the C# Web Developer program at SoftUni.bg as an online student.
+            I have taken the following courses:
+        </p>
+
+        <div id="accordion" role="tablist">
+
+            <cardaccordion 
+                title="Programming Basics" 
+                body="IDE's. Basic programming structures - variables, conditions, loops.">
+            </cardaccordion>
+            @*@Html.CardAccordionText("Programming Basics", "IDE's. Basic programming structures - variables, conditions, loops.")
+            @Html.CardAccordionImage("Programming Fundamentals", "/Resources/Certifications/programming fundamentals - may 2016 - certificate.jpeg")
+            @Html.CardAccordionImage("Software Technologies", "/Resources/Certifications/software technologies - june 2016 - certificate.jpeg")
+            @Html.CardAccordionImage("Js Fundamentals", "/Resources/Certifications/js fundamentals - september 2016 - certificate.jpeg")
+            @Html.CardAccordionImage("Js Advanced", "/Resources/Certifications/js advanced - october 2016 - certificate.jpeg")
+            @Html.CardAccordionImage("Js Applications", "/Resources/Certifications/js applications - november 2016 - certificate.jpeg")
+            @Html.CardAccordionText("Databases Basics - MS SQL server", "")
+            @Html.CardAccordionImage("Databases Advanced", "/Resources/Certifications/databases advanced - entity framework - february 2017 - certificate.jpeg")
+            @Html.CardAccordionText("QA Fundamentals", "")
+            @Html.CardAccordionImage("Microsoft Software Development Fundamentals", "/Resources/Certifications/microsoft software development fundamentals - january 2017 - certificate.jpeg")
+            @Html.CardAccordionImage("C# Advanced", "/Resources/Certifications/csharp advanced - may 2017 - certificate.jpeg")
+            @Html.CardAccordionText("Data structures", "")
+            @Html.CardAccordionImage("C# OOP Basics", "/Resources/Certifications/OOPBasicsCertificate.jpeg")
+            @Html.CardAccordionImage("C# OOP Advanced", "/Resources/Certifications/csharp oop advanced - july 2017 - certificate.jpeg")
+            @Html.CardAccordionText("Algorithms", "")
+            @Html.CardAccordionText("C# Web Basics - .Net Core, Entity Framework Core", "currently ongoing")
+            @Html.CardAccordionText("C# MVC Frameworks - ASP.NET Core", "currently ongoing")*@
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> </button>
+                <img src="" class="imagepreview" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $('.pop').on('click', function () {
+                $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                $('#imagemodal').modal('show');
+            });
+
+            $('#imagemodal').on('hidden.bs.collapse', function () {
+                // do something…
+                console.log(this)
+            })
+        });
+    </script>
+}
+
+@*<div class="card">
+    <div class="card-header" id="heading19752" role="tab">
+        <h6 class="mb-0">
+            <a aria-controls="collapse19752" aria-expanded="true" data-toggle="collapse" href="#collapse19752">Programming Basics</a>
+        </h6>
+    </div>
+    <div aria-labelledby="heading19752" class="collapse" data-parent="#accordion" id="collapse19752" role="tabpanel">
+        <div class="card-body">
+            <p>IDE&#39;s. Basic programming structures - variables, conditions, loops.</p>
+        </div>
+    </div>
+</div>*@
