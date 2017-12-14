@@ -16,8 +16,11 @@ namespace LanguageBuilder.Web.Helpers.TagHelpers
         [HtmlAttributeName("image")]
         public string Image { get; set; }
 
-        [HtmlAttributeName("class")]
-        public string CssClass { get; set; }
+        [HtmlAttributeName("container-class")]
+        public string ContainerClass { get; set; }
+
+        [HtmlAttributeName("image-class")]
+        public string ImageClass { get; set; }
 
         [HtmlAttributeName("body-as-html")]
         public bool BodyAsHtml { get; set; }
@@ -31,7 +34,7 @@ namespace LanguageBuilder.Web.Helpers.TagHelpers
 
             string titleText = TitleAsHtml ? Title : System.Net.WebUtility.HtmlEncode(Title);
             string bodyText = BodyAsHtml ? Body : System.Net.WebUtility.HtmlEncode(Body);
-            string image = $@"<img src=""{Image}"" class=""pop"" style=""width: 25%;"">";
+            string image = $@"<img src=""{Image}"" class=""{(String.IsNullOrEmpty(ImageClass) ? "" : ImageClass)}"" >";
             string id = context.UniqueId;
             string headerId = $"heading{id}";
             string collapseId = $"collapse{id}";
@@ -48,15 +51,18 @@ namespace LanguageBuilder.Web.Helpers.TagHelpers
                 <div aria-labelledby= ""{headerId}"" class=""collapse"" data-parent=""#accordion"" id=""{collapseId}"" role=""tabpanel"">
                     <div class=""card-body"">
                         <p>{(String.IsNullOrEmpty(Image) ? bodyText : image)}</p>
-                    </div>
+                    </ div>
                 </div>
             </div>");
 
-
             output.TagName = "div";
+
+            if (!String.IsNullOrEmpty(ContainerClass))
+            {
+                output.Attributes.Add("class", ContainerClass);
+            }
+
             output.Content.SetHtmlContent(sb.ToString());
         }
     }
 }
-
-

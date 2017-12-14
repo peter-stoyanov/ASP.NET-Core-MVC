@@ -31,7 +31,7 @@ namespace LanguageBuilder.Web.ViewModels.WordViewModels
                     this.Paging.CurrentPage = value.Records.PageNumber;
                     this.Paging.TotalItems = value.Records.TotalItems;
                     this.Paging.ItemsPerPage = value.Records.PageSize;
-                    this.Paging.MaxPagerItems = 100; // value.Records.TotalItems
+                    this.Paging.MaxPagerItems = value.Records.TotalItems;
                 }
             }
         }

@@ -32,18 +32,29 @@ namespace LanguageBuilder.Web.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> My(WordsSearchFormViewModel searchForm)
         {
-            var words = await _wordsService.GetByUserIdAsync(this.LoggedUser.Id);
+            var request = searchForm.ToSearchRequest();
+
+            var response = await _wordsService.Search(
+                request,
+                sortColumnSelector: w => w.Content,
+                criteria: w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()));
+
+            searchForm.Languages = (await _languageService.GetAllAsync()).ToList();
 
             var model = new WordsSearchViewModel
             {
-                //Words = words
+                Response = response,
+                SearchForm = searchForm
             };
 
-            TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Test", "Strong", false));
+            if (!model.Data.Any())
+            {
+                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
+            }
 
-            return View(model);
+            return View(nameof(Search), model);
         }
 
         public async Task<IActionResult> Search(WordsSearchFormViewModel searchForm)

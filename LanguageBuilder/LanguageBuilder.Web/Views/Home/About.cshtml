@@ -2,6 +2,25 @@
     ViewBag.Title = "About me";
 }
 
+
+@section Styles{
+
+    <style>
+
+        .pop {
+            display: block;
+            width: 25%;
+            height: auto;
+        }
+        
+        .pop:hover,
+        .pop:active {
+            cursor: zoom-in;
+        }
+
+    </style>
+}
+
 <h1 class="display-4 text-center">@ViewBag.Title</h1>
 
 <div class="row">
@@ -26,27 +45,26 @@
             My name is Petar Stoyanov and I work as a Junior .Net Web Developer.
         </p>
         <p>
-            I have a Masters degree in Structural Engineering from the University of Architecture, Civil Engineering and Geodesy in Sofia, Bulgaria.
-            I am currently enrolled in the C# Web Developer program at SoftUni.bg as an online student.
+            I am currently enrolled in the C# Web Developer program at SoftUni.bg as an online student.<br>
             I have taken the following courses:
         </p>
 
         <div id="accordion" role="tablist">
 
             <card-accordion title="Programming Basics" body="IDE's. Basic programming structures - variables, conditions, loops."></card-accordion>
-            <card-accordion title="Programming Fundamentals" image="/Resources/Certifications/programming fundamentals - may 2016 - certificate.jpeg"></card-accordion>
-            <card-accordion title="Software Technologies" image="/Resources/Certifications/software technologies - june 2016 - certificate.jpeg"></card-accordion>
-            <card-accordion title="Js Fundamentals" image="/Resources/Certifications/js fundamentals - september 2016 - certificate.jpeg"></card-accordion>
-            <card-accordion title="Js Advanced" image="/Resources/Certifications/js advanced - october 2016 - certificate.jpeg"></card-accordion>
-            <card-accordion title="Js Applications" image="/Resources/Certifications/js applications - november 2016 - certificate.jpeg"></card-accordion>
+            <card-accordion title="Programming Fundamentals" image-class="pop" image="/Resources/Certifications/programming fundamentals - may 2016 - certificate.jpeg"></card-accordion>
+            <card-accordion title="Software Technologies" image-class="pop" image="/Resources/Certifications/software technologies - june 2016 - certificate.jpeg"></card-accordion>
+            <card-accordion title="Js Fundamentals" image-class="pop" image="/Resources/Certifications/js fundamentals - september 2016 - certificate.jpeg"></card-accordion>
+            <card-accordion title="Js Advanced" image-class="pop" image="/Resources/Certifications/js advanced - october 2016 - certificate.jpeg"></card-accordion>
+            <card-accordion title="Js Applications" image-class="pop" image="/Resources/Certifications/js applications - november 2016 - certificate.jpeg"></card-accordion>
             <card-accordion title="Databases Basics - MS SQL server" body=""></card-accordion>
-            <card-accordion title="Databases Advanced" image="/Resources/Certifications/databases advanced - entity framework - february 2017 - certificate.jpeg"></card-accordion>
+            <card-accordion title="Databases Advanced" image-class="pop" image="/Resources/Certifications/databases advanced - entity framework - february 2017 - certificate.jpeg"></card-accordion>
             <card-accordion title="QA Fundamentals" body=""></card-accordion>
-            <card-accordion title="Microsoft Software Development Fundamentals" image="/Resources/Certifications/microsoft software development fundamentals - january 2017 - certificate.jpeg"></card-accordion>
-            <card-accordion title="C# Advanced" image="/Resources/Certifications/csharp advanced - may 2017 - certificate.jpeg"></card-accordion>
+            <card-accordion title="Microsoft Software Development Fundamentals" image-class="pop" image="/Resources/Certifications/microsoft software development fundamentals - january 2017 - certificate.jpeg"></card-accordion>
+            <card-accordion title="C# Advanced" image-class="pop" image="/Resources/Certifications/csharp advanced - may 2017 - certificate.jpeg"></card-accordion>
             <card-accordion title="Data structures" body=""></card-accordion>
-            <card-accordion title="C# OOP Basics" image="/Resources/Certifications/OOPBasicsCertificate.jpeg"></card-accordion>
-            <card-accordion title="C# OOP Advanced" image="/Resources/Certifications/csharp oop advanced - july 2017 - certificate.jpeg"></card-accordion>
+            <card-accordion title="C# OOP Basics" image-class="pop" image="/Resources/Certifications/OOPBasicsCertificate.jpeg"></card-accordion>
+            <card-accordion title="C# OOP Advanced" image-class="pop" image="/Resources/Certifications/csharp oop advanced - july 2017 - certificate.jpeg"></card-accordion>
             <card-accordion title="Algorithms" body=""></card-accordion>
             <card-accordion title="C# Web Basics - .Net Core, Entity Framework Core" body="IDE's. Basic programming structures - variables, conditions, loops."></card-accordion>
             <card-accordion title="C# MVC Frameworks - ASP.NET Core" body=""></card-accordion>
