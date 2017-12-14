@@ -164,6 +164,7 @@ namespace LanguageBuilder.Services.Implementations
             if (offset < 0) { offset = 0; }
 
             var query = _db.Words
+                .Include(w => w.Users)
                 .OrderBy(sortColumnSelector)
                 .Where(criteria);
 
