@@ -1,50 +1,60 @@
-﻿using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace LanguageBuilder.Web.Helpers.TagHelpers
 {
+    [HtmlTargetElement("card-accordion")]
     public class CardAccordionTagHelper : TagHelper
     {
+        [HtmlAttributeName("title")]
+        public string Title { get; set; }
+
+        [HtmlAttributeName("body")]
+        public string Body { get; set; }
+
+        [HtmlAttributeName("image")]
+        public string Image { get; set; }
+
+        [HtmlAttributeName("class")]
+        public string CssClass { get; set; }
+
+        [HtmlAttributeName("body-as-html")]
+        public bool BodyAsHtml { get; set; }
+
+        [HtmlAttributeName("title-as-html")]
+        public bool TitleAsHtml { get; set; }
+
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            string title = String.Empty;
-            string body = String.Empty;
+            if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(Body)) { return; }
+
+            string titleText = TitleAsHtml ? Title : System.Net.WebUtility.HtmlEncode(Title);
+            string bodyText = BodyAsHtml ? Body : System.Net.WebUtility.HtmlEncode(Body);
+            string image = $@"<img src=""{Image}"" class=""pop"" style=""width: 25%;"">";
             string id = context.UniqueId;
             string headerId = $"heading{id}";
             string collapseId = $"collapse{id}";
 
-            if (output.Attributes.ContainsName("title"))
-            {
-                title = output.Attributes["title"].Value.ToString();
-            };
+            StringBuilder sb = new StringBuilder();
 
-            if (output.Attributes.ContainsName("body"))
-            {
-                title = output.Attributes["body"].Value.ToString();
-            };
-
-            output.Content.SetContent(
-            $@"div class=""card"">
+            sb.Append(
+            $@"<div class=""card"">
                 <div class=""card-header"" id=""{headerId}"" role=""tab"">
                     <h6 class=""mb-0"">
-                        <a aria-controls=""{collapseId}"" aria-expanded=""true"" data-toggle=""collapse"" href=""#{collapseId}"">{title}</a>
+                        <a aria-controls=""{collapseId}"" aria-expanded=""true"" data-toggle=""collapse"" href=""#{collapseId}"">{titleText}</a>
                     </h6>
                 </div>
                 <div aria-labelledby= ""{headerId}"" class=""collapse"" data-parent=""#accordion"" id=""{collapseId}"" role=""tabpanel"">
                     <div class=""card-body"">
-                        <p>{body}</p>
+                        <p>{(String.IsNullOrEmpty(Image) ? bodyText : image)}</p>
                     </div>
                 </div>
             </div>");
 
 
-            output.Attributes.Remove(context.AllAttributes["title"]);
-            output.Attributes.Remove(context.AllAttributes["body"]);
+            output.TagName = "div";
+            output.Content.SetHtmlContent(sb.ToString());
         }
     }
 }

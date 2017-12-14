@@ -12,7 +12,7 @@ namespace LanguageBuilder.Web.Controllers
         {
             //var posts = db.Posts.ToList();
 
-            return View(posts);
+            return View();
         }
     }
 }
