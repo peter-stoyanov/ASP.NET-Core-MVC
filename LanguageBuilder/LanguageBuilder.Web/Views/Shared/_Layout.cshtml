@@ -16,8 +16,6 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-reboot.min.css" />
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css" />*@
         @*<link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />*@
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -55,23 +53,24 @@
 
     @Html.Partial("_Navigation")
 
-    <div class="container">
+    <div class="container-fluid">
 
         <main class="@(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" && ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" ? "landing-section" : String.Empty)">
 
             @RenderBody()
         </main>
 
-        <footer>
-
-            @Html.Partial("_Footer")
-        </footer>
     </div>
+    
+    <footer>
+
+        @Html.Partial("_Footer")
+    </footer>
 
     <environment include="Development">
         <script asp-src-include="~/lib/jquery/dist/*.js" ></script>
-        <script src="~/lib/tether/dist/js/tether.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        @*<script src="~/lib/tether/dist/js/tether.js"></script>*@
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">

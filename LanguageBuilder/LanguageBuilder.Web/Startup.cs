@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -56,6 +57,8 @@ namespace LanguageBuilder.Web
             {
                 config.Filters.Add(new ValidateModelStateAttributeAttribute());
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                //config.SslPort = 44321;
+                //config.Filters.Add(new RequireHttpsAttribute());
             });
 
             services.AddCors();
@@ -97,6 +100,16 @@ namespace LanguageBuilder.Web
                     options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
                     options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
                 });
+
+            //services.AddAntiforgery(
+            //    options =>
+            //    {
+            //        options.Cookie.Name = "_af";
+            //        options.Cookie.HttpOnly = true;
+            //        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            //        options.HeaderName = "X-XSRF-TOKEN";
+            //    }
+            //);
 
             services.AddCloudscribePagination();
         }
@@ -149,6 +162,10 @@ namespace LanguageBuilder.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //var rewriteOptions = new RewriteOptions().AddRedirectToHttps();
+
+            //app.UseRewriter(rewriteOptions);
 
             app.UseCors(
                 options => options.WithOrigins("*").AllowAnyMethod()

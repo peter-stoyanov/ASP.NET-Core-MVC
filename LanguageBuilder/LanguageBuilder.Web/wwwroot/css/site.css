@@ -3,17 +3,24 @@
 }
 
 .container {
-    /*max-width: 1140px;*/
-    /*overflow: hidden;*/
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 main {
-    margin-top: 3em;
-    margin-bottom: 3em;
+    max-width: 1140px;
+    margin: auto;
+    padding-top: 3em;
+    padding-bottom: 3em;
 }
 
 footer {
-    margin-top: 3em;
+    /*padding-top: 3em;*/
 }
 
 footer .contact {
