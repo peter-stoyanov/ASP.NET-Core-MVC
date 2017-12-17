@@ -117,7 +117,7 @@ namespace LanguageBuilder.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, LanguageBuilderDbContext context)
         {
-            ////debug
+            //debug
             //env.EnvironmentName = "Production";
 
             if (env.IsDevelopment())
@@ -150,6 +150,10 @@ namespace LanguageBuilder.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
                     name: "blog",
                     template: "blog/articles/{action}/{id}/{title}",
                     defaults: new { area = "Blog", controller = "Articles", action = "Index" });
@@ -158,9 +162,6 @@ namespace LanguageBuilder.Web
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             //var rewriteOptions = new RewriteOptions().AddRedirectToHttps();

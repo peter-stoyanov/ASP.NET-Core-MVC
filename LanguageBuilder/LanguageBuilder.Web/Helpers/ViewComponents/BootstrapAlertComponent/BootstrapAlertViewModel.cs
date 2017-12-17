@@ -4,7 +4,6 @@ namespace LanguageBuilder.Web.ViewComponents
 {
     public class BootstrapAlertViewModel
     {
-        //private BootstrapAlertType _type;
         public BootstrapAlertViewModel()
         { }
 
@@ -27,22 +26,5 @@ namespace LanguageBuilder.Web.ViewComponents
         public bool HasDismissButton { get; set; } = true;
 
         public BootstrapAlertType Type { get; set; }
-
-        //public BootstrapAlertType Type
-        //{
-        //    get
-        //    {
-        //        if (this.AlertKey is String alertKey)
-        //        {
-        //            var parsedAlertKey = Enum.TryParse(alertKey.ToLower(), out BootstrapAlertType type);
-
-        //            this._type = parsedAlertKey ? type : BootstrapAlertType.Info;
-        //        }
-
-        //        return this._type;
-        //    }
-
-        //    set => this._type = value;
-        //}
     }
 }

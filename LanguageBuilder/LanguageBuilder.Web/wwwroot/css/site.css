@@ -2,14 +2,14 @@
     font-family: Lato, Arial, sans-serif;
 }
 
-.container {
+.container-fluid {
     padding-left: 0px;
     padding-right: 0px;
 }
 
-.container-fluid {
-    padding-left: 0px;
-    padding-right: 0px;
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 main {

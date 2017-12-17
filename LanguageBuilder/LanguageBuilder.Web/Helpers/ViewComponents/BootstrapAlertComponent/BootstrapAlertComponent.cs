@@ -8,8 +8,6 @@ namespace LanguageBuilder.Web.ViewComponents
     {
         public async Task<IViewComponentResult> InvokeAsync(BootstrapAlertViewModel model)
         {
-            //if (model == null) { return; }
-
             if (model != null && (model.StrongText == null || String.IsNullOrEmpty(model.StrongText)))
             {
                 model.StrongText = $"{Enum.GetName(typeof(BootstrapAlertType), (int)model.Type)}.";

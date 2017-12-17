@@ -1,0 +1,31 @@
+﻿@model GoogleMapsViewModel
+
+@if (Model == null)
+{
+    return;
+}
+
+<div id="@Model.ContainerId"></div>
+
+<script type="text/javascript">
+
+    function initMap() {
+        var uluru = { lat: @Model.Latitude, lng: @Model.Longitude };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: @Model.Zoom,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDtSVZ3mN9YoKWfcsBf-D2x_1xBvEPqjY&callback=initMap">
+</script>
+
+
+

@@ -4,6 +4,10 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
+@{ 
+    var loggedUser = (User)ViewBag.LoggedUser;
+}
+
 <header>
     <div class="container-fluid d-flex justify-content-between bg-primary">
 
@@ -21,28 +25,88 @@
             </button>
 
             <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    
+                    <li class="nav-item @(ViewContext.IsCurrentUrl("home", "index") ? "active" : String.Empty)">
                         <a class="nav-link mr-3" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                    
+                    @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.UserRole))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @(ViewContext.IsCurrentUrl("words", new[] { "my", "create", "search" }) ? "active" : String.Empty)" 
+                               href="#" id="navbarDropdownTranslations"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Translations
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownTranslations">
+                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="My">My translations</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Create">Create new translation</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Search">Browse translations</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @(ViewContext.IsCurrentUrl("words", new[] { "train", "match", "reproduce" }) ? "active" : String.Empty)" 
+                               href="#" id="navbarDropdownStudy"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Study
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownStudy">
+                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Train">Train</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Match">Match</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Reproduce">Reproduce</a>
+                            </div>
+                        </li>
+                    }
+
+                    <li class="nav-item @(ViewContext.CurrentArea() == "blog" && ViewContext.CurrentAction() == "index" ? "active" : String.Empty)">
+                        <a class="nav-link mr-3" asp-area="Blog" asp-controller="Articles" asp-action="Index">Blog</a>
                     </li>
+                    
+                    @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.BlogAuthorRole))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @(ViewContext.CurrentArea() == "blog" && ViewContext.CurrentAction() != "index" ? "active" : String.Empty)" 
+                               href="#" id="navbarDropdownBlog"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Content Creators
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
+                                <a class="dropdown-item" asp-area="Blog" asp-controller="Articles" asp-action="My">My articles</a>
+                                <a class="dropdown-item" asp-area="Blog" asp-controller="Articles" asp-action="Create">Create article</a>
+                            </div>
+                        </li>
+                    }
+
+                    @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.AdministratorRole))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @(ViewContext.CurrentArea() == "admin" ? "active" : String.Empty)" 
+                               href="#" id="navbarDropdownAdmin"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admins
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Upload" asp-action="Words">Bulk upload words</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Search">Search Users</a>
+                            </div>
+                        </li>
+                    }
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            For the project
+                        <a class="nav-link dropdown-toggle @(ViewContext.IsCurrentUrl("home", new[] { "about", "contact" }) ? "active" : String.Empty)"
+                           href="#" id="navbarDropdown"
+                           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            About this project
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="About">About me</a>
                             <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Disabled</a>
-                    </li>
+                
                 </ul>
             </div>
         </nav>
