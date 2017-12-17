@@ -8,7 +8,7 @@
 <div class="row px-5">
     <div class="col-6">
 
-        <h2>@ViewBag.Title</h2>
+        <h1 class="display-4 text-center">@ViewBag.Title</h1>
 
         @await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
 

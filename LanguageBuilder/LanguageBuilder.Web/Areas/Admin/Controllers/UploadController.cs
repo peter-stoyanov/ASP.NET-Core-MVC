@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(WebConstants.AdminArea)]
     public class UploadController : BaseController
     {
         private readonly IWordsService _wordsService;

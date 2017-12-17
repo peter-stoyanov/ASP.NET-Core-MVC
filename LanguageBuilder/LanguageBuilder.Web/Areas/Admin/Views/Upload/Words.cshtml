@@ -4,26 +4,38 @@
     ViewBag.Title = "Upload words with excel";
 }
 
-<form method="post" enctype="multipart/form-data">
-    <div class="row">
-        <div class="col-md-4">
+<h1 class="display-4 text-center my-5">@ViewBag.Title</h1>
+
+<form class="form" method="post" enctype="multipart/form-data">
+    <div class="row mb-2">
+        <div class="col">
+            <ul>
+                <li>Save the file with .xslx extension</li>
+                <li>Upload it</li>
+                <li>Check to see the result of the parsing</li>
+                <li>Adjust the raw data until satisfactory result in the preview</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-8">
             <input type="file" id="fUpload" name="files" class="form-control" />
         </div>
-        <div class="col-md-8">
-            <input type="button" id="btnUpload" value="Upload" />
+
+        <div class="col-md-4">
+            <input type="button" class="btn btn-info" id="btnUpload" value="Upload" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8" style="padding-top:10px;">
-            <button asp-page-handler="Export">Export</button>
-        </div>
+
+    <div class="row mb-2">
+        <h3>Preview:</h3>
+        <div id="dvData"></div>
     </div>
-    <br />
-    <div id="dvData"></div>
 </form>
 
 @section Scripts {
-<script>
+    <script>
         $(document).ready(function () {
 
             $('#btnUpload').on('click', function () {
@@ -67,6 +79,6 @@
                 });
             })
         });
-</script>
+    </script>
 
 }

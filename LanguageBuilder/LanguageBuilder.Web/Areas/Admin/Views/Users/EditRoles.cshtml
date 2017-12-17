@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit user roles";
 }
 
-<h2>@ViewBag.Title</h2>
+<h1 class="display-4 text-center">@ViewBag.Title</h1>
 
 @await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
 

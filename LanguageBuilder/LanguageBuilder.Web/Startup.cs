@@ -28,7 +28,7 @@ namespace LanguageBuilder.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LanguageBuilderDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("AzureConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services
                 .AddIdentity<User, Role>(options =>
@@ -154,25 +154,6 @@ namespace LanguageBuilder.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-                //routes.MapRoute(
-                //    name: "blog",
-                //    template: "blog/articles/{action}/{id}",
-                //    defaults: new { area = "Blog", controller = "Articles", action = "Index" });
-
-                //routes.MapRoute(
-                //    name: "admin",
-                //    template: "admin/{controller}/{action}/{id}",
-                //    defaults: new { area = "Admin", controller = "Users", action = "Search" });
-
-                //routes.MapRoute(
-                //    name: "default",
-                //    template: "{controller=Home}/{action=Index}/{id?}");
-
-                //routes.MapRoute(
-                //    name: "areas",
-                //    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
             });
 
             var rewriteOptions = new RewriteOptions().AddRedirectToHttps();
