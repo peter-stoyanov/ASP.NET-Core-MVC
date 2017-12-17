@@ -143,10 +143,6 @@ namespace LanguageBuilder.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute(
                     name: "blog",
                     template: "blog/articles/{action}/{id}/{title}",
                     defaults: new { area = "Blog", controller = "Articles", action = "Index" });
@@ -154,6 +150,28 @@ namespace LanguageBuilder.Web
                 routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                //routes.MapRoute(
+                //    name: "blog",
+                //    template: "blog/articles/{action}/{id}",
+                //    defaults: new { area = "Blog", controller = "Articles", action = "Index" });
+
+                //routes.MapRoute(
+                //    name: "admin",
+                //    template: "admin/{controller}/{action}/{id}",
+                //    defaults: new { area = "Admin", controller = "Users", action = "Search" });
+
+                //routes.MapRoute(
+                //    name: "default",
+                //    template: "{controller=Home}/{action=Index}/{id?}");
+
+                //routes.MapRoute(
+                //    name: "areas",
+                //    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             });
 

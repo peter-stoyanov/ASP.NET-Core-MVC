@@ -13,7 +13,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark">
             <!-- Brand -->
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand mr-5">LanguageBuilder</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand mr-5">Language Builder</a>
 
             <button class="navbar-toggler" type="button"
                     data-toggle="collapse"
@@ -28,14 +28,14 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav mr-auto">
                     
-                    <li class="nav-item @(ViewContext.IsCurrentUrl("home", "index") ? "active" : String.Empty)">
-                        <a class="nav-link mr-3" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <li class="nav-item px-1 @(ViewContext.IsCurrentUrl("home", "index") ? "active highlighted" : String.Empty)">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     
                     @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.UserRole))
                     {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle @(ViewContext.IsCurrentUrl("words", new[] { "my", "create", "search" }) ? "active" : String.Empty)" 
+                        <li class="nav-item dropdown px-1 @(ViewContext.IsCurrentUrl("words", new[] { "my", "create", "search" }) ? "active highlighted" : String.Empty)">
+                            <a class="nav-link dropdown-toggle" 
                                href="#" id="navbarDropdownTranslations"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Translations
@@ -47,8 +47,8 @@
                             </div>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle @(ViewContext.IsCurrentUrl("words", new[] { "train", "match", "reproduce" }) ? "active" : String.Empty)" 
+                        <li class="nav-item dropdown px-1 @(ViewContext.IsCurrentUrl("words", new[] { "train", "match", "reproduce" }) ? "active highlighted" : String.Empty)">
+                            <a class="nav-link dropdown-toggle" 
                                href="#" id="navbarDropdownStudy"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Study
@@ -61,29 +61,29 @@
                         </li>
                     }
 
-                    <li class="nav-item @(ViewContext.CurrentArea() == "blog" && ViewContext.CurrentAction() == "index" ? "active" : String.Empty)">
-                        <a class="nav-link mr-3" asp-area="Blog" asp-controller="Articles" asp-action="Index">Blog</a>
+                    <li class="nav-item px-1 @(ViewContext.CurrentArea() == "blog" && ViewContext.CurrentAction() == "index" ? "active highlighted" : String.Empty)">
+                        <a class="nav-link" asp-area="Blog" asp-controller="Articles" asp-action="Index">Blog</a>
                     </li>
                     
                     @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.BlogAuthorRole))
                     {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle @(ViewContext.CurrentArea() == "blog" && ViewContext.CurrentAction() != "index" ? "active" : String.Empty)" 
+                        <li class="nav-item dropdown px-1 @(ViewContext.CurrentArea() == "blog" && ViewContext.CurrentAction() != "index" ? "active highlighted" : String.Empty)">
+                            <a class="nav-link dropdown-toggle" 
                                href="#" id="navbarDropdownBlog"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Content Creators
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
-                                <a class="dropdown-item" asp-area="Blog" asp-controller="Articles" asp-action="My">My articles</a>
-                                <a class="dropdown-item" asp-area="Blog" asp-controller="Articles" asp-action="Create">Create article</a>
+                                <a class="dropdown-item" asp-area="blog" asp-controller="Articles" asp-action="My">My articles</a>
+                                <a class="dropdown-item" asp-area="blog" asp-controller="Articles" asp-action="Create">Create article</a>
                             </div>
                         </li>
                     }
 
                     @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.AdministratorRole))
                     {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle @(ViewContext.CurrentArea() == "admin" ? "active" : String.Empty)" 
+                        <li class="nav-item dropdown px-1 @(ViewContext.CurrentArea() == "admin" ? "active highlighted" : String.Empty)">
+                            <a class="nav-link dropdown-toggle" 
                                href="#" id="navbarDropdownAdmin"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Admins
@@ -95,11 +95,11 @@
                         </li>
                     }
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle @(ViewContext.IsCurrentUrl("home", new[] { "about", "contact" }) ? "active" : String.Empty)"
+                    <li class="nav-item dropdown px-1 @(ViewContext.IsCurrentUrl("home", new[] { "about", "contact" }) ? "active highlighted" : String.Empty)">
+                        <a class="nav-link dropdown-toggle"
                            href="#" id="navbarDropdown"
                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            About this project
+                            About
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="About">About me</a>
@@ -111,23 +111,29 @@
             </div>
         </nav>
 
-        <nav class="navbar navbar-expand-lg navbar-dark ml-auto">
+        <nav class="navbar navbar-expand-lg navbar-dark ml-auto px-1">
             @if (SignInManager.IsSignedIn(User))
             {
                 <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">@UserManager.GetUserName(User)!</a>
-                        </li>
-                        <li class="nav-item">
-                            <button type="submit" class="btn">Log out</button>
+                       
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#" id="navbarDropdownLogin"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user-o" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownLogin">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">@UserManager.GetUserName(User)!</a>
+                                <button type="submit" class="btn btn-info ml-5">Log out</button>
+                            </div>
                         </li>
                     </ul>
                 </form>
             }
             else
             {
-                <div class="ml-auto">
+                <div>
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Register</a>

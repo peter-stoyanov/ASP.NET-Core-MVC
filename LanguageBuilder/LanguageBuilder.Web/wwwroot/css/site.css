@@ -1,4 +1,8 @@
-﻿body {
+﻿/* ----------------------------------------- */
+/* Globals */
+/* ----------------------------------------- */
+
+body {
     font-family: Lato, Arial, sans-serif;
 }
 
@@ -27,6 +31,10 @@ footer .contact {
     font-size: 150%;
 }
 
+footer section {
+    background-color: #191919;
+}
+
 h2 {
     margin-top: 1em;
     margin-bottom: 1em;
@@ -39,6 +47,27 @@ h2 {
 
 .small-icon {
     margin-left: 1em;
+}
+
+/* ----------------------------------------- */
+/* Navigation */
+/* ----------------------------------------- */
+.navbar {
+    padding: 0rem 1rem;
+}
+
+.highlighted {
+    background-color: #005abb;
+}
+
+.navbar .nav-item {
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
+}
+
+.navbar .nav-item:hover,
+.navbar .nav-item:active {
+    background-color: #006bdd;
 }
 
 /* ----------------------------------------- */
