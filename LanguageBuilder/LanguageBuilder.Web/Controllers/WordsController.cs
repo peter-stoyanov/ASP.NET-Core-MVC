@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Web.Extensions;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.ViewComponents;
 using LanguageBuilder.Web.ViewModels.TranslationViewModels;

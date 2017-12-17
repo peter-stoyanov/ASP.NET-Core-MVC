@@ -2,7 +2,7 @@ using LanguageBuilder.Services.Contracts;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace LanguageBuilder.Web.Services
+namespace LanguageBuilder.Web.Infrastructure.Extensions
 {
     public static class EmailSenderExtensions
     {

@@ -10,12 +10,17 @@ namespace LanguageBuilder.Tests.Web
 {
     public class HomeControllerTests
     {
-         [Fact]
+        private readonly HomeController _homeController;
+
+        public HomeControllerTests(IUsersService usersService)
+        {
+            _homeController = new HomeController(usersService);
+        }
+
+        [Fact]
         public void Index_ReturnsAViewResult_WithDefaultViewName()
         {
-            var controller = new HomeController();
-
-            var result = controller.Index();
+            var result = _homeController.Index();
 
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Empty(viewResult.ViewName);
@@ -26,7 +31,7 @@ namespace LanguageBuilder.Tests.Web
         {
             var mockUserService = new Mock<IUsersService>();
 
-            var sut = new HomeController();
+            var sut = _homeController;
 
             var result = sut.Index() as ViewResult;
 
@@ -36,12 +41,10 @@ namespace LanguageBuilder.Tests.Web
         [Fact]
         public void Index_ReturnsAViewResult_WithViewDataWithoutModel()
         {
-            var controller = new HomeController();
-
-            var result = controller.Index();
+            var result = _homeController.Index();
 
             var viewResult = Assert.IsType<ViewResult>(result);
-            //Assert.Equal("Welcome to the Gatewood Elementary 'Bids For Kids' Auction Procurement Database!", viewResult.ViewData["Message"]);
+
             Assert.Null(viewResult.ViewData.Model);
         }
         
@@ -50,7 +53,7 @@ namespace LanguageBuilder.Tests.Web
         {
             var mockUserService = new Mock<IUsersService>();
 
-            var sut = new HomeController();
+            var sut = _homeController;
 
             var result = sut.About() as ViewResult;
 
@@ -62,7 +65,7 @@ namespace LanguageBuilder.Tests.Web
         {
             var mockUserService = new Mock<IUsersService>();
 
-            var sut = new HomeController();
+            var sut = _homeController;
 
             var result = sut.Contact() as ViewResult;
 

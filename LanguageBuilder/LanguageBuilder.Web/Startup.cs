@@ -25,11 +25,9 @@ namespace LanguageBuilder.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LanguageBuilderDbContext>(options =>
-                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
                 options.UseSqlServer(Configuration.GetConnectionString("AzureConnection")));
 
             services
@@ -43,12 +41,10 @@ namespace LanguageBuilder.Web
                 .AddEntityFrameworkStores<LanguageBuilderDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Add application services.
             services.AddDomainServices();
 
             services.AddAutoMapper();
 
-            //services.AddEmbededFileProviderServices();
             services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -57,8 +53,8 @@ namespace LanguageBuilder.Web
             {
                 config.Filters.Add(new ValidateModelStateAttributeAttribute());
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-                //config.SslPort = 44321;
-                //config.Filters.Add(new RequireHttpsAttribute());
+                config.SslPort = 44321;
+                config.Filters.Add(new RequireHttpsAttribute());
             });
 
             services.AddCors();
@@ -101,20 +97,19 @@ namespace LanguageBuilder.Web
                     options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
                 });
 
-            //services.AddAntiforgery(
-            //    options =>
-            //    {
-            //        options.Cookie.Name = "_af";
-            //        options.Cookie.HttpOnly = true;
-            //        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            //        options.HeaderName = "X-XSRF-TOKEN";
-            //    }
-            //);
+            services.AddAntiforgery(
+                options =>
+                {
+                    options.Cookie.Name = "_af";
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    options.HeaderName = "X-XSRF-TOKEN";
+                }
+            );
 
             services.AddCloudscribePagination();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, LanguageBuilderDbContext context)
         {
             //debug
@@ -134,8 +129,6 @@ namespace LanguageBuilder.Web
             app.UseStaticFiles();
 
             app.UseDatabaseMigration(context);
-
-            //DbInitializer.Initialize(context);
 
             app
                 .UseAuthentication()
@@ -164,9 +157,9 @@ namespace LanguageBuilder.Web
 
             });
 
-            //var rewriteOptions = new RewriteOptions().AddRedirectToHttps();
+            var rewriteOptions = new RewriteOptions().AddRedirectToHttps();
 
-            //app.UseRewriter(rewriteOptions);
+            app.UseRewriter(rewriteOptions);
 
             app.UseCors(
                 options => options.WithOrigins("*").AllowAnyMethod()

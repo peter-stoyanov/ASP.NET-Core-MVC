@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LanguageBuilder.Web.Extensions
+namespace LanguageBuilder.Web.Infrastructure.Extensions
 {
     public static class ViewContextExtensions
     {

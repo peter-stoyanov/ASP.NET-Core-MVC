@@ -36,7 +36,8 @@ namespace LanguageBuilder.Tests.Web
         {
             // Arrange
             var dbContext = _serviceProvider.GetRequiredService<LanguageBuilderDbContext>();
-            var controller = new HomeController();
+            var mockUsersService = new Mock<IUsersService>();
+            var controller = new HomeController(mockUsersService.Object);
 
             // Act
             var result = controller.Index();
