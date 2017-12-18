@@ -75,8 +75,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                 Roles = (await _roleService.GetAllAsync()).ToList(),
                 SelectedRoles = (await _roleService.GetByUserIdAsync(id)).Select(r => r.Name).ToList(),
                 User = user,
-                UserId = user.Id,
-                //Caller = Request.UrlReferrer()?.AbsoluteUri
+                UserId = user.Id
             };
 
             return View(model);
@@ -111,6 +110,35 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "We are sorry, but it seems that an error occured.", hasDismissButton: true));
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(string userId)
+        {
+            try
+            {
+                var user = await _userService.GetByIdAsync(userId);
+
+                if (user == null)
+                {
+                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "User not found.", hasDismissButton: true));
+
+                    return RedirectToAction(nameof(Search));
+                }
+
+                await _userService.DeleteAsync(userId);
+
+                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true));
+                
+            }
+            catch (Exception ex)
+            {
+                ex.SaveToLog();
+
+                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "We are sorry, but it seems that an error occured.", hasDismissButton: true));
+            }
+
+            return RedirectToLocal("", nameof(UsersController.Search), "Users");
         }
     }
 }

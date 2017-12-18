@@ -31,8 +31,7 @@
                     <td>@user.Email </td>
                     <td>
                         <a asp-controller="Users" asp-action="EditRoles" title="Edit User" asp-route-id="@user.Id"><i class="fa fa-pencil contact small-icon" aria-hidden="true"></i></a>
-                        <a asp-controller="Users" asp-action="Clone" title="Clone User"><i class="fa fa-files-o contact small-icon" aria-hidden="true"></i></a>
-                        <a asp-controller="Users" asp-action="Delete" title="Delete User"><i class="fa fa-trash contact small-icon btn-delete" aria-hidden="true"></i></a>
+                        <a asp-controller="Users" asp-action="Delete" title="Delete User"><i class="fa fa-trash contact small-icon btn-delete" data-userId="@user.Id" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             }
@@ -61,21 +60,21 @@
         $(document).ready(function () {
 
             var dialog = $('#delete-modal').modal({ show: false });
-            var clickedWord = undefined;
+            var clickedUserId;
 
             $('.btn-delete').on('click', function (event) {
                 event.preventDefault();
-                clickedWord = $(event.target)
+                clickedUserId = $(event.target).attr('data-userId');
                 dialog.modal().show();
             });
 
             $('#modal-confirm').on('click', function (event) {
-                //$.ajax({
-                //    type: "POST",
-                //    url: '/Users/DeleteConfirmed/' + clickedWord.data('id'),
-                //    data: {},
-                //    success: undefined
-                //});
+                $.ajax({
+                    type: "POST",
+                    url: '/admin/users/deleteConfirmed?userId=' + clickedUserId,
+                    data: {},
+                    //success: undefined
+                });
             });
 
         });

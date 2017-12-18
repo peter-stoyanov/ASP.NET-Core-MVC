@@ -193,5 +193,10 @@ namespace LanguageBuilder.Services.Implementations
 
             return response;
         }
+
+        public async Task<bool> ExistAsync(string content)
+        {
+            return await _db.Words.AnyAsync(w => w.Content.ToLower() == content.ToLower());
+        }
     }
 }

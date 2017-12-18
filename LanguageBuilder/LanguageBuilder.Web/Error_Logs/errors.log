@@ -1402,3 +1402,108 @@ Query: (null)
 
 
 
+Date: 2017-12-18 19:59:09,572 
+
+Host: Petar 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [22] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception: System.ArgumentException: Column out of range
+   at OfficeOpenXml.ExcelRange.ValidateRowCol(Int32 Row, Int32 Col)
+   at OfficeOpenXml.ExcelRange.get_Item(Int32 Row, Int32 Col)
+   at LanguageBuilder.Web.Areas.Admin.Controllers.UploadController.<Words>d__6.MoveNext() in D:\PStoyanov\repo\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Areas\Admin\Controllers\UploadController.cs:line 89
+ 
+Message: Column out of range 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
+Date: 2017-12-18 21:14:53,128 
+
+Host: Petar 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [39] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: The DELETE statement conflicted with the REFERENCE constraint "FK_tbl_IdentityUserRole_tbl_User_UserId". The conflict occurred in database "DB_A2C13B_languageBuilderDb", table "dbo.tbl_IdentityUserRole", column 'UserId'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__108_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.<ExecuteAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.<ExecuteAsync>d__32.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.<ExecuteAsync>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.<ExecuteAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.<ExecuteAsync>d__7`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<SaveChangesAsync>d__61.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<SaveChangesAsync>d__59.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.DbContext.<SaveChangesAsync>d__48.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at LanguageBuilder.Services.Implementations.UsersService.<DeleteAsync>d__9.MoveNext() in D:\PStoyanov\repo\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Services\Implementations\UsersService.cs:line 125
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at LanguageBuilder.Web.Areas.Admin.Controllers.UsersController.<DeleteConfirmed>d__8.MoveNext() in D:\PStoyanov\repo\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Areas\Admin\Controllers\UsersController.cs:line 129
+ 
+Message: An error occurred while updating the entries. See the inner exception for details. 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+

@@ -21,6 +21,8 @@ namespace LanguageBuilder.Services.Contracts
 
         Task<bool> ExistInUserAsync(int id, string userId);
 
+        Task<bool> ExistAsync(string content);
+
         Task<UserWord> SoftDeleteInUserAsync(int id, string userId);
 
         Task AddWordsWithTranslationAsync(Word source, Word target, string userId);

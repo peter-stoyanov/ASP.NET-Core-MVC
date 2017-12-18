@@ -8,14 +8,6 @@ namespace LanguageBuilder.Web.Infrastructure.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext actionContext)
         {
-            //if (actionContext.ModelState.IsValid == false)
-            //{
-            //    actionContext.Result = new BadRequestObjectResult(
-            //        actionContext.ModelState.Values
-            //            .SelectMany(e => e.Errors)
-            //            .Select(e => e.ErrorMessage));
-            //}
-
             if (!actionContext.ModelState.IsValid)
             {
                 var controller = actionContext.Controller as Controller;

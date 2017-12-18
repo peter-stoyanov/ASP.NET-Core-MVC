@@ -1,5 +1,7 @@
 ﻿@model GoogleMapsViewModel
 
+@using System.Globalization;
+
 @if (Model == null)
 {
     return;
@@ -10,7 +12,7 @@
 <script type="text/javascript">
 
     function initMap() {
-        var uluru = { lat: @Model.Latitude, lng: @Model.Longitude };
+        var uluru = { lat: @Model.Latitude.ToString(CultureInfo.GetCultureInfo("en-GB")), lng: @Model.Longitude.ToString(CultureInfo.GetCultureInfo("en-GB")) };
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: @Model.Zoom,
             center: uluru

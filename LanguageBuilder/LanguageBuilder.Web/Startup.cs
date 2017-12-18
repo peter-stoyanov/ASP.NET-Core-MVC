@@ -53,8 +53,8 @@ namespace LanguageBuilder.Web
             {
                 config.Filters.Add(new ValidateModelStateAttributeAttribute());
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-                config.SslPort = 44321;
-                config.Filters.Add(new RequireHttpsAttribute());
+                //config.SslPort = 44321;
+                //config.Filters.Add(new RequireHttpsAttribute());
             });
 
             services.AddCors();
@@ -97,15 +97,15 @@ namespace LanguageBuilder.Web
                     options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
                 });
 
-            services.AddAntiforgery(
-                options =>
-                {
-                    options.Cookie.Name = "_af";
-                    options.Cookie.HttpOnly = true;
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                    options.HeaderName = "X-XSRF-TOKEN";
-                }
-            );
+            //services.AddAntiforgery(
+            //    options =>
+            //    {
+            //        options.Cookie.Name = "_af";
+            //        options.Cookie.HttpOnly = true;
+            //        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            //        options.HeaderName = "X-XSRF-TOKEN";
+            //    }
+            //);
 
             services.AddCloudscribePagination();
         }
@@ -156,9 +156,9 @@ namespace LanguageBuilder.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            var rewriteOptions = new RewriteOptions().AddRedirectToHttps();
+            //var rewriteOptions = new RewriteOptions().AddRedirectToHttps();
 
-            app.UseRewriter(rewriteOptions);
+            //app.UseRewriter(rewriteOptions);
 
             app.UseCors(
                 options => options.WithOrigins("*").AllowAnyMethod()

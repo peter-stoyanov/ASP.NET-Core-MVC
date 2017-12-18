@@ -20,6 +20,8 @@ namespace LanguageBuilder.Services.Contracts
 
         Task UpdateAsync(User user);
 
+        Task<User> DeleteAsync(string id);
+
         Task<Response> Search(
             Request request,
             Expression<Func<User, object>> sortColumnSelector = null);

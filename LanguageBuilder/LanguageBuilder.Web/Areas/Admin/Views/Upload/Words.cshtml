@@ -4,43 +4,61 @@
     ViewBag.Title = "Upload words with excel";
 }
 
+@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
+
 <h1 class="display-4 text-center my-5">@ViewBag.Title</h1>
 
-<form class="form" method="post" enctype="multipart/form-data">
-    <div class="row mb-2">
-        <div class="col">
-            <ul>
-                <li>Save the file with .xslx extension</li>
-                <li>Upload it</li>
-                <li>Check to see the result of the parsing</li>
-                <li>Adjust the raw data until satisfactory result in the preview</li>
-            </ul>
-        </div>
+<div class="row mb-2">
+    <div class="col pl-0">
+        <ul class="list-group">
+            <li class="list-group-item">Save the file with .xslx extension</li>
+            <li class="list-group-item">
+                Use 2 columns providing the following information:
+                <ol>
+                    <li>Word in the given language(up to 300 characters)</li>
+                    <li>Definition in the given language(everything longer than 1000 characters will be trimmed)</li>
+                </ol>
+            </li>
+            <li class="list-group-item">Upload it</li>
+        </ul>
     </div>
+</div>
 
-    <div class="row mb-5">
-        <div class="col-md-8">
-            <input type="file" id="fUpload" name="files" class="form-control" />
+<div class="row mb-5">
+    <form method="post"
+          asp-area="Admin"
+          asp-action="Words"
+          asp-controller="Upload"
+          enctype="multipart/form-data"
+          class="form">
+
+        <div class="form-group">
+            <label asp-for="LanguageId" class="control-label"></label>
+            <select asp-for="LanguageId" class="form-control" asp-items="Model.Languages.Select(l => new SelectListItem { Text = l.Name, Value = l.Id.ToString() })"></select>
+            <span asp-validation-for="LanguageId" class="text-danger"></span>
         </div>
 
-        <div class="col-md-4">
-            <input type="button" class="btn btn-info" id="btnUpload" value="Upload" />
+        <div class="form-group">
+            <label for="">Example file input</label>
+            <input type="file" name="file" class="form-control-file" id="fileUpload">
+            <span asp-validation-for="File" class="text-danger"></span>
         </div>
-    </div>
 
-    <div class="row mb-2">
-        <h3>Preview:</h3>
-        <div id="dvData"></div>
-    </div>
-</form>
+        <div class="form-group">
+            <input id="submitBtn" class="btn btn-info" type="submit" value="Upload" />
+        </div>
+    </form>
+</div>
+
 
 @section Scripts {
     <script>
         $(document).ready(function () {
 
-            $('#btnUpload').on('click', function () {
+            $('#submitBtn').on('click', function () {
                 var fileExtension = ['xls', 'xlsx'];
-                var filename = $('#fUpload').val();
+                var filename = $('#fileUpload').val();
+
                 if (filename.length == 0) {
                     alert("Please select a file.");
                     return false;
@@ -52,31 +70,6 @@
                         return false;
                     }
                 }
-                var fdata = new FormData();
-                var fileUpload = $("#fUpload").get(0);
-                var files = fileUpload.files;
-                fdata.append(files[0].name, files[0]);
-                $.ajax({
-                    type: "POST",
-                    url: "/Admin/Upload/Words",
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    data: fdata,
-                    contentType: false,
-                    processData: false,
-                    success: function (response) {
-                        if (response.length == 0)
-                            alert('Some error occured while uploading');
-                        else {
-                            $('#dvData').html(response);
-                        }
-                    },
-                    error: function (e) {
-                        $('#dvData').html(e.responseText);
-                    }
-                });
             })
         });
     </script>

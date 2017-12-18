@@ -62,7 +62,14 @@ namespace LanguageBuilder.Data
 
                 foreach (var fk in entity.GetForeignKeys())
                 {
-                    fk.DeleteBehavior = DeleteBehavior.Restrict;
+                    if (typeName.ToLower() == "user")
+                    {
+                        fk.DeleteBehavior = DeleteBehavior.Cascade;
+                    }
+                    else
+                    {
+                        fk.DeleteBehavior = DeleteBehavior.Restrict;
+                    }
                 }
             }
         }

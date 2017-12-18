@@ -110,5 +110,21 @@ namespace LanguageBuilder.Services.Implementations
 
             _db.SaveChanges();
         }
+
+        public async Task<User> DeleteAsync(string id)
+        {
+            var entity = await this.GetByIdAsync(id);
+
+            if (entity == null)
+            {
+                return null;
+            }
+
+            _db.Users.Remove(entity);
+
+            await _db.SaveChangesAsync();
+
+            return entity;
+        }
     }
 }
