@@ -107,7 +107,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             model.Roles = (await _roleService.GetAllAsync()).ToList();
             model.SelectedRoles = (await _roleService.GetByUserIdAsync(model.UserId)).Select(r => r.Name).ToList();
 
-            TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "We are sorry, but it seems that an error occured.", hasDismissButton: true));
+            TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
 
             return View(model);
         }
@@ -135,7 +135,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             {
                 ex.SaveToLog();
 
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "We are sorry, but it seems that an error occured.", hasDismissButton: true));
+                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
             }
 
             return RedirectToLocal("", nameof(UsersController.Search), "Users");

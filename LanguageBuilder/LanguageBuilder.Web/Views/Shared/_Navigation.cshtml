@@ -38,12 +38,12 @@
                             <a class="nav-link dropdown-toggle" 
                                href="#" id="navbarDropdownTranslations"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Translations
+                                Vocabulary
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownTranslations">
-                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="My">My translations</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Search">Browse words</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Create">Create new translation</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Search">Browse translations</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="My">My translations</a>
                             </div>
                         </li>
 
@@ -89,9 +89,10 @@
                                 Admins
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Upload" asp-action="Languages">All Languages</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Upload" asp-action="Languages">Languages</a>
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="Upload" asp-action="Words">Bulk upload words</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Search">Search Users</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Upload" asp-action="Translations">Bulk upload translations</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Search">Users</a>
                             </div>
                         </li>
                     }

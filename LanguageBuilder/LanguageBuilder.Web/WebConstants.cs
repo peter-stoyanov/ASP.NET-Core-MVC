@@ -15,5 +15,7 @@
 
         public const string AdminArea = "Admin";
         public const string BlogArea = "Blog";
+
+        public const string GeneralError = "We are sorry but it seems that an error occured.";
     }
 }

@@ -50,9 +50,10 @@
 
     <div class="container-fluid">
 
-        <main class="@(ViewContext.IsCurrentUrl("home", "index") ? "landing-section" : String.Empty)">
+        <main class="@(ViewContext.IsCurrentUrl("home", "index") ? "landing-section" : "page")">
 
             @RenderBody()
+        
         </main>
 
         @Html.Partial("_Footer")

@@ -16,7 +16,7 @@ body {
     margin-left: 0px;
 }
 
-main {
+.page {
     max-width: 1140px;
     margin: auto;
     padding-top: 3em;
@@ -76,5 +76,6 @@ h2 {
     background-position: center;
     background-attachment: fixed;
     height: 100vh;
+    width: 100vw;
 }
 

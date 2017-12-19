@@ -18,7 +18,6 @@
         <thead>
             <tr>
                 <th>UserName</th>
-                <th>Name</th>
                 <th>Email</th>
                 <th>Actions</th>
             </tr>
@@ -28,7 +27,6 @@
             {
                 <tr>
                     <td>@user.UserName </td>
-                    <td>@user.Name </td>
                     <td>@user.Email </td>
                     <td>
                         <a asp-controller="Users" asp-action="EditRoles" title="Edit User" asp-route-id="@user.Id"><i class="fa fa-pencil contact small-icon" aria-hidden="true"></i></a>

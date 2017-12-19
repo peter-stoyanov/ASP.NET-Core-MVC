@@ -218,7 +218,7 @@ namespace LanguageBuilder.Web.Controllers
             if (ModelState.IsValid)
             {
                 // todo subscription from dropdown ?
-                var user = new User { UserName = model.Email, Email = model.Email, SubscriptionId = 1 };
+                var user = new User { UserName = model.Username, Email = model.Email, SubscriptionId = 1 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 await _userManager.AddToRoleAsync(user, WebConstants.UserRole);
 

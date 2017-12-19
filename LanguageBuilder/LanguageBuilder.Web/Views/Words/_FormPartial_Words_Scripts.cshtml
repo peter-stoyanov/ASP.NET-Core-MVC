@@ -2,20 +2,19 @@
 
     $(document).ready(function () {
 
-         $('#TeamLeader').autocomplete({
+        $('#source-word').autocomplete({
             source: function (request, response) {
-                pipeline.ajaxGetJson({
+                $.getJSON({
                     url: '@Url.Content("~/api/Words")',
-                    data: { keywords: $('#source-word').val(), rows: 10 },
+                    data: { keywords: $('#source-word').val(), languageId: $('#SourceWord_LanguageId').val(), rows: 10 },
                     success: function (data, status, xhr) {
                         var items = [];
 
                         if (data) {
-                            items = $.map(data.records, function (user) {
+                            items = $.map(data, function (word) {
                                 return {
-                                    label: user.fullName + ' (' + user.domainUserLogin + ')',
-                                    value: user.fullName,
-                                    id: user.id
+                                    label: word.content,
+                                    value: word.content
                                 };
                             });
                         }
@@ -24,7 +23,33 @@
                 });
             },
             select: function (event, ui) {
-                $('#source-word').val(ui.item.id);
+                //$('#source-word').val(ui.item.id);
+            },
+            minLength: 1
+        });
+
+        $('#target-word').autocomplete({
+            source: function (request, response) {
+                $.getJSON({
+                    url: '@Url.Content("~/api/Words")',
+                    data: { keywords: $('#target-word').val(), languageId: $('#TargetWord_LanguageId').val(), rows: 10 },
+                    success: function (data, status, xhr) {
+                        var items = [];
+
+                        if (data) {
+                            items = $.map(data, function (word) {
+                                return {
+                                    label: word.content,
+                                    value: word.content
+                                };
+                            });
+                        }
+                        response(items);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                //$('#source-word').val(ui.item.id);
             },
             minLength: 1
         });

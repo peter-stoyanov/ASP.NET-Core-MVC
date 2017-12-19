@@ -126,7 +126,7 @@
             this.loadData = function (callback) {
 
                 $.getJSON({
-                    url: '/api/words',
+                    url: '/api/translations',
                     data: { userId: '@loggedUser.Id', languageId: '2' },
                     success: function (response, status, xhr) {
 

@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 namespace LanguageBuilder.Web.Controllers.ApiControllers
 {
     [Route("api/[controller]")]
-    public class WordsController : BaseController
+    public class TranslationsController : BaseController
     {
         private readonly IWordsService _wordsService;
         private readonly ITranslationService _translationService;
         private readonly IMapper _mapper;
 
-        public WordsController(
+        public TranslationsController(
             IWordsService wordsService, 
             ITranslationService translationService, 
             IUsersService userService,
@@ -31,15 +31,25 @@ namespace LanguageBuilder.Web.Controllers.ApiControllers
 
         // GET api/values
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery]string keywords, [FromQuery]int languageId, [FromQuery]int rows = 10)
+        public async Task<IActionResult> Get([FromQuery]string userId, [FromQuery]string languageId)
         {
-            var words = await _wordsService.SearchAsync(keywords, languageId, rows);
-
-            var response = new List<WordDTO>();
-
-            foreach (var word in words)
+            if (LoggedUser.Id != userId)
             {
-                response.Add(_mapper.Map<Word, WordDTO>(word));
+                return Unauthorized();
+            }
+
+            if (String.IsNullOrEmpty(userId) || String.IsNullOrEmpty(languageId))
+            {
+                return BadRequest();
+            }
+
+            var translations = await _translationService.GetByUserAndLanguageAsync(userId, languageId);
+
+            var response = new List<TranslationDTO>();
+
+            foreach (var translation in translations)
+            {
+                response.Add(_mapper.Map<Translation, TranslationDTO>(translation));
             }
 
             return Ok(response);

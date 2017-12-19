@@ -112,7 +112,7 @@ namespace LanguageBuilder.Services.Implementations
             return wordInUser;
         }
 
-        public async Task AddWordsWithTranslationAsync(Word source, Word target, string userId)
+        public async Task AddWordsWithTranslationWithUserConnectionAsync(Word source, Word target, string userId)
         {
             await _db
                 .Words
@@ -139,11 +139,28 @@ namespace LanguageBuilder.Services.Implementations
             _db.SaveChanges();
         }
 
-        public async Task<IEnumerable<Word>> SearchAsync(string keywords, int rows = 10)
+        public async Task AddWordsWithTranslationAsync(Word source, Word target)
+        {
+            await _db
+                .Words
+                .AddRangeAsync(new[] { source, target });
+
+            await _db
+                .Translations
+                .AddAsync(new Translation
+                {
+                    SourceWordId = source.Id,
+                    TargetWordId = target.Id
+                });
+
+            _db.SaveChanges();
+        }
+
+        public async Task<IEnumerable<Word>> SearchAsync(string keywords, int languageId, int rows = 10)
         {
             return await _db
                 .Words
-                .Where(w => w.Content.Contains(keywords))
+                .Where(w => w.Content.Contains(keywords) && w.LanguageId == languageId)
                 .Take(rows)
                 .ToListAsync();
         }

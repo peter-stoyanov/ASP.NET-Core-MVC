@@ -1,4 +1,4 @@
-﻿@model WordsUploadViewModel
+﻿@model TranslationsUploadViewModel
 
 @{
     ViewBag.Title = "Upload words with excel";
@@ -15,8 +15,8 @@
             <li class="list-group-item">
                 Use 2 columns providing the following information:
                 <ol>
-                    <li>Word in the given language(up to 300 characters)</li>
-                    <li>Definition in the given language(everything longer than 1000 characters will be trimmed)</li>
+                    <li>Word in the source language(up to 300 characters)</li>
+                    <li>Word in the target language(up to 300 characters)</li>
                 </ol>
             </li>
             <li class="list-group-item">Upload it</li>
@@ -27,15 +27,21 @@
 <div class="row mb-5">
     <form method="post"
           asp-area="Admin"
-          asp-action="Words"
+          asp-action="Translations"
           asp-controller="Upload"
           enctype="multipart/form-data"
           class="form">
 
         <div class="form-group">
-            <label asp-for="LanguageId" class="control-label"></label>
-            <select asp-for="LanguageId" class="form-control" asp-items="Model.Languages.Select(l => new SelectListItem { Text = l.Name, Value = l.Id.ToString() })"></select>
-            <span asp-validation-for="LanguageId" class="text-danger"></span>
+            <label asp-for="FromLanguageId" class="control-label">Source Language</label>
+            <select asp-for="FromLanguageId" class="form-control" asp-items="Model.Languages.Select(l => new SelectListItem { Text = l.Name, Value = l.Id.ToString() })"></select>
+            <span asp-validation-for="FromLanguageId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ToLanguageId" class="control-label">Target Language</label>
+            <select asp-for="ToLanguageId" class="form-control" asp-items="Model.Languages.Select(l => new SelectListItem { Text = l.Name, Value = l.Id.ToString() })"></select>
+            <span asp-validation-for="ToLanguageId" class="text-danger"></span>
         </div>
 
         <div class="form-group">

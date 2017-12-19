@@ -15,7 +15,7 @@
 
 <div class="row justify-content-center">
 
-    <div class="col-12">
+    <div class="col-12 mb-5">
         <h1 class="display-4 text-center">@ViewBag.Title</h1>
     </div>
 
@@ -25,18 +25,18 @@
         </div>
         <div class="row justify-content-center">
             <address class="col-12 d-flex justify-content-center mt-5 mb-2">
-                <a href="https://github.com/peter-stoyanov" class="btn btn-primary w-75">My GitHub Account</a>
+                <a href="https://github.com/peter-stoyanov" target="_blank" class="btn btn-primary w-75">My GitHub Account</a>
             </address>
             <address class="col-12 d-flex justify-content-center my-2">
-                <a href="https://www.linkedin.com/in/peshostoyanov/" class="btn btn-primary w-75">My LinkedIn Profile</a>
+                <a href="https://www.linkedin.com/in/peshostoyanov/" target="_blank" class="btn btn-primary w-75">My LinkedIn Profile</a>
             </address>
             <address class="col-12 d-flex justify-content-center my-2">
-                <a href="mailto:pesho.stoyanov@gmail.com" class="btn btn-primary w-75">Send me an email</a>
+                <a href="mailto:pesho.stoyanov@gmail.com" target="_blank" class="btn btn-primary w-75">Send me an email</a>
             </address>
         </div>
     </div>
 
-    <div class="col-lg-9 mt-5">
+    <div class="col-lg-9">
         <address>
             @await Component.InvokeAsync(nameof(GoogleMapsComponent),
                 new GoogleMapsViewModel { Latitude = 42.70, Longitude = 23.32, ContainerId = "map", Zoom = 8 })

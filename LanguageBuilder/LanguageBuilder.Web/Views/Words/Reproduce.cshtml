@@ -183,7 +183,7 @@
                 var deferred = $.Deferred();
 
                 $.getJSON({
-                    url: '/api/words',
+                    url: '/api/translations',
                     data: { userId: '@loggedUser.Id', languageId: '2' },
                     success: function (response, status, xhr) {
                         self.words(response);

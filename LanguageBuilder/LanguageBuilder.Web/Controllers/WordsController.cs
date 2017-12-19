@@ -7,7 +7,9 @@ using LanguageBuilder.Web.ViewModels.TranslationViewModels;
 using LanguageBuilder.Web.ViewModels.WordViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers
@@ -35,10 +37,21 @@ namespace LanguageBuilder.Web.Controllers
         {
             var request = searchForm.ToSearchRequest();
 
+            // move to model ?
+            Expression<Func<Word, bool>> filter = null;
+            if (String.IsNullOrEmpty(searchForm.SelectedLetter))
+            {
+                filter = w => w.Users.Any(u => u.UserId == LoggedUser.Id);
+            }
+            else
+            {
+                filter = w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()) && w.Users.Any(u => u.UserId == LoggedUser.Id);
+            };
+
             var response = await _wordsService.Search(
                 request,
                 sortColumnSelector: w => w.Content,
-                criteria: w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()) && w.Users.Any(u => u.UserId == LoggedUser.Id));
+                criteria: filter);
 
             searchForm.Languages = (await _languageService.GetAllAsync()).ToList();
 
@@ -60,10 +73,21 @@ namespace LanguageBuilder.Web.Controllers
         {
             var request = searchForm.ToSearchRequest();
 
+            // move to model ?
+            Expression<Func<Word, bool>> filter = null;
+            if (String.IsNullOrEmpty(searchForm.Keywords))
+            {
+                filter = w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower());
+            }
+            else
+            {
+                filter = w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()) && w.Content.Contains(searchForm.Keywords);
+            };
+
             var response = await _wordsService.Search(
                 request,
                 sortColumnSelector: w => w.Content,
-                criteria: w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()) && w.Content.Contains(searchForm.Keywords));
+                criteria: filter);
 
             searchForm.Languages = (await _languageService.GetAllAsync()).ToList();
 
@@ -113,19 +137,29 @@ namespace LanguageBuilder.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TranslationCreateViewModel model)
         {
-            //try-catch ?
-
-            if (ModelState.IsValid)
+            try
             {
-                await _wordsService.AddWordsWithTranslationAsync(
-                    _mapper.Map<WordCreateViewModel, Word>(model.SourceWord),
-                    _mapper.Map<WordCreateViewModel, Word>(model.TargetWord),
-                    this.LoggedUser.Id);
+                if (ModelState.IsValid)
+                {
+                    await _wordsService.AddWordsWithTranslationWithUserConnectionAsync(
+                        _mapper.Map<WordCreateViewModel, Word>(model.SourceWord),
+                        _mapper.Map<WordCreateViewModel, Word>(model.TargetWord),
+                        this.LoggedUser.Id);
 
-                return RedirectToAction(nameof(Search));
+                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "Translation was succesfuly created.", hasDismissButton: true));
+
+                    return RedirectToAction(nameof(My));
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.SaveToLog();
+
+                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
             }
 
             model.Languages = await _languageService.GetAllAsync();
+
             return View(model);
         }
 

@@ -73,7 +73,7 @@ namespace LanguageBuilder.Web.Controllers
             catch (Exception ex)
             {
                 ex.SaveToLog();
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "We are sorry, but it seems that an error occured.", hasDismissButton: true));
+                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
             }
 
             return View(model);

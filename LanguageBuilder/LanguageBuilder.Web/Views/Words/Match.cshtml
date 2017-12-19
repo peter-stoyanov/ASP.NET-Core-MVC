@@ -24,7 +24,7 @@
         }
 
         .tile-active {
-            background-color: #21c8ff;
+            background-color: #98e5ff;
         }
 
         .control {
@@ -51,9 +51,9 @@
             <div class="row" data-bind="visible: !hasError() && !isLoading()">
 
                 <div data-bind="foreach: words">
-                    <button class="col-4 d-inline-block tile" data-bind="text: face, css: status, click: $root.onChosen()">
+                    <button class="col-4 d-inline-block tile" data-bind="click: $parent.onChosen, text: face, css: { 'tile-active': selected() }">
 
-                    </buttonon>
+                    </button>
                 </div>
 
             </div>
@@ -109,8 +109,10 @@
             };
 
             this.onChosen = function (tile, event) {
-                if (tile) { tile.selected = true; }
+                if (tile) { tile.selected(true); }
                 var guessOne = self.guessOne();
+
+                if (guessOne && guessOne.equals(tile.face) == true) { return; }
 
                 if (!guessOne) {
                     self.guessOne(tile);
@@ -132,7 +134,7 @@
             this.loadData = function (callback) {
 
                 $.getJSON({
-                    url: '/api/words',
+                    url: '/api/translations',
                     data: { userId: '@loggedUser.Id', languageId: '2' },
                     success: function (response, status, xhr) {
                         var tiles = [];
@@ -143,13 +145,13 @@
                             var sourceTile = {
                                 face: translation.sourceWord,
                                 id: i,
-                                selected: false
+                                selected: ko.observable(false)
                             };
 
                             var targetTile = {
                                 face: translation.targetWord,
                                 id: i,
-                                selected: false
+                                selected: ko.observable(false)
                             };
 
                             tiles.push(sourceTile);

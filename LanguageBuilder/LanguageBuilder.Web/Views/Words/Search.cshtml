@@ -7,6 +7,8 @@
 
 <h1 class="display-4 text-center">@ViewBag.Title</h1>
 
+@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
+
 @Html.Partial("_SearchForm", Model.SearchForm)
 
 <div>

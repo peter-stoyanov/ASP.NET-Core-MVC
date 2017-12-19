@@ -2,4 +2,16 @@
     ViewBag.Title = "Language Builder";
 }
 
-<h1 class="display-1 text-white">@ViewBag.Title</h1>
+<div class="d-flex flex-column justify-content-center" style="height: 80%;">
+    
+    <h1 class="display-1 text-white align-self-center">@ViewBag.Title</h1>
+
+    <div class="row mt-5">
+        <div class="col-4 offset-4">
+            <a class="btn btn-info px-5 py-2 mr-3 d-inline-block" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            <a class="btn btn-outline-info px-5 py-2 d-inline-block" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+        </div>
+    </div>
+
+</div>
+
