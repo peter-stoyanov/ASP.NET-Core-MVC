@@ -16,7 +16,7 @@ namespace LanguageBuilder.Data
 
             var builder = new DbContextOptionsBuilder<LanguageBuilderDbContext>();
 
-            var connectionString = configuration.GetConnectionString("AzureConnection");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             builder.UseSqlServer(connectionString);
 

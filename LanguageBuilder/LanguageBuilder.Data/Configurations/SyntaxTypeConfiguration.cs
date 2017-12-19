@@ -11,7 +11,8 @@ namespace LanguageBuilder.Data.Configurations
             builder
                 .HasMany(s => s.Words)
                 .WithOne(w => w.SyntaxType)
-                .HasForeignKey(w => w.SyntaxTypeId);
+                .HasForeignKey(w => w.SyntaxTypeId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

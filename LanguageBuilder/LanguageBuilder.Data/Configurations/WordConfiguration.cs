@@ -11,8 +11,8 @@ namespace LanguageBuilder.Data.Configurations
             builder
                 .HasOne(w => w.Language)
                 .WithMany(lan => lan.Words)
-                .HasForeignKey(w => w.LanguageId);
-            //.OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(w => w.LanguageId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

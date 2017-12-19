@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
+using System.Collections.Generic;
 
 namespace LanguageBuilder.Data.Migrations
 {
@@ -83,7 +84,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.LanguageId,
                         principalTable: "tbl_Language",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,7 +105,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.RoleId,
                         principalTable: "tbl_Role",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -164,13 +165,13 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.LanguageId,
                         principalTable: "tbl_Language",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tbl_Word_tbl_SyntaxType_SyntaxTypeId",
                         column: x => x.SyntaxTypeId,
                         principalTable: "tbl_SyntaxType",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,7 +193,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.AuthorId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -213,7 +214,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -233,7 +234,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -251,13 +252,13 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.RoleId,
                         principalTable: "tbl_Role",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tbl_IdentityUserRole_tbl_User_UserId",
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -277,7 +278,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -303,7 +304,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -324,7 +325,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.WordId,
                         principalTable: "tbl_Word",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -378,7 +379,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "tbl_User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tbl_UserWord_tbl_Word_WordId",
                         column: x => x.WordId,
@@ -410,7 +411,7 @@ namespace LanguageBuilder.Data.Migrations
                         column: x => x.ExampleId,
                         principalTable: "tbl_Example",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tbl_UserWordExample_tbl_UserWord_UserWordId",
                         column: x => x.UserWordId,

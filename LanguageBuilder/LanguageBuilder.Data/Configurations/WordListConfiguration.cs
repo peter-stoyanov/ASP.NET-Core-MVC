@@ -11,7 +11,8 @@ namespace LanguageBuilder.Data.Configurations
             builder
                 .HasMany(list => list.Words)
                 .WithOne(uw => uw.WordList)
-                .HasForeignKey(uw => uw.WordListId);
+                .HasForeignKey(uw => uw.WordListId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

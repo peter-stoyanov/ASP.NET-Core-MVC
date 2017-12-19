@@ -1,7 +1,12 @@
-﻿using LanguageBuilder.Data;
+﻿using AutoMapper.QueryableExtensions;
+using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Data.Services;
 using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Services.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Implementations
 {
@@ -13,6 +18,11 @@ namespace LanguageBuilder.Services.Implementations
             : base(context)
         {
             _db = context;
+        }
+
+        public IEnumerable<LanguageListingServiceModel> GetAllWithWordsCount()
+        {
+            return _db.Languages.ProjectTo<LanguageListingServiceModel>().ToList();
         }
     }
 }

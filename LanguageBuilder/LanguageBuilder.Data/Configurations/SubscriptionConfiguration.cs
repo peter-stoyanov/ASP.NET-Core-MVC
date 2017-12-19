@@ -11,7 +11,8 @@ namespace LanguageBuilder.Data.Configurations
             builder
                 .HasMany(s => s.Users)
                 .WithOne(u => u.Subscription)
-                .HasForeignKey(u => u.SubscriptionId);
+                .HasForeignKey(u => u.SubscriptionId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

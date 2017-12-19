@@ -11,12 +11,14 @@ namespace LanguageBuilder.Data.Configurations
             builder
                 .HasOne(uw => uw.User)
                 .WithMany(u => u.Words)
-                .HasForeignKey(uw => uw.UserId);
+                .HasForeignKey(uw => uw.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder
                 .HasOne(uw => uw.Word)
                 .WithMany(w => w.Users)
-                .HasForeignKey(uw => uw.WordId);
+                .HasForeignKey(uw => uw.WordId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

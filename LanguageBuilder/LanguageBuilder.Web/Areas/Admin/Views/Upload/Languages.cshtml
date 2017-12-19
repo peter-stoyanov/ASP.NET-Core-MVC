@@ -1,0 +1,75 @@
+﻿@model IEnumerable<LanguageListingViewModel>
+
+@{
+    ViewBag.Title = "Languages in use";
+    ViewBag.RegisterSignalR = true;
+}
+
+<h1 class="display-4 text-center">@ViewBag.Title</h1>
+
+@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
+
+@if (Model.Any())
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Language</th>
+                <th>Words count</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var language in Model)
+            {
+                <tr>
+                    <td>@language.Name </td>
+                    <td>@language.WordsCount </td>
+                    <td>
+                        <a asp-area="Admin" asp-controller="Upload" asp-action="Words" title="Upload words" asp-route-languageId="@language.Id"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a>
+                        <a asp-area="Admin" asp-controller="Upload" asp-action="Delete" title="Delete language"><i class="fa fa-trash contact small-icon btn-delete" data-languageId="@language.Id" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @await Component.InvokeAsync(
+        nameof(BootstrapModalComponent),
+        new BootstrapModalViewModel()
+        {
+            Body = "Do you want to delete this language.",
+            ConfirmButtonName = "Yes",
+            Title = "Confirm delete",
+            CancelButtonName = "No",
+            Id = "delete-modal",
+            ConfirmButtonId = "modal-confirm"
+        })
+
+}
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var dialog = $('#delete-modal').modal({ show: false });
+            var clickedLanguageId;
+
+            $('.btn-delete').on('click', function (event) {
+                event.preventDefault();
+                clickedLanguageId = $(event.target).attr('data-languageId');
+                dialog.modal().show();
+            });
+
+            $('#modal-confirm').on('click', function (event) {
+                $.ajax({
+                    type: "POST",
+                    url: '/admin/upload/LanguageDelete?languageId=' + clickedLanguageId,
+                    data: {},
+                    //success: undefined
+                });
+            });
+        });
+    </script>
+}

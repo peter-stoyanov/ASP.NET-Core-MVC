@@ -14,6 +14,11 @@ using System;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.ViewComponents;
 using LanguageBuilder.Data.Models;
+using AutoMapper;
+using LanguageBuilder.Services.Models;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.SignalR;
+using LanguageBuilder.Web.Hubs;
 
 namespace LanguageBuilder.Web.Areas.Admin.Controllers
 {
@@ -23,17 +28,23 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
         private readonly IWordsService _wordsService;
         private readonly ILanguageService _languageService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IMapper _mappper;
+        private IHubContext<NotificationsHub> _hubContext;
 
         public UploadController(
             IWordsService wordsService,
             IUsersService usersService,
             ILanguageService languageService,
+            IMapper mapper,
+            IHubContext<NotificationsHub> hubContext,
             IHostingEnvironment hostingEnvironment)
             : base(usersService)
         {
             _wordsService = wordsService;
             _languageService = languageService;
             _hostingEnvironment = hostingEnvironment;
+            _mappper = mapper;
+            _hubContext = hubContext;
         }
 
         [HttpGet]
@@ -45,6 +56,25 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Languages()
+        {
+            var model = _languageService
+                .GetAllWithWordsCount()
+                .Select(l => _mappper.Map<LanguageListingServiceModel, LanguageListingViewModel>(l))
+                .ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult LanguageDelete()
+        {
+            
+
+            return RedirectToAction(nameof(Languages));
         }
 
         [HttpPost]
@@ -96,7 +126,9 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                     }
                 }
 
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "Word import has been successful.", hasDismissButton: true));
+                //TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "Word import has been successful.", hasDismissButton: true));
+
+                return RedirectToAction(nameof(Languages));
 
             }
             catch (Exception ex)

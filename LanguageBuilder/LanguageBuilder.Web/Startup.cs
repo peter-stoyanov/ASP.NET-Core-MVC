@@ -1,5 +1,6 @@
 ﻿using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
+using LanguageBuilder.Web.Hubs;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.Infrastructure.Filters;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web
 {
@@ -56,6 +60,8 @@ namespace LanguageBuilder.Web
                 //config.SslPort = 44321;
                 //config.Filters.Add(new RequireHttpsAttribute());
             });
+
+            services.AddSignalR();
 
             services.AddCors();
 
@@ -110,7 +116,10 @@ namespace LanguageBuilder.Web
             services.AddCloudscribePagination();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, LanguageBuilderDbContext context)
+        public void Configure(IApplicationBuilder app,
+            IHostingEnvironment env,
+            IApplicationLifetime lifetime,
+            LanguageBuilderDbContext context)
         {
             //debug
             //env.EnvironmentName = "Production";
@@ -160,9 +169,41 @@ namespace LanguageBuilder.Web
 
             //app.UseRewriter(rewriteOptions);
 
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<NotificationsHub>("notificationsHub");
+            });
+
             app.UseCors(
                 options => options.WithOrigins("*").AllowAnyMethod()
             );
+
+            lifetime.ApplicationStarted.Register(() =>
+            {
+                // not awaiting the 'promise task' here
+                var t = DoWorkAsync(lifetime.ApplicationStopping);
+
+                lifetime.ApplicationStopped.Register(() =>
+                {
+                    try
+                    {
+                        // give extra time to complete before shutting down
+                        t.Wait(TimeSpan.FromSeconds(10));
+                    }
+                    catch (Exception)
+                    {
+                        // ignore
+                    }
+                });
+            });
+        }
+
+        async Task DoWorkAsync(CancellationToken token)
+        {
+            while (!token.IsCancellationRequested)
+            {
+                //await // async method
+            }
         }
     }
 }

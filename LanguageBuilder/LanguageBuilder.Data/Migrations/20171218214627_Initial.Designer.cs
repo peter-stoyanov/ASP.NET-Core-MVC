@@ -11,7 +11,7 @@ using System;
 namespace LanguageBuilder.Data.Migrations
 {
     [DbContext(typeof(LanguageBuilderDbContext))]
-    [Migration("20171210143940_Initial")]
+    [Migration("20171218214627_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -435,7 +435,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.User", "Author")
                         .WithMany("Articles")
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.Example", b =>
@@ -443,7 +443,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.Word", "Word")
                         .WithMany("Examples")
                         .HasForeignKey("WordId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.Translation", b =>
@@ -477,7 +477,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.User", "User")
                         .WithMany("Languages")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.UserWord", b =>
@@ -485,7 +485,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.User", "User")
                         .WithMany("Words")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LanguageBuilder.Data.Models.Word", "Word")
                         .WithMany("Users")
@@ -503,7 +503,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.Example", "Example")
                         .WithMany("UserWords")
                         .HasForeignKey("ExampleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LanguageBuilder.Data.Models.UserWord", "UserWord")
                         .WithMany("Examples")
@@ -516,12 +516,12 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.Language", "Language")
                         .WithMany("Words")
                         .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LanguageBuilder.Data.Models.SyntaxType", "SyntaxType")
                         .WithMany("Words")
                         .HasForeignKey("SyntaxTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("LanguageBuilder.Data.Models.WordList", b =>
@@ -529,7 +529,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.Language", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -537,7 +537,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -545,7 +545,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -553,7 +553,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -561,12 +561,12 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LanguageBuilder.Data.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -574,7 +574,7 @@ namespace LanguageBuilder.Data.Migrations
                     b.HasOne("LanguageBuilder.Data.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -59,18 +59,6 @@ namespace LanguageBuilder.Data
                 if (typeName.Contains('`')) { typeName = typeName.Substring(0, typeName.IndexOf("`")); }
 
                 entity.Relational().TableName = "tbl_" + typeName;
-
-                foreach (var fk in entity.GetForeignKeys())
-                {
-                    if (typeName.ToLower() == "user")
-                    {
-                        fk.DeleteBehavior = DeleteBehavior.Cascade;
-                    }
-                    else
-                    {
-                        fk.DeleteBehavior = DeleteBehavior.Restrict;
-                    }
-                }
             }
         }
 

@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <!--<ItemGroup>
+    <Compile Include="Hubs\NotificationsHub.cs" />
+  </ItemGroup>-->
+
+  <!--<ItemGroup>
     <Compile Include="Helpers\TagHelpers\CardAccordionTagHelper.cs" />
   </ItemGroup>-->
 
@@ -24,6 +28,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="2.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha1-final" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +49,7 @@
     <Folder Include="wwwroot\lib\jquery-ui\css\" />
     <Folder Include="wwwroot\lib\jquery-ui\js\" />
     <Folder Include="wwwroot\lib\knockout\" />
+    <Folder Include="wwwroot\lib\signalr\" />
     <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 

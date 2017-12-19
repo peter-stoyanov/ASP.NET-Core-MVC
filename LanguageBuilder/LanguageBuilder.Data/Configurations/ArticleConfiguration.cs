@@ -11,7 +11,8 @@ namespace LanguageBuilder.Data.Configurations
             builder
                 .HasOne(a => a.Author)
                 .WithMany(u => u.Articles)
-                .HasForeignKey(a => a.AuthorId);
+                .HasForeignKey(a => a.AuthorId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
