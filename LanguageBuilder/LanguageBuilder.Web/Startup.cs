@@ -122,7 +122,7 @@ namespace LanguageBuilder.Web
             LanguageBuilderDbContext context)
         {
             //debug
-            //env.EnvironmentName = "Production";
+            env.EnvironmentName = "Production";
 
             if (env.IsDevelopment())
             {
