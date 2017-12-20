@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Study";
+    ViewBag.Title = "Train";
     ViewBag.RegisterKnockout = true;
 
     User loggedUser = (User)ViewBag.LoggedUser;
@@ -16,9 +16,12 @@
             text-align: center;
             text-decoration: none;
             display: block;
-            font-size: 5em;
-            width: 100%;
-            height: 50%;
+            font-size: 3em;
+            width: 450px;
+            height: 450px;
+            -ms-word-wrap: hyphenate;
+            word-wrap: hyphenate;
+            cursor: pointer;
         }
 
         .control {
@@ -28,13 +31,15 @@
 }
 
 
-<div id="train-cards" class="container d-flex h-100">
-
+<div id="train-cards" class="d-flex h-100">
+    
     <div class="row justify-content-center align-self-center align-items-center">
 
+        <div class="col-12 mb-5">
+            <h1 class="display-4 text-center d-block">@ViewBag.Title</h1>
+        </div>
+        
         <div class="col-8 align-self-center">
-
-            <h1 class="display-4 text-center">@ViewBag.Title</h1>
 
             <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
 
@@ -50,7 +55,7 @@
         </div>
 
         <div class="col-4 align-self-center">
-            <div>Words left: <span class="control" data-bind="text: wordsLeft"></span></div>
+            <div><span class="control" data-bind="text: position"></span></div>
 
             <button class="btn btn-info control" data-bind="click: loadPrevious">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -76,16 +81,14 @@
             this.isLoading = ko.observable(true);
             this.hasError = ko.observable(false);
             this.trainEnded = ko.observable(false);
-
             this.words = ko.observableArray();
-            this.wordsLeft = ko.observable();
-            this.words.subscribe(function (value) {
-                self.wordsLeft(self.words().length);
-            });
-
             this.frontWord = ko.observable();
             this.backWord = ko.observable();
             this.currentIndex = ko.observable(-1);
+
+            this.position = ko.computed(function () {
+                return '' + (self.currentIndex() + 1) + ' / ' + self.words().length;
+            });
 
             this.loadEntry = function (index) {
                 var word = self.words()[index];

@@ -10,11 +10,13 @@ namespace LanguageBuilder.Tests.Web
 {
     public class HomeControllerTests
     {
-        private readonly HomeController _homeController;
+        private HomeController _homeController;
 
-        public HomeControllerTests(IUsersService usersService)
+        public HomeControllerTests()
         {
-            _homeController = new HomeController(usersService);
+            var mockUsersService = new Mock<IUsersService>();
+
+            _homeController = new HomeController(mockUsersService.Object);
         }
 
         [Fact]

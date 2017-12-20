@@ -37,9 +37,11 @@
 
     <div class="row justify-content-center align-self-center align-items-center">
 
+        <div class="col-12 mb-5">
+            <h1 class="display-4 text-center d-block">@ViewBag.Title</h1>
+        </div>
+        
         <div class="col-8 align-self-center">
-
-            <h1 class="display-4 text-center">@ViewBag.Title</h1>
 
             <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
 
@@ -51,12 +53,14 @@
 
                     <div class="col-4 d-inline-block tile mr-5 text-center" data-bind="text: hint" style="width: 40em;"></div>
                     
-                    <input class="mr-5 text-center" type="text" placeholder="type your guess..." data-bind="value: guess, css: status"/>
+                    <input class="mr-5 text-center" type="text" placeholder="type your guess..." data-bind="value: guess, css: status, event: { keyup: onKeyup }"/>
 
             </div>
         </div>
 
         <div class="col-4 align-self-center">
+            <div><span class="control" data-bind="text: position"></span></div>
+
             <button class="btn btn-info" data-bind="click: check()">Check</button>
             
             <button class="btn btn-info control" data-bind="click: loadPrevious">
@@ -98,6 +102,10 @@
                     .then(function () { if (callback !== undefined) { callback(); } });
             };
 
+            this.position = ko.computed(function () {
+                return '' + (self.currentIndex() + 1) + ' / ' + self.words().length;
+            });
+
             this.randomize = function () {
                 var array = self.words();
 
@@ -119,6 +127,12 @@
                 self.words(array);
             };
 
+            this.onKeyup = function (input, event) {
+                if (event.keyCode == 13) {
+                    self.check();
+                }
+            };
+
             this.status = ko.pureComputed(function () {
                 return self.isCorrect() === true ? "correct" : self.isCorrect() === false ? "incorrect" : "";
             });
@@ -126,16 +140,6 @@
             this.hint = ko.pureComputed(function () {
                 return self.activeTranslation() ? self.activeTranslation().sourceWord : '';
             });
-
-            //this.hint = ko.pureComputed({
-            //    read: function () {
-            //        return self.activeTranslation() ? self.activeTranslation().sourceWord : '';
-            //    },
-            //    write: function (value) {
-            //        self.activeTranslation().
-            //    },
-            //    owner: this
-            //});
 
             this.check = function (guess, event) {
                 if (!self.activeTranslation()) { return; }
@@ -147,6 +151,10 @@
 
                 if (answer == userGuess) {
                     self.isCorrect(true);
+                    setTimeout(function () {
+                        self.guess('');
+                        self.loadNext();
+                    }, 500)
                 } else {
                     self.isCorrect(false);
                 }
@@ -191,7 +199,6 @@
                         self.isLoading(false);
 
                         deferred.resolve(response);
-                        //if (callback !== undefined) { callback(response); }
                     },
                     error: function () {
                         self.isLoading(false);

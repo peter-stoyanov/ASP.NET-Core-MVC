@@ -16,6 +16,7 @@
             text-align: center;
             text-decoration: none;
             font-size: 2em;
+            cursor: pointer;
         }
 
         .tile:hover {
@@ -34,13 +35,15 @@
 }
 
 
-<div id="match-cards" class="container d-flex h-100">
+<div id="match-cards" class="d-flex h-100">
 
     <div class="row justify-content-center align-self-center align-items-center">
 
-        <div class="col-8 align-self-center">
+        <div class="col-12 mb-5">
+            <h1 class="display-4 text-center d-block">@ViewBag.Title</h1>
+        </div>
 
-            <h1 class="display-4 text-center">@ViewBag.Title</h1>
+        <div class="col-8 align-self-center">
 
             <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
 
@@ -48,10 +51,14 @@
                 Sorry, it seems that an error has occured.
             </div>
 
+            <div class="text-success" data-bind="visible: trainEnded() && !isLoading()">
+                Matching exercise ended.
+            </div>
+
             <div class="row" data-bind="visible: !hasError() && !isLoading()">
 
                 <div data-bind="foreach: words">
-                    <button class="col-4 d-inline-block tile" data-bind="click: $parent.onChosen, text: face, css: { 'tile-active': selected() }">
+                    <button class="col-4 d-inline-block tile m-2" data-bind="click: $parent.onChosen, text: face, css: { 'tile-active': selected() }, attr: { disabled: selected() }">
 
                     </button>
                 </div>
@@ -78,7 +85,6 @@
 
             this.isLoading = ko.observable(true);
             this.hasError = ko.observable(false);
-            this.trainEnded = ko.observable(false);
             this.words = ko.observableArray([]);
             this.guessOne = ko.observable();
 
@@ -86,6 +92,10 @@
                 self.loadData(self.randomize);
                 if (callback !== undefined) { callback(); }
             };
+
+            this.trainEnded = ko.computed(function () {
+                return self.words().length == 0;
+            });
 
             this.randomize = function () {
                 var array = self.words();
@@ -112,7 +122,7 @@
                 if (tile) { tile.selected(true); }
                 var guessOne = self.guessOne();
 
-                if (guessOne && guessOne.equals(tile.face) == true) { return; }
+                if (guessOne && guessOne === tile.face) { return; }
 
                 if (!guessOne) {
                     self.guessOne(tile);
@@ -120,8 +130,9 @@
                     if (tile.id == guessOne.id) {
                         self.words.remove(tile);
                         self.words.remove(guessOne);
+                        self.guessOne(null);
                     } else {
-                        if (tile) { tile.selected = false; }
+                        if (tile) { tile.selected(false); }
                         self.guessOne(null);
                     }
                 };
