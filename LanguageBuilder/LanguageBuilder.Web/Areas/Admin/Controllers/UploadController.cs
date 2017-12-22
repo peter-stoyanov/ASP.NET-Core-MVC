@@ -25,14 +25,14 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
         private readonly ILanguageService _languageService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IMapper _mappper;
-        private IHubContext<NotificationsHub> _hubContext;
+        //private IHubContext<NotificationsHub> _hubContext;
 
         public UploadController(
             IWordsService wordsService,
             IUsersService usersService,
             ILanguageService languageService,
             IMapper mapper,
-            IHubContext<NotificationsHub> hubContext,
+            //IHubContext<NotificationsHub> hubContext,
             IHostingEnvironment hostingEnvironment)
             : base(usersService)
         {
@@ -40,7 +40,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             _languageService = languageService;
             _hostingEnvironment = hostingEnvironment;
             _mappper = mapper;
-            _hubContext = hubContext;
+            //_hubContext = hubContext;
         }
 
         [HttpGet]
