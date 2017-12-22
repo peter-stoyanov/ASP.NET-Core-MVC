@@ -4,7 +4,7 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-@{ 
+@{
     var loggedUser = (User)ViewBag.LoggedUser;
 }
 
@@ -27,15 +27,15 @@
             <!-- Links -->
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav mr-auto">
-                    
+
                     <li class="nav-item px-1 @(ViewContext.IsCurrentUrl("home", "index") ? "active highlighted" : String.Empty)">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    
+
                     @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.UserRole))
                     {
                         <li class="nav-item dropdown px-1 @(ViewContext.IsCurrentUrl("words", new[] { "my", "create", "search" }) ? "active highlighted" : String.Empty)">
-                            <a class="nav-link dropdown-toggle" 
+                            <a class="nav-link dropdown-toggle"
                                href="#" id="navbarDropdownTranslations"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Vocabulary
@@ -48,7 +48,7 @@
                         </li>
 
                         <li class="nav-item dropdown px-1 @(ViewContext.IsCurrentUrl("words", new[] { "train", "match", "reproduce" }) ? "active highlighted" : String.Empty)">
-                            <a class="nav-link dropdown-toggle" 
+                            <a class="nav-link dropdown-toggle"
                                href="#" id="navbarDropdownStudy"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Study
@@ -64,11 +64,11 @@
                     <li class="nav-item px-1 @(ViewContext.CurrentArea() == "blog" && ViewContext.CurrentAction() == "index" ? "active highlighted" : String.Empty)">
                         <a class="nav-link" asp-area="Blog" asp-controller="Articles" asp-action="Index">Blog</a>
                     </li>
-                    
+
                     @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.BlogAuthorRole))
                     {
                         <li class="nav-item dropdown px-1 @(ViewContext.CurrentArea() == "blog" && ViewContext.CurrentAction() != "index" ? "active highlighted" : String.Empty)">
-                            <a class="nav-link dropdown-toggle" 
+                            <a class="nav-link dropdown-toggle"
                                href="#" id="navbarDropdownBlog"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Content Creators
@@ -83,7 +83,7 @@
                     @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.AdministratorRole))
                     {
                         <li class="nav-item dropdown px-1 @(ViewContext.CurrentArea() == "admin" ? "active highlighted" : String.Empty)">
-                            <a class="nav-link dropdown-toggle" 
+                            <a class="nav-link dropdown-toggle"
                                href="#" id="navbarDropdownAdmin"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Admins
@@ -108,7 +108,6 @@
                             <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </div>
                     </li>
-                
                 </ul>
             </div>
         </nav>
@@ -118,7 +117,7 @@
             {
                 <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
                     <ul class="navbar-nav ml-auto">
-                       
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
                                href="#" id="navbarDropdownLogin"

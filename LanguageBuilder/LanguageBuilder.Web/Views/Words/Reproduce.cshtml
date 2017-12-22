@@ -27,11 +27,8 @@
             border: 3px solid #008CBA;
             background-color: #ee8cc9;
         }
-
-        
     </style>
 }
-
 
 <div id="reproduce-cards">
 
@@ -40,7 +37,7 @@
         <div class="col-12 mb-5">
             <h1 class="display-4 text-center d-block">@ViewBag.Title</h1>
         </div>
-        
+
         <div class="col-8 align-self-center">
 
             <img src="~/images/loading.gif" data-bind="visible: isLoading()" />
@@ -52,9 +49,8 @@
             <div class="row" data-bind="visible: !hasError() && !isLoading()">
 
                     <div class="col-4 d-inline-block tile mr-5 text-center" data-bind="text: hint" style="width: 40em;"></div>
-                    
-                    <input class="mr-5 text-center" type="text" placeholder="type your guess..." data-bind="value: guess, css: status, event: { keyup: onKeyup }"/>
 
+                    <input class="mr-5 text-center" type="text" placeholder="type your guess..." data-bind="value: guess, css: status, event: { keyup: onKeyup }" />
             </div>
         </div>
 
@@ -62,7 +58,7 @@
             <div><span class="control" data-bind="text: position"></span></div>
 
             <button class="btn btn-info" data-bind="click: check()">Check</button>
-            
+
             <button class="btn btn-info control" data-bind="click: loadPrevious">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </button>
@@ -71,10 +67,8 @@
                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </button>
         </div>
-
     </div>
 </div>
-
 
 @section Scripts {
 
@@ -231,7 +225,6 @@
         reproduceModel = new ReproduceViewModel();
 
         reproduceModel.init(ko.applyBindings(reproduceModel, $('#reproduce-cards').get(0)));
-
 
     });
     </script>

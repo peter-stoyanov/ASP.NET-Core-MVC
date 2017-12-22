@@ -129,7 +129,6 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                 await _userService.DeleteAsync(userId);
 
                 TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User was successfully deleted.", hasDismissButton: true));
-                
             }
             catch (Exception ex)
             {

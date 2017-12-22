@@ -1,24 +1,22 @@
-﻿using LanguageBuilder.Services.Contracts;
+﻿using AutoMapper;
+using LanguageBuilder.Data.Models;
+using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Services.Models;
 using LanguageBuilder.Web.Areas.Admin.Models;
 using LanguageBuilder.Web.Controllers;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OfficeOpenXml;
-using OfficeOpenXml.Table;
-using System;
+using LanguageBuilder.Web.Hubs;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.ViewComponents;
-using LanguageBuilder.Data.Models;
-using AutoMapper;
-using LanguageBuilder.Services.Models;
-using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using LanguageBuilder.Web.Hubs;
+using OfficeOpenXml;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
+using System;
 
 namespace LanguageBuilder.Web.Areas.Admin.Controllers
 {
@@ -123,7 +121,6 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                 }
 
                 return RedirectToAction(nameof(Languages));
-
             }
             catch (Exception ex)
             {
@@ -197,7 +194,6 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                 }
 
                 return RedirectToAction(nameof(Languages));
-
             }
             catch (Exception ex)
             {

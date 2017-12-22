@@ -1,10 +1,8 @@
-using Xunit;
-using Xunit.Sdk;
-using LanguageBuilder.Web.Controllers;
-using Moq;
 using LanguageBuilder.Services.Contracts;
-using LanguageBuilder.Data.Models;
+using LanguageBuilder.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
+using Xunit;
 
 namespace LanguageBuilder.Tests.Web
 {
@@ -49,7 +47,7 @@ namespace LanguageBuilder.Tests.Web
 
             Assert.Null(viewResult.ViewData.Model);
         }
-        
+
         [Fact]
         public void About_ReturnsView()
         {
@@ -73,7 +71,5 @@ namespace LanguageBuilder.Tests.Web
 
             Assert.IsType<ViewResult>(result);
         }
-
-        
     }
 }

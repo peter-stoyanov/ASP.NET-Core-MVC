@@ -1,8 +1,4 @@
-﻿using LanguageBuilder.Data.Models;
-using LanguageBuilder.Web.ViewModels.WordViewModels;
-using System.Collections.Generic;
-
-namespace LanguageBuilder.Web.DTOs
+﻿namespace LanguageBuilder.Web.DTOs
 {
     public class TranslationDTO
     {
@@ -11,6 +7,5 @@ namespace LanguageBuilder.Web.DTOs
 
         public int TargetWordId { get; set; }
         public string TargetWord { get; set; }
-
     }
 }

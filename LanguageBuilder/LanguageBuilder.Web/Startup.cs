@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -198,7 +197,7 @@ namespace LanguageBuilder.Web
             });
         }
 
-        async Task DoWorkAsync(CancellationToken token)
+        private async Task DoWorkAsync(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
             {

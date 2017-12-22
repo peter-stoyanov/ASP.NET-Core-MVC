@@ -1,18 +1,16 @@
-﻿using LanguageBuilder.Web.ViewModels;
+﻿using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using LanguageBuilder.Services.Contracts;
 using System.Web.Http;
-using LanguageBuilder.Data.Models;
 using System;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace LanguageBuilder.Web.Controllers
 {
     [AllowAnonymous]
     public class HomeController : BaseAnonymousController
     {
-        public HomeController(IUsersService usersService) : base (usersService)
+        public HomeController(IUsersService usersService) : base(usersService)
         { }
 
         [ResponseCache(Duration = 60)]

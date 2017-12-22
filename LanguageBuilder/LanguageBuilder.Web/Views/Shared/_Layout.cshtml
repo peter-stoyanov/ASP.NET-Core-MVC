@@ -42,7 +42,6 @@
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 
     @RenderSection("Styles", required: false)
-
 </head>
 <body>
 
@@ -53,13 +52,10 @@
         <main class="@(ViewContext.IsCurrentUrl("home", "index") ? "landing-section" : "page")">
 
             @RenderBody()
-        
         </main>
 
         @Html.Partial("_Footer")
-        
     </div>
-
 
     <environment include="Development">
         <script asp-src-include="~/lib/jquery/dist/*.js"></script>
@@ -77,7 +73,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous" >
+                crossorigin="anonymous">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
@@ -109,6 +105,5 @@
     @Html.Partial("_SignalR")
 
     @Html.Partial("_GoogleAnalytics")
-
 </body>
 </html>

@@ -8,7 +8,6 @@ namespace LanguageBuilder.Web.ViewComponents
     {
         public async Task<IViewComponentResult> InvokeAsync(GoogleMapsViewModel model)
         {
-
             return View(model);
         }
     }

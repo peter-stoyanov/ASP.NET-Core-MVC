@@ -1,12 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using Xunit;
-using Xunit.Sdk;
+using LanguageBuilder.Data.Models;
+using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Web.Areas.Admin.Controllers;
 using LanguageBuilder.Web.Areas.Admin.Models;
-using Moq;
-using LanguageBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
-using LanguageBuilder.Data.Models;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
+using Xunit;
 
 namespace LanguageBuilder.Tests.Web
 {
@@ -28,7 +27,5 @@ namespace LanguageBuilder.Tests.Web
 
             Assert.IsType<ViewResult>(result);
         }
-
-        
     }
 }

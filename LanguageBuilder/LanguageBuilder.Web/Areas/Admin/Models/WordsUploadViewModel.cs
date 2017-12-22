@@ -9,6 +9,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Models
     {
         [Required]
         public int LanguageId { get; set; }
+
         public List<Language> Languages { get; set; }
 
         [Required]

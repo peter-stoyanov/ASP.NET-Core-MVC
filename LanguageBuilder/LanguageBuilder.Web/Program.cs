@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.IO;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
 
 namespace LanguageBuilder.Web
 {

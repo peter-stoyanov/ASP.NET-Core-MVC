@@ -5,7 +5,6 @@ using LanguageBuilder.Web.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers.ApiControllers
@@ -18,8 +17,8 @@ namespace LanguageBuilder.Web.Controllers.ApiControllers
         private readonly IMapper _mapper;
 
         public TranslationsController(
-            IWordsService wordsService, 
-            ITranslationService translationService, 
+            IWordsService wordsService,
+            ITranslationService translationService,
             IUsersService userService,
             IMapper mapper)
             : base(userService)
