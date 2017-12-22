@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Language Builder";
+    var loggedUser = (User)ViewBag.LoggedUser;
 }
 
 <div class="d-flex flex-column justify-content-center" style="height: 80%;">
@@ -8,8 +9,18 @@
 
     <div class="row mt-5">
         <div class="col-4 offset-4">
-            <a class="btn btn-info px-5 py-2 mr-3 d-inline-block" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-            <a class="btn btn-outline-info px-5 py-2 d-inline-block" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+
+            @if (loggedUser == null)
+            {
+                <a class="btn btn-info px-5 py-2 mr-3 d-inline-block" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                <a class="btn btn-outline-info px-5 py-2 d-inline-block" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+            }
+            else
+            {
+                <h2 class="text-white align-self-center pt-1">Welcome @loggedUser.UserName. Start training
+                    <a class="btn btn-outline-info px-5 py-2 d-inline-block" asp-area="" asp-controller="Words" asp-action="Train">here</a>
+                </h2>
+            }
         </div>
     </div>
 </div>

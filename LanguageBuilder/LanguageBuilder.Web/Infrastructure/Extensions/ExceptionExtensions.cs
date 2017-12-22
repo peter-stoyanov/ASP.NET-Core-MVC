@@ -23,16 +23,5 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
         {
             ExceptionExtensions.Logger.Error(ex.Message, ex);
         }
-
-        //public static void SaveToLog(this Exception ex, string query)
-        //{
-        //    string key = "query";
-
-        //    log4net.ThreadContext.Properties[key] = query;
-
-        //    ExceptionExtensions.logger.Error(ex.Message, ex);
-
-        //    log4net.ThreadContext.Properties[key] = null;
-        //}
     }
 }

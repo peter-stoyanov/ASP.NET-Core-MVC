@@ -69,7 +69,6 @@
                 crossorigin="anonymous"
                 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=">
         </script>
-        @*<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>*@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
@@ -100,9 +99,12 @@
         <script src="~/lib/knockout/knockout-3.4.2.js"></script>
     }
 
-    <script src="~/lib/signalr/signalr-client-1.0.0-alpha2-final.js"></script>
+    @if (ViewBag.RegisterSignalR == true)
+    {
+        <script src="~/lib/signalr/signalr-client-1.0.0-alpha2-final.js"></script>
 
-    @Html.Partial("_SignalR")
+        @Html.Partial("_SignalR")
+    }
 
     @Html.Partial("_GoogleAnalytics")
 </body>

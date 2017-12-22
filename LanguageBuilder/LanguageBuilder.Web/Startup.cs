@@ -1,6 +1,5 @@
 ﻿using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
-using LanguageBuilder.Web.Hubs;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.Infrastructure.Filters;
 using Microsoft.AspNetCore.Builder;
@@ -12,10 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using System;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web
 {
@@ -121,7 +117,7 @@ namespace LanguageBuilder.Web
             LanguageBuilderDbContext context)
         {
             //debug
-            env.EnvironmentName = "Production";
+            //env.EnvironmentName = "Production";
 
             if (env.IsDevelopment())
             {
@@ -168,41 +164,41 @@ namespace LanguageBuilder.Web
 
             //app.UseRewriter(rewriteOptions);
 
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<NotificationsHub>("notificationsHub");
-            });
+            //app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<NotificationsHub>("notificationsHub");
+            //});
 
             app.UseCors(
                 options => options.WithOrigins("*").AllowAnyMethod()
             );
 
-            lifetime.ApplicationStarted.Register(() =>
-            {
-                // not awaiting the 'promise task' here
-                var t = DoWorkAsync(lifetime.ApplicationStopping);
+            //lifetime.ApplicationStarted.Register(() =>
+            //{
+            //    // not awaiting the 'promise task' here
+            //    var t = DoWorkAsync(lifetime.ApplicationStopping);
 
-                lifetime.ApplicationStopped.Register(() =>
-                {
-                    try
-                    {
-                        // give extra time to complete before shutting down
-                        t.Wait(TimeSpan.FromSeconds(10));
-                    }
-                    catch (Exception)
-                    {
-                        // ignore
-                    }
-                });
-            });
+            //    lifetime.ApplicationStopped.Register(() =>
+            //    {
+            //        try
+            //        {
+            //            // give extra time to complete before shutting down
+            //            t.Wait(TimeSpan.FromSeconds(10));
+            //        }
+            //        catch (Exception)
+            //        {
+            //            // ignore
+            //        }
+            //    });
+            //});
         }
 
-        private async Task DoWorkAsync(CancellationToken token)
-        {
-            while (!token.IsCancellationRequested)
-            {
-                //await // async method
-            }
-        }
+        //private async Task DoWorkAsync(CancellationToken token)
+        //{
+        //    while (!token.IsCancellationRequested)
+        //    {
+        //        //await // async method
+        //    }
+        //}
     }
 }

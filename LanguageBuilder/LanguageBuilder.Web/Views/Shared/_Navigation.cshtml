@@ -6,6 +6,8 @@
 
 @{
     var loggedUser = (User)ViewBag.LoggedUser;
+
+    if (loggedUser == null && ViewContext.IsCurrentUrl("home", "index")) { return; }
 }
 
 <header>

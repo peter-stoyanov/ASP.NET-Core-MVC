@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LanguageBuilder.Web.ViewComponents
+﻿namespace LanguageBuilder.Web.ViewComponents
 {
     public class GoogleMapsViewModel
     {

@@ -1,15 +1,12 @@
 using AutoMapper;
 using LanguageBuilder.Data;
-using System;
 using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Tests.Web.Data;
 using LanguageBuilder.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-
 using System;
-
 using Xunit;
 
 namespace LanguageBuilder.Tests.Web
@@ -38,7 +35,7 @@ namespace LanguageBuilder.Tests.Web
             _mockLanguageService = new Mock<ILanguageService>();
             _mapper = mapper;
 
-            _context = new LanguageBuilderDbContext(InMemoryDbContextOptionsFactory.Create<LanguageBuilderDbContext>());
+            //_context = new LanguageBuilderDbContext(InMemoryDbContextOptionsFactory.Create<LanguageBuilderDbContext>());
             _context = Tests.GetDb();
         }
 

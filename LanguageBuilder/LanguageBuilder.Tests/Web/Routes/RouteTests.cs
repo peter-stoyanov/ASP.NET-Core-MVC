@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LanguageBuilder.Tests.Web.Routes
+﻿namespace LanguageBuilder.Tests.Web.Routes
 {
     public class RouteFacts
     {

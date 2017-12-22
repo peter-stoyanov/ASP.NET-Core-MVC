@@ -73,3 +73,30 @@ Query: (null)
 
 
 
+Date: 2017-12-22 10:29:03,566 
+
+Host: Petar 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [13] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception: System.Exception: test exception
+   at LanguageBuilder.Web.Controllers.HomeController.Index() in D:\PStoyanov\repo\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Controllers\HomeController.cs:line 22
+ 
+Message: test exception 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
