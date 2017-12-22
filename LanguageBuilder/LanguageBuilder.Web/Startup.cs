@@ -52,61 +52,11 @@ namespace LanguageBuilder.Web
             {
                 config.Filters.Add(new ValidateModelStateAttributeAttribute());
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-                //config.SslPort = 44321;
-                //config.Filters.Add(new RequireHttpsAttribute());
             });
-
-            services.AddSignalR();
 
             services.AddCors();
 
             services.AddRouting(routing => routing.LowercaseUrls = true);
-
-            services.AddSession(options =>
-            {
-                //options.Cookie.Name = ".LanguageBuilder.Session";
-                //options.IdleTimeout = TimeSpan.FromMinutes(30);
-            });
-
-            // This one's not working yet...
-            services.Configure<SessionOptions>(options =>
-            {
-                options.Cookie.HttpOnly = false;
-                options.Cookie.Name = "LOGIN_COOKIE";
-                options.Cookie.Domain = "asdf.com";
-                options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
-                options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
-            });
-
-            services.Configure<CookiePolicyOptions>(o =>
-            {
-                o.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.None;
-                o.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
-                o.Secure = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
-            });
-
-            services
-                .AddAuthentication("CookieAuth")
-                .AddCookie("CookieAuth", options =>
-                {
-                    options.LoginPath = new PathString("/Home/Login/");
-                    options.AccessDeniedPath = new PathString("/Home/Error/");
-                    options.Cookie.HttpOnly = false;
-                    options.Cookie.Name = "LOGIN_COOKIE";
-                    options.Cookie.Domain = "asdf.com";
-                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
-                    options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.None;
-                });
-
-            //services.AddAntiforgery(
-            //    options =>
-            //    {
-            //        options.Cookie.Name = "_af";
-            //        options.Cookie.HttpOnly = true;
-            //        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            //        options.HeaderName = "X-XSRF-TOKEN";
-            //    }
-            //);
 
             services.AddCloudscribePagination();
         }
@@ -116,13 +66,9 @@ namespace LanguageBuilder.Web
             IApplicationLifetime lifetime,
             LanguageBuilderDbContext context)
         {
-            //debug
-            //env.EnvironmentName = "Production";
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
             }
             else
@@ -143,7 +89,6 @@ namespace LanguageBuilder.Web
                     MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None,
                 });
 
-            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -160,45 +105,9 @@ namespace LanguageBuilder.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //var rewriteOptions = new RewriteOptions().AddRedirectToHttps();
-
-            //app.UseRewriter(rewriteOptions);
-
-            //app.UseSignalR(routes =>
-            //{
-            //    routes.MapHub<NotificationsHub>("notificationsHub");
-            //});
-
             app.UseCors(
                 options => options.WithOrigins("*").AllowAnyMethod()
             );
-
-            //lifetime.ApplicationStarted.Register(() =>
-            //{
-            //    // not awaiting the 'promise task' here
-            //    var t = DoWorkAsync(lifetime.ApplicationStopping);
-
-            //    lifetime.ApplicationStopped.Register(() =>
-            //    {
-            //        try
-            //        {
-            //            // give extra time to complete before shutting down
-            //            t.Wait(TimeSpan.FromSeconds(10));
-            //        }
-            //        catch (Exception)
-            //        {
-            //            // ignore
-            //        }
-            //    });
-            //});
         }
-
-        //private async Task DoWorkAsync(CancellationToken token)
-        //{
-        //    while (!token.IsCancellationRequested)
-        //    {
-        //        //await // async method
-        //    }
-        //}
     }
 }
