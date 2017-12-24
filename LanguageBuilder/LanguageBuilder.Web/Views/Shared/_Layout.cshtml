@@ -46,15 +46,18 @@
 <body>
 
     @Html.Partial("_Navigation")
+    @Html.Partial("_BackgroundTaskIndicator")
 
     <div class="container-fluid">
 
         <main class="@(ViewContext.IsCurrentUrl("home", "index") ? "landing-section" : "page")">
 
             @RenderBody()
+
         </main>
 
         @Html.Partial("_Footer")
+    
     </div>
 
     <environment include="Development">
@@ -99,12 +102,9 @@
         <script src="~/lib/knockout/knockout-3.4.2.js"></script>
     }
 
-    @if (ViewBag.RegisterSignalR == true)
-    {
-        <script src="~/lib/signalr/signalr-client-1.0.0-alpha2-final.js"></script>
+    <script src="~/lib/signalr/signalr-client-1.0.0-alpha2-final.js"></script>
 
-        @Html.Partial("_SignalR")
-    }
+    @Html.Partial("_SignalR")
 
     @Html.Partial("_GoogleAnalytics")
 </body>

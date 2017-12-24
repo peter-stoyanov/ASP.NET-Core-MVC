@@ -3,13 +3,43 @@
         $(document).ready(function () {
 
             var connection = new signalR.HubConnection('/notificationsHub');
+            var $notification = $('#background-task-notification');
 
             connection.on('broadcastMessage', data => {
                 console.log(data);
             });
+            
+            connection.on('onBackgroundJobStarted', data => {
+                console.log(data);
+                $notification.show();
+            });
+            
+            connection.on('onUploadWordsCompleted', data => {
+                console.log(data);
+
+                var $modal = $('#notification-modal');
+
+                if (data) { $modal.find('.modal-body').text(data); }
+
+                $notification.hide();
+                $modal.modal();
+                // todo: clean on close modal
+            });
+
+            connection.on('onUploadTranslationsCompleted', data => {
+                console.log(data);
+
+                var $modal = $('#notification-modal');
+
+                if (data) { $modal.find('.modal-body').text(data); }
+
+                $notification.hide();
+                $modal.modal();
+                // todo: clean on close modal
+            });
 
             connection.on('onConnected', data => {
-                console.log(data);
+                console.log(data); 
             });
 
             connection.on('onDisconnected', data => {
@@ -19,3 +49,15 @@
             connection.start();
         });
 </script>
+
+@await Component.InvokeAsync(
+        nameof(BootstrapModalComponent),
+        new BootstrapModalViewModel()
+        {
+            Body = "Notification",
+            ConfirmButtonName = "Ok",
+            Title = "Notification",
+            CancelButtonName = "Close",
+            Id = "notification-modal",
+            ConfirmButtonId = "modal-confirm-notification"
+        })

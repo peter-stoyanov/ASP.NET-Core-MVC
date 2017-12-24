@@ -22,8 +22,8 @@ namespace LanguageBuilder.Data.Services
 
         public virtual void Add(TEntity entity)
         {
-            _db.Set<TEntity>().AddAsync(entity);
-            _db.SaveChangesAsync();
+            _db.Set<TEntity>().Add(entity);
+            _db.SaveChanges();
         }
 
         public virtual async Task AddAsync(TEntity entity)
