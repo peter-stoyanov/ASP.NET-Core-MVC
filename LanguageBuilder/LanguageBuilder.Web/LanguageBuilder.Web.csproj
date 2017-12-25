@@ -5,20 +5,6 @@
     <UserSecretsId>aspnet-LanguageBuilder.Web-A38E2AFA-0825-4BEF-B3C6-E3130290153D</UserSecretsId>
   </PropertyGroup>
 
-  <!--<ItemGroup>
-    <Compile Include="Hubs\NotificationsHub.cs" />
-  </ItemGroup>-->
-
-  <!--<ItemGroup>
-    <Compile Include="Helpers\TagHelpers\CardAccordionTagHelper.cs" />
-  </ItemGroup>-->
-
-  <!--<ItemGroup>
-    <Compile Include="ViewModels\WordViewModels\WordDetailViewModel.cs" />
-    <Compile Include="ViewModels\WordViewModels\WordsSearchViewModel.cs" />
-  </ItemGroup>-->
-
-
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.1" />
     <PackageReference Include="cloudscribe.Web.Pagination" Version="2.1.1" />

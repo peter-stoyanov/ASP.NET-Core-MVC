@@ -9,11 +9,11 @@
                 console.log(data);
             });
             
-            connection.on('onBackgroundJobStarted', data => {
+            connection.on('initTaskNotification', data => {
                 console.log(data);
-                $notification.show();
+                $notification.removeClass('notvisible');
             });
-            
+
             connection.on('onUploadWordsCompleted', data => {
                 console.log(data);
 

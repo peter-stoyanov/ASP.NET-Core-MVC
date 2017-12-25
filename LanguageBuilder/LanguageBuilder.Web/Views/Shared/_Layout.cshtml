@@ -80,7 +80,6 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    @RenderSection("Scripts", required: false)
 
     @if (ViewBag.RegisterJqueryUi == true)
     {
@@ -107,5 +106,7 @@
     @Html.Partial("_SignalR")
 
     @Html.Partial("_GoogleAnalytics")
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

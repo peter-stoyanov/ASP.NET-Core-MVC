@@ -9,3 +9,11 @@ $(document).ready(function () {
         $(this).closest('form').submit();
     });
 });
+
+
+
+//$(document).ready(function () {
+
+//    $('#background-task-notification').hide();
+
+//});

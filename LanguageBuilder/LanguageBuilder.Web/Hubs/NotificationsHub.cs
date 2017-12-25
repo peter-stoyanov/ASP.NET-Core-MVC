@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -7,6 +8,18 @@ namespace LanguageBuilder.Web.Hubs
     [Authorize]
     public class NotificationsHub : Hub
     {
+        private static HashSet<string> _backgroundTasks = new HashSet<string>();
+
+        public static void AddBackgroundTaskForUser(string username)
+        {
+            _backgroundTasks.Add(username);
+        }
+
+        public static void RemoveBackgroundTaskForUser(string username)
+        {
+            _backgroundTasks.Remove(username);
+        }
+
         public override Task OnConnectedAsync()
         {
             Clients.All.InvokeAsync("onConnected", "SignalR Connected");
@@ -15,17 +28,19 @@ namespace LanguageBuilder.Web.Hubs
 
             Groups.AddAsync(Context.ConnectionId, name);
 
+            this.HasBackgroundTask();
+
             return base.OnConnectedAsync();
         }
 
-        public void Send(string who, string message)
+        public void HasBackgroundTask()
         {
-            Clients.Client(who)?.InvokeAsync("broadcastMessage", message);
-        }
+            string name = Context.User.Identity.Name;
 
-        public void Broadcast(string connectionId, string message)
-        {
-            Clients.All.InvokeAsync("broadcastMessage", message);
+            if (_backgroundTasks.Contains(name))
+            {
+                Clients.Group(name)?.InvokeAsync("initTaskNotification", "initTaskNotification");
+            }
         }
 
         public override Task OnDisconnectedAsync(System.Exception exception)

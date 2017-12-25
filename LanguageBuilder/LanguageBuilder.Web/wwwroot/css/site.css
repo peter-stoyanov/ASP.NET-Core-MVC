@@ -50,7 +50,6 @@ h2 {
     z-index: 1000;
     top: 20px;
     right: 0px;
-    visibility: hidden;
     background: #3fb8fa;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -58,6 +57,13 @@ h2 {
     font-weight: 500;
     box-shadow: -3px 3px 8px 2px black;
     padding: 10px 25px 10px 10px;
+}
+
+.notvisible {
+    visibility: hidden;
+    overflow: hidden;
+    width: 0px;
+    height: 0px;
 }
 
 /* ----------------------------------------- */
