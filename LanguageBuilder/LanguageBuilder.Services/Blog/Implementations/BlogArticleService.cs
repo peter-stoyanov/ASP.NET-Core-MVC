@@ -27,8 +27,8 @@ namespace LanguageBuilder.Services.Blog.Implementations
             => await this.db
                 .Articles
                 .OrderByDescending(a => a.PublishDate)
-                .Skip((page - 1) * BlogArticlesPageSize)
-                .Take(BlogArticlesPageSize)
+                .Skip((page - 1) * BLOGARTICLES_PAGESIZE)
+                .Take(BLOGARTICLES_PAGESIZE)
                 .ProjectTo<BlogArticleListingServiceModel>()
                 .ToListAsync();
 
@@ -37,8 +37,8 @@ namespace LanguageBuilder.Services.Blog.Implementations
                 .Articles
                 .Where(a => a.AuthorId == authorId)
                 .OrderByDescending(a => a.PublishDate)
-                .Skip((page - 1) * BlogArticlesPageSize)
-                .Take(BlogArticlesPageSize)
+                .Skip((page - 1) * BLOGARTICLES_PAGESIZE)
+                .Take(BLOGARTICLES_PAGESIZE)
                 .ProjectTo<BlogArticleListingServiceModel>()
                 .ToListAsync();
 

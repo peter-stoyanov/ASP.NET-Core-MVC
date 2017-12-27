@@ -22,18 +22,34 @@ namespace LanguageBuilder.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        string _facebookAppId = null;
+        string _facebookAppSecret = null;
+
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // load tokens from secret manager
+            _facebookAppId = Configuration["Authentication:Facebook:AppId"];
+            _facebookAppSecret = Configuration["Authentication:Facebook:AppSecret"];
+
             services.AddDbContext<LanguageBuilderDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
+
             services
                 .AddIdentity<User, Role>(options =>
                 {
@@ -44,22 +60,46 @@ namespace LanguageBuilder.Web
                 })
                 .AddEntityFrameworkStores<LanguageBuilderDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
+
             services.AddDomainServices();
+
             services.AddAutoMapper();
+
             services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
             services.AddMvc(config =>
             {
                 config.Filters.Add(new ValidateModelStateAttributeAttribute());
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                config.SslPort = 44321;
+                config.Filters.Add(new RequireHttpsAttribute());
             });
+
+            services.AddAntiforgery(
+                options =>
+                {
+                    options.Cookie.Name = "_af";
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    options.HeaderName = "X-XSRF-TOKEN";
+                }
+            );
+
             services.AddCors();
+
             services.AddRouting(routing => routing.LowercaseUrls = true);
+
             services.AddCloudscribePagination();
+
             services.AddSignalR();
-
-
         }
 
         public void Configure(IApplicationBuilder app,

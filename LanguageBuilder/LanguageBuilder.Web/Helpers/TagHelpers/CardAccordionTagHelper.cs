@@ -28,6 +28,9 @@ namespace LanguageBuilder.Web.Helpers.TagHelpers
         [HtmlAttributeName("title-as-html")]
         public bool TitleAsHtml { get; set; }
 
+        [HtmlAttributeName("expanded")]
+        public bool Expanded { get; set; }
+
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(Body)) { return; }
@@ -45,10 +48,10 @@ namespace LanguageBuilder.Web.Helpers.TagHelpers
             $@"<div class=""card"">
                 <div class=""card-header"" id=""{headerId}"" role=""tab"">
                     <h6 class=""mb-0"">
-                        <a aria-controls=""{collapseId}"" aria-expanded=""true"" data-toggle=""collapse"" href=""#{collapseId}"">{titleText}</a>
+                        <a aria-controls=""{collapseId}"" aria-expanded=""{(Expanded ? "true" : String.Empty )}"" data-toggle=""collapse"" href=""#{collapseId}"">{titleText}</a>
                     </h6>
                 </div>
-                <div aria-labelledby= ""{headerId}"" class=""collapse"" data-parent=""#accordion"" id=""{collapseId}"" role=""tabpanel"">
+                <div aria-labelledby= ""{headerId}"" class=""{(Expanded ? String.Empty : "collapse")}"" data-parent=""#accordion"" id=""{collapseId}"" role=""tabpanel"">
                     <div class=""card-body"">
                         <p>{(String.IsNullOrEmpty(Image) ? bodyText : image)}</p>
                     </ div>

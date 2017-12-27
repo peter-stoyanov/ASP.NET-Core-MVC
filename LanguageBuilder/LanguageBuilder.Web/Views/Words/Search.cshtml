@@ -2,12 +2,12 @@
 @model WordsSearchViewModel
 
 @{
-    ViewBag.Title = "Search the words in the dictionaries by language";
+    ViewBag.Title = "Search words";
 }
 
 <h1 class="display-4 text-center">@ViewBag.Title</h1>
 
-@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
+@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.ALERTKEY))
 
 @Html.Partial("_SearchForm", Model.SearchForm)
 

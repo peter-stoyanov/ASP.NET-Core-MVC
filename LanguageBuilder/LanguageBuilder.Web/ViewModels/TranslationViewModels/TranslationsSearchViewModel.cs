@@ -1,19 +1,17 @@
 ﻿using cloudscribe.Web.Pagination;
 using LanguageBuilder.Data.Models;
-using LanguageBuilder.Services.Models.WordsSearch;
+using LanguageBuilder.Services.Models.TranslationsSearch;
 using System.Collections.Generic;
 
-namespace LanguageBuilder.Web.ViewModels.WordViewModels
+namespace LanguageBuilder.Web.ViewModels.TranslationViewModels
 {
-    public class WordsSearchViewModel
+    public class TranslationsSearchViewModel
     {
         private Response _response = new Response();
 
-        public WordsSearchFormViewModel SearchForm { get; set; }
+        public TranslationsSearchFormViewModel SearchForm { get; set; }
 
-        public List<Word> Data { get; set; }
-
-        public char SelectedLetter { get; set; }
+        public List<Translation> Data { get; set; }
 
         public PaginationSettings Paging { get; set; } = new PaginationSettings();
 

@@ -114,9 +114,11 @@ namespace LanguageBuilder.Services.Implementations
 
         public async Task AddWordsWithTranslationWithUserConnectionAsync(Word source, Word target, string userId)
         {
-            await _db
-                .Words
-                .AddRangeAsync(new[] { source, target });
+            if (!await ExistAsync(source.Content)) { _db.Words.Add(source); }
+            if (!await ExistAsync(target.Content)) { _db.Words.Add(target); }
+
+            source = await _db.Words.Where(w => w.Content == source.Content).FirstOrDefaultAsync();
+            target = await _db.Words.Where(w => w.Content == target.Content).FirstOrDefaultAsync();
 
             await _db
                 .UserWords
@@ -183,7 +185,12 @@ namespace LanguageBuilder.Services.Implementations
             var query = _db.Words
                 .Include(w => w.Users)
                 .OrderBy(sortColumnSelector)
-                .Where(criteria);
+                .AsQueryable();
+
+            if (criteria != null)
+            {
+                query = query.Where(criteria);
+            }
 
             if (request.LanguageIds.Any())
             {

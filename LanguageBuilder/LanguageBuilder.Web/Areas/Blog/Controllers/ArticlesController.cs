@@ -12,8 +12,8 @@ using static LanguageBuilder.Web.WebConstants;
 
 namespace LanguageBuilder.Web.Areas.Blog.Controllers
 {
-    [Area(BlogArea)]
-    [Authorize(Roles = BlogAuthorRole)]
+    [Area(BLOG_AREA)]
+    [Authorize(Roles = BLOGAUTHOR_ROLE)]
     public class ArticlesController : BaseController
     {
         private readonly IBlogArticleService _articles;

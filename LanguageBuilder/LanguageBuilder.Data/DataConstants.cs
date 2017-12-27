@@ -2,10 +2,10 @@
 {
     public class DataConstants
     {
-        public const int ArticleTitleMinLength = 3;
-        public const int ArticleTitleMaxLength = 50;
+        public const int ARTICLE_TITLE_MINLENGTH = 3;
+        public const int ARTICLE_TITLE_MAXLENGTH = 50;
 
-        public const int ArticleContentMinLength = 100;
-        public const int ArticleContentMaxLength = 10000;
+        public const int ARTICLE_CONTENT_MINLENGTH = 100;
+        public const int ARTICLE_CONTENT_MAXLENGTH = 10000;
     }
 }

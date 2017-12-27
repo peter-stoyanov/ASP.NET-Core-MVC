@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers
 {
-    [Authorize(Roles = WebConstants.UserRole)]
+    [Authorize(Roles = WebConstants.USER_ROLE)]
     public class UsersController : BaseController
     {
         private readonly IUsersService _userService;
@@ -66,14 +66,14 @@ namespace LanguageBuilder.Web.Controllers
 
                 await _userService.UpdateAsync(user);
 
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User profile was successfully updated.", hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User profile was successfully updated.", hasDismissButton: true));
 
                 return RedirectToLocal(null, nameof(UsersController.Profile), "Users", new { area = "", id = model.Username });
             }
             catch (Exception ex)
             {
                 ex.SaveToLog();
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GENERAL_ERROR, hasDismissButton: true));
             }
 
             return View(model);

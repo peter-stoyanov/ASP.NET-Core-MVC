@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Areas.Admin.Controllers
 {
-    [Area(WebConstants.AdminArea)]
+    [Area(WebConstants.ADMIN_AREA)]
     public class UploadController : BaseController
     {
         private readonly IWordsService _wordsService;
@@ -99,14 +99,14 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Please select a file.", hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Please select a file.", hasDismissButton: true));
 
                     return RedirectToLocal("", nameof(UploadController.Words), "Upload");
                 }
 
                 if (model.File == null || model.File.Length == 0)
                 {
-                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Please select a file.", hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Please select a file.", hasDismissButton: true));
 
                     return RedirectToLocal("", nameof(UploadController.Words), "Upload");
                 }
@@ -121,7 +121,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             {
                 ex.SaveToLog();
 
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GENERAL_ERROR, hasDismissButton: true));
             }
 
             return View(model);
@@ -147,14 +147,14 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Please select a file.", hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Please select a file.", hasDismissButton: true));
 
                     return RedirectToLocal("", nameof(UploadController.Translations), "Upload");
                 }
 
                 if (model.File == null || model.File.Length == 0)
                 {
-                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Please select a file.", hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Please select a file.", hasDismissButton: true));
 
                     return RedirectToLocal("", nameof(UploadController.Translations), "Upload");
                 }
@@ -169,7 +169,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             {
                 ex.SaveToLog();
 
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GENERAL_ERROR, hasDismissButton: true));
             }
 
             return View(model);

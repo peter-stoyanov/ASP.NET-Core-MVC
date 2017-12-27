@@ -1,0 +1,136 @@
+﻿@using System.Linq;
+@model TranslationsSearchViewModel
+
+@inject UserManager<User> UserManager
+
+@{
+    ViewBag.Title = "Search translations";
+    var loggedUser = (User)ViewBag.LoggedUser;
+}
+
+<h1 class="display-4 text-center">@ViewBag.Title</h1>
+
+@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.ALERTKEY))
+
+@Html.Partial("_SearchForm", Model.SearchForm)
+
+@Html.Partial("_Pager")
+
+@if (Model.Data.Any())
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    <span class="mr-2">Source</span>
+
+                    <a href="#" class="sort-link mr-2" onclick="submitFormWithParams('source', 'ascending')">
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="sort-link" onclick="submitFormWithParams('source', 'descending')">
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    </a>
+                </th>
+                <th>
+                    <span class="mr-2">Target</span>
+                    
+                    <a href="#" class="sort-link mr-2" onclick="submitFormWithParams('target', 'ascending')">
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="sort-link" onclick="submitFormWithParams('target', 'descending')">
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    </a>
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var translation in Model.Data)
+            {
+                <tr>
+                    <td>@translation.SourceWord.Content</td>
+                    <td>@translation.TargetWord.Content</td>
+                    <td>
+                        <a asp-controller="Translations" asp-action="Edit" title="Edit User" asp-route-id="@translation.Id"><i class="fa fa-pencil contact small-icon" aria-hidden="true"></i></a>
+                    
+                        @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.ADMINISTRATOR_ROLE))
+                        {
+                            <a asp-controller="Translations" asp-action="Delete" title="Delete Translation"><i class="fa fa-trash contact small-icon btn-delete" data-Id="@translation.Id" aria-hidden="true"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @Html.Partial("_Pager")
+
+    @await Component.InvokeAsync(
+        nameof(BootstrapModalComponent),
+        new BootstrapModalViewModel()
+        {
+            Body = "Do you want to delete this translation.",
+            ConfirmButtonName = "Yes",
+            Title = "Confirm delete",
+            CancelButtonName = "No",
+            Id = "delete-modal",
+            ConfirmButtonId = "modal-confirm"
+        })
+}
+
+@section Scripts {
+    <script type="text/javascript">
+
+        function submitFormWithParams(column, direction) {
+            var $form = $('#search-form');
+
+            var sortcolumn = $("<input>")
+                .attr("type", "hidden")
+                .attr("name", "sortColumn").val(column);
+
+            var sortDirection = $("<input>")
+                .attr("type", "hidden")
+                .attr("name", "sortDirection").val(direction);
+
+            $form.append($(sortcolumn)).append($(sortDirection));
+
+            $form.submit();
+        }
+
+        $(document).ready(function () {
+
+            var dialog = $('#delete-modal').modal({ show: false });
+            var selectedTranslationId;
+            var selectedTranslation;
+            var $errorSign;
+
+            $('.btn-delete').on('click', function (event) {
+                event.preventDefault();
+                selectedTranslation = $(event.target);
+                selectedTranslationId = $(event.target).attr('data-Id');
+                dialog.modal().show();
+            });
+
+            $('#modal-confirm').on('click', function (event) {
+                if ($errorSign) { $errorSign.remove(); }
+
+                $.ajax({
+                    type: "POST",
+                    url: '/translations/deleteConfirmed?id=0',// + selectedTranslationId,
+                    data: {},
+                    success: function (data) {
+                        window.location.reload(true);
+                    },
+                    error: function () {
+                        $errorSign = $('<i class="fa fa-exclamation-circle text-danger ml-3" aria-hidden="true"></i>');
+
+                        selectedTranslation.parent().append($errorSign);
+                    }
+                });
+
+            });
+
+        });
+    </script>
+}
+

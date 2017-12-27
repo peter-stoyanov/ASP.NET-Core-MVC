@@ -14,8 +14,8 @@ using static LanguageBuilder.Web.WebConstants;
 
 namespace LanguageBuilder.Web.Areas.Admin.Controllers
 {
-    [Area(AdminArea)]
-    [Authorize(Roles = AdministratorRole)]
+    [Area(ADMIN_AREA)]
+    [Authorize(Roles = ADMINISTRATOR_ROLE)]
     public class UsersController : BaseController
     {
         private readonly IUsersService _userService;
@@ -55,7 +55,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
 
             if (!model.Data.Any())
             {
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
             }
 
             return View(model);
@@ -88,14 +88,14 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             {
                 if (model.UserId == LoggedUser.Id)
                 {
-                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "Users can not update their own roles.", hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, "Users can not update their own roles.", hasDismissButton: true));
 
                     return RedirectToLocal(model.Caller, nameof(UsersController.Search), "Users");
                 }
 
                 await _roleService.UpdateAsync(model.UserId, model.SelectedRoles);
 
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true));
 
                 return RedirectToLocal(model.Caller, nameof(UsersController.Search), "Users");
             }
@@ -107,7 +107,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             model.Roles = (await _roleService.GetAllAsync()).ToList();
             model.SelectedRoles = (await _roleService.GetByUserIdAsync(model.UserId)).Select(r => r.Name).ToList();
 
-            TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
+            TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GENERAL_ERROR, hasDismissButton: true));
 
             return View(model);
         }
@@ -121,20 +121,20 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
 
                 if (user == null)
                 {
-                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "User not found.", hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "User not found.", hasDismissButton: true));
 
                     return RedirectToAction(nameof(Search));
                 }
 
                 await _userService.DeleteAsync(userId);
 
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User was successfully deleted.", hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User was successfully deleted.", hasDismissButton: true));
             }
             catch (Exception ex)
             {
                 ex.SaveToLog();
 
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GENERAL_ERROR, hasDismissButton: true));
             }
 
             return RedirectToLocal("", nameof(UsersController.Search), "Users");

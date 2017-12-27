@@ -131,3 +131,187 @@ Query: (null)
 
 
 
+Date: 2017-12-26 21:17:31,233 
+
+Host: DESKTOP-CQAS2KA 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [8] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception: System.UriFormatException: Invalid URI: The hostname could not be parsed.
+   at System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   at System.Uri..ctor(String uriString)
+   at System.UriBuilder.get_Uri()
+   at LanguageBuilder.Web.Infrastructure.Extensions.HttpRequestExtensions.UrlReferrer(HttpRequest request) in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Infrastructure\Extensions\HttpRequestExtensions.cs:line 18
+   at LanguageBuilder.Web.Controllers.TranslationsController.<DeleteConfirmed>d__14.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Controllers\TranslationsController.cs:line 226
+ 
+Message: Invalid URI: The hostname could not be parsed. 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
+Date: 2017-12-26 21:18:59,855 
+
+Host: DESKTOP-CQAS2KA 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [54] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception: System.UriFormatException: Invalid URI: The hostname could not be parsed.
+   at System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   at System.Uri..ctor(String uriString)
+   at System.UriBuilder.get_Uri()
+   at LanguageBuilder.Web.Infrastructure.Extensions.HttpRequestExtensions.UrlReferrer(HttpRequest request) in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Infrastructure\Extensions\HttpRequestExtensions.cs:line 18
+   at LanguageBuilder.Web.Controllers.TranslationsController.<DeleteConfirmed>d__14.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Controllers\TranslationsController.cs:line 226
+ 
+Message: Invalid URI: The hostname could not be parsed. 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
+Date: 2017-12-26 21:25:51,245 
+
+Host: DESKTOP-CQAS2KA 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [45] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_tbl_Translation_tbl_Word_SourceWordId". The conflict occurred in database "DB_A2C13B_languageBuilderDb", table "dbo.tbl_Word", column 'Id'.
+The INSERT statement conflicted with the FOREIGN KEY constraint "FK_tbl_UserWord_tbl_Word_WordId". The conflict occurred in database "DB_A2C13B_languageBuilderDb", table "dbo.tbl_Word", column 'Id'.
+The statement has been terminated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteReader(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(Tuple`2 parameters)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ExecutionStrategyExtensions.Execute[TState,TResult](IExecutionStrategy strategy, TState state, Func`2 operation)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IReadOnlyList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IReadOnlyList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at LanguageBuilder.Data.LanguageBuilderDbContext.SaveChanges(Boolean acceptAllChangesOnSuccess) in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Data\LanguageBuilderDbContext.cs:line 88
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at LanguageBuilder.Services.Implementations.WordsService.<AddWordsWithTranslationWithUserConnectionAsync>d__11.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Services\Implementations\WordsService.cs:line 138
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at LanguageBuilder.Web.Controllers.TranslationsController.<Create>d__8.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Controllers\TranslationsController.cs:line 126
+ 
+Message: An error occurred while updating the entries. See the inner exception for details. 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
+Date: 2017-12-26 21:30:05,892 
+
+Host: DESKTOP-CQAS2KA 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [8] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_tbl_Translation_tbl_Word_SourceWordId". The conflict occurred in database "DB_A2C13B_languageBuilderDb", table "dbo.tbl_Word", column 'Id'.
+The INSERT statement conflicted with the FOREIGN KEY constraint "FK_tbl_UserWord_tbl_Word_WordId". The conflict occurred in database "DB_A2C13B_languageBuilderDb", table "dbo.tbl_Word", column 'Id'.
+The statement has been terminated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteReader(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(Tuple`2 parameters)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ExecutionStrategyExtensions.Execute[TState,TResult](IExecutionStrategy strategy, TState state, Func`2 operation)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IReadOnlyList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IReadOnlyList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at LanguageBuilder.Data.LanguageBuilderDbContext.SaveChanges(Boolean acceptAllChangesOnSuccess) in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Data\LanguageBuilderDbContext.cs:line 88
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at LanguageBuilder.Services.Implementations.WordsService.<AddWordsWithTranslationWithUserConnectionAsync>d__11.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Services\Implementations\WordsService.cs:line 138
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at LanguageBuilder.Web.Controllers.TranslationsController.<Create>d__8.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Controllers\TranslationsController.cs:line 126
+ 
+Message: An error occurred while updating the entries. See the inner exception for details. 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+

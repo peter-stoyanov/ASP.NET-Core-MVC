@@ -11,7 +11,7 @@ namespace LanguageBuilder.Web.Areas.Blog.Models.Articles
 
         public int TotalArticles { get; set; }
 
-        public int TotalPages => (int)Math.Ceiling((double)this.TotalArticles / ServiceConstants.BlogArticlesPageSize);
+        public int TotalPages => (int)Math.Ceiling((double)this.TotalArticles / ServiceConstants.BLOGARTICLES_PAGESIZE);
 
         public int CurrentPage { get; set; }
 

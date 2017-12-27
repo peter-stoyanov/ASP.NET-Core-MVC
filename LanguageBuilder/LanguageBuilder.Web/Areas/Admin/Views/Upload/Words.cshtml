@@ -4,7 +4,7 @@
     ViewBag.Title = "Upload words with excel";
 }
 
-@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.AlertKey))
+@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.ALERTKEY))
 
 <h1 class="display-4 text-center my-5">@ViewBag.Title</h1>
 

@@ -1,0 +1,58 @@
+﻿<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#source-word').autocomplete({
+            source: function (request, response) {
+                $.getJSON({
+                    url: '@Url.Content("~/api/Words")',
+                    data: { keywords: $('#source-word').val(), languageId: $('#SourceWord_LanguageId').val(), rows: 10 },
+                    success: function (data, status, xhr) {
+                        var items = [];
+
+                        if (data) {
+                            items = $.map(data, function (word) {
+                                return {
+                                    label: word.content,
+                                    value: word.content
+                                };
+                            });
+                        }
+                        response(items);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                //$('#source-word').val(ui.item.id);
+            },
+            minLength: 1
+        });
+
+        $('#target-word').autocomplete({
+            source: function (request, response) {
+                $.getJSON({
+                    url: '@Url.Content("~/api/Words")',
+                    data: { keywords: $('#target-word').val(), languageId: $('#TargetWord_LanguageId').val(), rows: 10 },
+                    success: function (data, status, xhr) {
+                        var items = [];
+
+                        if (data) {
+                            items = $.map(data, function (word) {
+                                return {
+                                    label: word.content,
+                                    value: word.content
+                                };
+                            });
+                        }
+                        response(items);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                //$('#source-word').val(ui.item.id);
+            },
+            minLength: 1
+        });
+
+    });
+</script>

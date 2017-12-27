@@ -32,9 +32,9 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                         // feed roles
                         var roles = new[]
                         {
-                            WebConstants.AdministratorRole,
-                            WebConstants.UserRole,
-                            WebConstants.BlogAuthorRole
+                            WebConstants.ADMINISTRATOR_ROLE,
+                            WebConstants.USER_ROLE,
+                            WebConstants.BLOGAUTHOR_ROLE
                         };
 
                         foreach (var role in roles)
@@ -75,7 +75,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
                             var user = new User { UserName = adminEmail, Email = adminEmail, SubscriptionId = 1 };
 
                             await userManager.CreateAsync(user, "admin123456");
-                            await userManager.AddToRolesAsync(user, new[] { WebConstants.AdministratorRole, WebConstants.UserRole, WebConstants.BlogAuthorRole });
+                            await userManager.AddToRolesAsync(user, new[] { WebConstants.ADMINISTRATOR_ROLE, WebConstants.USER_ROLE, WebConstants.BLOGAUTHOR_ROLE });
                         }
 
                         // seed languages

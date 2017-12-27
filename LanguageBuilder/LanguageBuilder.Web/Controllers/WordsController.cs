@@ -63,7 +63,7 @@ namespace LanguageBuilder.Web.Controllers
 
             if (!model.Data.Any())
             {
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
             }
 
             return View(nameof(Search), model);
@@ -99,7 +99,7 @@ namespace LanguageBuilder.Web.Controllers
 
             if (!model.Data.Any())
             {
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
             }
 
             return View(model);
@@ -146,7 +146,7 @@ namespace LanguageBuilder.Web.Controllers
                         _mapper.Map<WordCreateViewModel, Word>(model.TargetWord),
                         this.LoggedUser.Id);
 
-                    TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Success, "Translation was succesfuly created.", hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, "Translation was succesfuly created.", hasDismissButton: true));
 
                     return RedirectToAction(nameof(My));
                 }
@@ -155,7 +155,7 @@ namespace LanguageBuilder.Web.Controllers
             {
                 ex.SaveToLog();
 
-                TempData.Put(WebConstants.AlertKey, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GeneralError, hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GENERAL_ERROR, hasDismissButton: true));
             }
 
             model.Languages = await _languageService.GetAllAsync();
@@ -163,20 +163,7 @@ namespace LanguageBuilder.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Train()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> Match()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> Reproduce()
-        {
-            return View();
-        }
+        
 
         //// GET: Words/Edit/5
         //public async Task<IActionResult> Edit(int? id)
