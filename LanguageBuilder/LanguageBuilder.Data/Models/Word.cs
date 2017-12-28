@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using static LanguageBuilder.Data.DataConstants;
+
 namespace LanguageBuilder.Data.Models
 {
     public class Word : BaseEntity<int>
     {
-        [MaxLength(15)]
+        [MaxLength(WORD_GENDER_MAX_LENGTH)]
         public string Gender { get; set; }
 
-        [MaxLength(1000)]
+        [MaxLength(WORD_DEFINITION_MAX_LENGTH)]
         public string Definition { get; set; }
 
         [Required]
-        [MinLength(1)]
-        [MaxLength(300)]
+        [MinLength(WORD_CONTENT_MIN_LENGTH)]
+        [MaxLength(WORD_CONTENT_MAX_LENGTH)]
         public string Content { get; set; }
 
         public int LanguageId { get; set; }

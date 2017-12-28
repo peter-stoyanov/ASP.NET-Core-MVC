@@ -79,19 +79,19 @@ namespace LanguageBuilder.Web
             {
                 config.Filters.Add(new ValidateModelStateAttributeAttribute());
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-                config.SslPort = 44321;
-                config.Filters.Add(new RequireHttpsAttribute());
+                //config.SslPort = 44321;
+                //config.Filters.Add(new RequireHttpsAttribute());
             });
 
-            services.AddAntiforgery(
-                options =>
-                {
-                    options.Cookie.Name = "_af";
-                    options.Cookie.HttpOnly = true;
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                    options.HeaderName = "X-XSRF-TOKEN";
-                }
-            );
+            //services.AddAntiforgery(
+            //    options =>
+            //    {
+            //        options.Cookie.Name = "_af";
+            //        options.Cookie.HttpOnly = true;
+            //        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            //        options.HeaderName = "X-XSRF-TOKEN";
+            //    }
+            //);
 
             services.AddCors();
 

@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using static LanguageBuilder.Data.DataConstants;
+
 namespace LanguageBuilder.Data.Models
 {
     public class Language : BaseEntity<int>
     {
         [Required]
-        [MinLength(1)]
-        [MaxLength(30)]
+        [MinLength(LANGUAGE_MIN_LENGTH)]
+        [MaxLength(LANGUAGE_MAX_LENGTH)]
         public string Name { get; set; }
 
         public bool IsUsed { get; set; } = true;
