@@ -6,7 +6,7 @@ using Xunit;
 
 namespace LanguageBuilder.Tests.Web
 {
-    public class HomeControllerTests
+    public class HomeControllerTests : BaseWebTest
     {
         private HomeController _homeController;
 

@@ -16,11 +16,12 @@ using Xunit;
 
 namespace LanguageBuilder.Tests.Web
 {
-    public class UsersControllerTests
+    public class UsersControllerTests : BaseWebTest
     {
         [Fact]
         public async void Search_ReturnsView()
         {
+            // Arrange
             var mockUserService = new Mock<IUsersService>();
             var mockRolesService = new Mock<IRolesService>();
 
@@ -28,19 +29,22 @@ namespace LanguageBuilder.Tests.Web
 
             var searchForm = new UsersSearchFormViewModel();
             int? page = 1;
+
+            // Act
             var result = await sut.Search(searchForm, page) as ViewResult;
 
+            // Assert
             Assert.IsType<ViewResult>(result);
         }
 
         [Fact]
         public void ActionMethods_RequireAdministratorRole()
         {
-            //Arrange
+            // Arrange
             //var methods = typeof(UsersController).GetMethods();
-            var methods = GetMethodsOfReturnType(typeof(UsersController), typeof(ActionResult));
+            var methods = GetMethodsOfReturnType(typeof(UsersController), typeof(ActionResult)); // too many methods ?
 
-            //Act
+            // Act
             var attributes = new List<AuthorizeAttribute>();
             foreach (var method in methods)
             {
@@ -49,7 +53,7 @@ namespace LanguageBuilder.Tests.Web
                 attributes.Add(attribute);
             }
 
-            //Assert
+            // Assert
             Assert.All(attributes, attribute => Assert.True(attribute != null && attribute.Roles == LanguageBuilder.Web.WebConstants.ADMIN_AREA));
         }
 
@@ -57,7 +61,6 @@ namespace LanguageBuilder.Tests.Web
         public async Task EditRolesPost_ReturnsBadRequestResult_WhenModelStateIsInvalid()
         {
             // Arrange
-
             var mockUserService = new Mock<IUsersService>();
             var mockRolesService = new Mock<IRolesService>();
 
@@ -69,7 +72,7 @@ namespace LanguageBuilder.Tests.Web
             var viewModel = new UserRolesViewModel();
 
             // Act
-            var result = await sut.EditRoles(viewModel);
+            var result = await sut.EditRoles(viewModel); // tempdata null ?
 
             // Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
@@ -80,7 +83,6 @@ namespace LanguageBuilder.Tests.Web
 
         public IEnumerable<MethodInfo> GetMethodsOfReturnType(Type cls, Type returnType)
         {
-            // Did you really mean to prohibit public methods? I assume not
             var methods = cls.GetMethods(BindingFlags.NonPublic |
                                          BindingFlags.Public |
                                          BindingFlags.Instance);
