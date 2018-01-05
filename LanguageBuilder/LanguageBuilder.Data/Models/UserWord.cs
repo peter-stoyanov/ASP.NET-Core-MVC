@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using static LanguageBuilder.Data.DataConstants;
+
 namespace LanguageBuilder.Data.Models
 {
     public class UserWord : BaseEntity<int>
@@ -22,7 +24,7 @@ namespace LanguageBuilder.Data.Models
 
         public DateTime NextReview { get; set; } = DateTime.Now.AddDays(2);
 
-        [MaxLength(300)]
+        [MaxLength(WORD_NOTES_MAX_LENGTH)]
         public string Notes { get; set; }
 
         public int? WordListId { get; set; }

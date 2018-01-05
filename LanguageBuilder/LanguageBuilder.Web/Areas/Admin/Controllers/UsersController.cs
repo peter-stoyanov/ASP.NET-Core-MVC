@@ -19,21 +19,15 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
     public class UsersController : BaseController
     {
         private readonly IUsersService _userService;
-        private readonly RoleManager<Role> _roleManager;
         private readonly IRolesService _roleService;
-        private readonly UserManager<User> _userManager;
 
         public UsersController(
             IUsersService usersService,
-            RoleManager<Role> roleManager,
-            IRolesService roleService,
-            UserManager<User> userManager)
+            IRolesService roleService)
             : base(usersService)
         {
-            this._userManager = userManager;
             this._userService = usersService;
             this._roleService = roleService; ;
-            this._roleManager = roleManager;
         }
 
         [HttpGet]

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using static LanguageBuilder.Data.DataConstants;
+
 namespace LanguageBuilder.Data.Models
 {
     public class Example : BaseEntity<int>
@@ -11,7 +13,7 @@ namespace LanguageBuilder.Data.Models
         public bool IsActive { get; set; }
 
         [Required]
-        [MaxLength(300)]
+        [MaxLength(EXAMPLE_MAX_LENGTH)]
         public string Content { get; set; }
 
         public List<UserWordExample> UserWords { get; set; } = new List<UserWordExample>();

@@ -11,32 +11,21 @@ using Xunit;
 
 namespace LanguageBuilder.Tests.Web
 {
-    public class WordsControllerTests
+    public class WordsControllerTests : BaseWebTest
     {
         private IServiceProvider _serviceProvider;
         private Mock<ILanguageService> _mockLanguageService;
         private Mock<IWordsService> _mockWordsService;
         private Mock<IUsersService> _mockUsersService;
-        private LanguageBuilderDbContext _context;
         private Mapper _mapper;
 
         public WordsControllerTests(Mapper mapper)
         {
-            //var services = new ServiceCollection();
-
-            //services
-            //    .AddEntityFrameworkInMemoryDatabase()
-            //    .AddDbContext<LanguageBuilderDbContext>();
-
-            //_serviceProvider = services.BuildServiceProvider();
-
             _mockWordsService = new Mock<IWordsService>();
             _mockUsersService = new Mock<IUsersService>();
             _mockLanguageService = new Mock<ILanguageService>();
             _mapper = mapper;
 
-            //_context = new LanguageBuilderDbContext(InMemoryDbContextOptionsFactory.Create<LanguageBuilderDbContext>());
-            _context = Tests.GetDb();
         }
 
         [Fact]

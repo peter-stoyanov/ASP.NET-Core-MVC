@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LanguageBuilder.Data
 {
@@ -64,6 +66,27 @@ namespace LanguageBuilder.Data
         // enforce data validation with attributes before saving changes to Db
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
+            ThrowIfEntitiesNotValid();
+
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            ThrowIfEntitiesNotValid();
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            ThrowIfEntitiesNotValid();
+
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+        private void ThrowIfEntitiesNotValid()
+        {
             var serviceProvider = this.GetService<IServiceProvider>();
             var items = new Dictionary<object, object>();
 
@@ -84,8 +107,6 @@ namespace LanguageBuilder.Data
                     }
                 }
             }
-
-            return base.SaveChanges(acceptAllChangesOnSuccess);
         }
     }
 }

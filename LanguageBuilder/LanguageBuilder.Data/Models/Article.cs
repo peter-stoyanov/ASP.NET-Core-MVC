@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+
 using static LanguageBuilder.Data.DataConstants;
 
 namespace LanguageBuilder.Data.Models
@@ -12,8 +13,8 @@ namespace LanguageBuilder.Data.Models
         public string Title { get; set; }
 
         [Required]
-        [MinLength(ARTICLE_CONTENT_MINLENGTH)]
-        [MaxLength(ARTICLE_CONTENT_MAXLENGTH)]
+        [MinLength(ARTICLE_CONTENT_MIN_LENGTH)]
+        [MaxLength(ARTICLE_CONTENT_MAX_LENGTH)]
         public string Content { get; set; }
 
         public DateTime PublishDate { get; set; }

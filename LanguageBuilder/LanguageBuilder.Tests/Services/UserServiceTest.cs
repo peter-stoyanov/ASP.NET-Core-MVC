@@ -8,27 +8,25 @@ using Xunit;
 
 namespace LanguageBuilder.Tests.Services
 {
-    public class UserServiceTest
+    public class UserServiceTest : BaseServiceTest
     {
-        private readonly LanguageBuilderDbContext _context;
-
         public UserServiceTest()
         {
-            _context = Tests.GetDb();
+
         }
 
         [Fact]
-        public void ReturnsExistingUser()
+        public void GetById_ReturnsUser_IfExisting()
         {
             // Arange
-            var userService = new UsersService(_context);
+            var userService = new UsersService(InMemoryDatabase);
 
             string guid = new Guid().ToString();
 
             var user = new User { Id = guid };
 
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            InMemoryDatabase.Users.Add(user);
+            InMemoryDatabase.SaveChanges();
 
             // Act
             var result = userService.GetById(guid);
