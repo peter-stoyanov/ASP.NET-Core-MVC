@@ -1,4 +1,5 @@
 ﻿using LanguageBuilder.Data.Models;
+using LanguageBuilder.Services.Models;
 using LanguageBuilder.Services.Models.WordsSearch;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,8 @@ namespace LanguageBuilder.Web.ViewModels.WordViewModels
         public List<Language> Languages { get; set; }
 
         public string SelectedLetter { get; set; } = "";
+
+        public SortOptions SortOptions { get; set; } = new SortOptions();
 
         [DisplayName("Page size")]
         public int RowCount { get; set; }

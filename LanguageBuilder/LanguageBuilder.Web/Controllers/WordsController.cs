@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Services.Models;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.ViewComponents;
 using LanguageBuilder.Web.ViewModels.TranslationViewModels;
@@ -33,27 +34,26 @@ namespace LanguageBuilder.Web.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> My(WordsSearchFormViewModel searchForm)
+        public async Task<IActionResult> My(WordsSearchFormViewModel searchForm, SortOptions sortOptions)
         {
             var request = searchForm.ToSearchRequest();
 
-            // move to model ?
-            Expression<Func<Word, bool>> filter = null;
-            if (String.IsNullOrEmpty(searchForm.SelectedLetter))
+            if (String.IsNullOrEmpty(searchForm.Keywords))
             {
-                filter = w => w.Users.Any(u => u.UserId == LoggedUser.Id);
+                request.Filter = w => w.Users.Any(u => u.UserId == LoggedUser.Id)
+                                    && w.Content.StartsWith(searchForm.SelectedLetter.ToLower());
             }
             else
             {
-                filter = w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()) && w.Users.Any(u => u.UserId == LoggedUser.Id);
-            };
+                request.Filter = w => w.Users.Any(u => u.UserId == LoggedUser.Id)
+                                    && w.Content.StartsWith(searchForm.SelectedLetter.ToLower()) 
+                                    && w.Content.Contains(searchForm.Keywords);
+            }
 
-            var response = await _wordsService.Search(
-                request,
-                sortColumnSelector: w => w.Content,
-                criteria: filter);
+            var response = await _wordsService.Search(request, sortOptions);
 
             searchForm.Languages = (await _languageService.GetAllAsync()).ToList();
+            //searchForm.SortOptions = sortOptions;
 
             var model = new WordsSearchViewModel
             {
@@ -63,33 +63,29 @@ namespace LanguageBuilder.Web.Controllers
 
             if (!model.Data.Any())
             {
-                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Info, WebConstants.NORECORDS_MESSAGE, hasDismissButton: true));
             }
 
             return View(nameof(Search), model);
         }
 
-        public async Task<IActionResult> Search(WordsSearchFormViewModel searchForm)
+        public async Task<IActionResult> Search(WordsSearchFormViewModel searchForm, SortOptions sortOptions)
         {
             var request = searchForm.ToSearchRequest();
 
-            // move to model ?
-            Expression<Func<Word, bool>> filter = null;
             if (String.IsNullOrEmpty(searchForm.Keywords))
             {
-                filter = w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower());
+                request.Filter = w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower());
             }
             else
             {
-                filter = w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()) && w.Content.Contains(searchForm.Keywords);
-            };
+                request.Filter = w => w.Content.StartsWith(searchForm.SelectedLetter.ToLower()) && w.Content.Contains(searchForm.Keywords);
+            }
 
-            var response = await _wordsService.Search(
-                request,
-                sortColumnSelector: w => w.Content,
-                criteria: filter);
+            var response = await _wordsService.Search(request, sortOptions);
 
             searchForm.Languages = (await _languageService.GetAllAsync()).ToList();
+            //searchForm.SortOptions = sortOptions;
 
             var model = new WordsSearchViewModel
             {
@@ -99,7 +95,7 @@ namespace LanguageBuilder.Web.Controllers
 
             if (!model.Data.Any())
             {
-                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
+                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Info, WebConstants.NORECORDS_MESSAGE, hasDismissButton: true));
             }
 
             return View(model);

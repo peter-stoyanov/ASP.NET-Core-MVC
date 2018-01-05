@@ -3,6 +3,7 @@ using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
 using LanguageBuilder.Data.Services;
 using LanguageBuilder.Services.Contracts;
+using LanguageBuilder.Services.Models;
 using LanguageBuilder.Services.Models.WordsSearch;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -167,35 +168,55 @@ namespace LanguageBuilder.Services.Implementations
                 .ToListAsync();
         }
 
-        public Task AddInUserAsync(Word word, User user)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task AddInUserAsync(Word word, User user)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public async Task<Response> Search(
-            Request request,
-            Expression<Func<Word, object>> sortColumnSelector = null,
-            Expression<Func<Word, bool>> criteria = null)
+        public async Task<Response> Search(Request request, SortOptions sortOptions)
         {
             request.CancellationToken.ThrowIfCancellationRequested();
 
             int offset = (request.PageSize * request.PageNumber) - request.PageSize;
             if (offset < 0) { offset = 0; }
 
-            var query = _db.Words
-                .Include(w => w.Users)
-                .OrderBy(sortColumnSelector)
-                .AsQueryable();
+            var query = _db.Words.AsQueryable();
 
-            if (criteria != null)
+            switch (sortOptions.SortColumn.ToLower())
             {
-                query = query.Where(criteria);
+                case "content":
+                    query = sortOptions.SortDirection == SortDirection.Ascending
+                        ? query.OrderBy(t => t.Content)
+                        : query.OrderByDescending(t => t.Content);
+                    break;
+                case "gender":
+                    query = sortOptions.SortDirection == SortDirection.Ascending
+                        ? query.OrderBy(t => t.Gender)
+                        : query.OrderByDescending(t => t.Gender);
+                    break;
+                default:
+                    query = sortOptions.SortDirection == SortDirection.Ascending
+                        ? query.OrderBy(t => t.Content)
+                        : query.OrderByDescending(t => t.Content);
+                    break;
+            }
+
+            if (request.Keywords != null)
+            {
+                query = query.Where(t => t.Content.Contains(request.Keywords.ToLower()));
+            }
+
+            if (request.Filter != null)
+            {
+                query = query.Where(request.Filter);
             }
 
             if (request.LanguageIds.Any())
             {
                 query = query.Where(w => request.LanguageIds.Contains(w.LanguageId));
             }
+
+            var totalItems = await query.CountAsync();
 
             query = query
                 .Select(p => p)
@@ -205,14 +226,15 @@ namespace LanguageBuilder.Services.Implementations
             var pagedResult = new PagedResult<Word>
             {
                 Data = await query.AsNoTracking().ToListAsync(request.CancellationToken),
-                TotalItems = await _db.Words.CountAsync(),
+                TotalItems = totalItems,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize
             };
 
             var response = new Response()
             {
-                Records = pagedResult
+                Records = pagedResult,
+                TotalRecords = totalItems
             };
 
             return response;

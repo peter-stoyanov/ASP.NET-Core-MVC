@@ -1,6 +1,6 @@
 ﻿@model WordsSearchFormViewModel
 
-<form class="autosubmit form-inline my-3" role="form" asp-controller="Words" asp-action="Search" method="get" asp-antiforgery="false">
+<form id="search-form" class="autosubmit form-inline my-3" role="form" asp-controller="Words" asp-action="Search" method="get" asp-antiforgery="false">
     <div class="form-group">
         <label asp-for="Keywords"></label>
         <input asp-for="Keywords" placeholder="type keyword ..." title="Search in dictionaries" class="form-control my-3 mx-3" type="text" />

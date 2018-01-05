@@ -1,4 +1,5 @@
 ﻿using LanguageBuilder.Data.Models;
+using LanguageBuilder.Services.Models;
 using LanguageBuilder.Services.Models.WordsSearch;
 using System;
 using System.Collections.Generic;
@@ -31,8 +32,8 @@ namespace LanguageBuilder.Services.Contracts
 
         Task<IEnumerable<Word>> SearchAsync(string keywords, int languageId, int rows = 10);
 
-        Task AddInUserAsync(Word word, User user);
+        //Task AddInUserAsync(Word word, User user);
 
-        Task<Response> Search(Request request, Expression<Func<Word, object>> sortColumnSelector = null, Expression<Func<Word, bool>> criteria = null);
+        Task<Response> Search(Request request, SortOptions sortOptions);
     }
 }

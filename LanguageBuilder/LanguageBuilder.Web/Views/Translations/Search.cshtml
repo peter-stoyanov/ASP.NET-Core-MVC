@@ -51,7 +51,7 @@
                     <td>@translation.SourceWord.Content</td>
                     <td>@translation.TargetWord.Content</td>
                     <td>
-                        <a asp-controller="Translations" asp-action="Edit" title="Edit User" asp-route-id="@translation.Id"><i class="fa fa-pencil contact small-icon" aria-hidden="true"></i></a>
+                        <a asp-controller="Translations" asp-action="Edit" title="Edit Translation" asp-route-id="@translation.Id"><i class="fa fa-pencil contact small-icon" aria-hidden="true"></i></a>
                     
                         @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.ADMINISTRATOR_ROLE))
                         {
@@ -116,7 +116,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: '/translations/deleteConfirmed?id=0',// + selectedTranslationId,
+                    url: '/translations/deleteConfirmed?id=' + selectedTranslationId,
                     data: {},
                     success: function (data) {
                         window.location.reload(true);

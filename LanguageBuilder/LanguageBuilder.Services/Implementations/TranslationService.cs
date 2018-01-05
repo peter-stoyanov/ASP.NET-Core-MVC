@@ -30,7 +30,11 @@ namespace LanguageBuilder.Services.Implementations
 
             if (targetWordIds.Any())
             {
-                return await _db.Translations.Include(t => t.SourceWord).Where(t => targetWordIds.Contains(t.TargetWordId)).ToListAsync();
+                return await _db
+                    .Translations
+                    .Include(t => t.SourceWord)
+                    .Where(t => targetWordIds.Contains(t.TargetWordId))
+                    .ToListAsync();
             }
 
             return Enumerable.Empty<Translation>();
