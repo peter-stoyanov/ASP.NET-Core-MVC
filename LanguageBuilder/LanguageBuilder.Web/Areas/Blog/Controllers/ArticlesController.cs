@@ -22,7 +22,8 @@ namespace LanguageBuilder.Web.Areas.Blog.Controllers
         public ArticlesController(
             IBlogArticleService articles,
             IUsersService userService,
-            IHtmlService html) : base(userService)
+            IHtmlService html)
+            : base(userService)
         {
             this._articles = articles;
             this._html = html;

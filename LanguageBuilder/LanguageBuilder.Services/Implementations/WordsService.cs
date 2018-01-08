@@ -6,10 +6,8 @@ using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Services.Models;
 using LanguageBuilder.Services.Models.WordsSearch;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Implementations
@@ -118,6 +116,8 @@ namespace LanguageBuilder.Services.Implementations
             if (!await ExistAsync(source.Content)) { _db.Words.Add(source); }
             if (!await ExistAsync(target.Content)) { _db.Words.Add(target); }
 
+            _db.SaveChanges();
+
             source = await _db.Words.Where(w => w.Content == source.Content).FirstOrDefaultAsync();
             target = await _db.Words.Where(w => w.Content == target.Content).FirstOrDefaultAsync();
 
@@ -189,11 +189,13 @@ namespace LanguageBuilder.Services.Implementations
                         ? query.OrderBy(t => t.Content)
                         : query.OrderByDescending(t => t.Content);
                     break;
+
                 case "gender":
                     query = sortOptions.SortDirection == SortDirection.Ascending
                         ? query.OrderBy(t => t.Gender)
                         : query.OrderByDescending(t => t.Gender);
                     break;
+
                 default:
                     query = sortOptions.SortDirection == SortDirection.Ascending
                         ? query.OrderBy(t => t.Content)

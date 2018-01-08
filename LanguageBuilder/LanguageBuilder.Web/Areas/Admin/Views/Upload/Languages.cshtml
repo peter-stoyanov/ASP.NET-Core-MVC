@@ -7,7 +7,8 @@
 
 <h1 class="display-4 text-center">@ViewBag.Title</h1>
 
-@await Component.InvokeAsync(nameof(BootstrapAlertComponent), TempData.Get<BootstrapAlertViewModel>(WebConstants.ALERTKEY))
+@await Component.InvokeAsync(nameof(BootstrapAlertComponent),
+    TempData.Get<BootstrapAlertViewModel>(WebConstants.ALERTKEY))
 
 @if (Model.Any())
 {

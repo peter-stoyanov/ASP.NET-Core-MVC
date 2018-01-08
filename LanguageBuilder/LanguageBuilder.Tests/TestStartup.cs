@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using LanguageBuilder.Data;
 using LanguageBuilder.Web.Infrastructure.Mapping;
-using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace LanguageBuilder.Tests
 {
@@ -22,14 +19,5 @@ namespace LanguageBuilder.Tests
                 }
             }
         }
-
-        //public static LanguageBuilderDbContext GetDb()
-        //{
-        //    var dbOptions = new DbContextOptionsBuilder<LanguageBuilderDbContext>()
-        //        .UseInMemoryDatabase(Guid.NewGuid().ToString())
-        //        .Options;
-
-        //    return new LanguageBuilderDbContext(dbOptions);
-        //}
     }
 }

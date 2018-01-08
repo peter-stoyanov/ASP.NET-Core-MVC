@@ -1,7 +1,6 @@
 ﻿using LanguageBuilder.Data.Models;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -38,7 +37,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Models
                         var content = worksheet.Cells[row, 1].Value.ToString();
                         var definition = worksheet.Cells[row, 2].Value.ToString();
 
-                        if (String.IsNullOrEmpty(content) || String.IsNullOrEmpty(definition)) { continue; }
+                        if (string.IsNullOrEmpty(content) || string.IsNullOrEmpty(definition)) { continue; }
 
                         dictionary.Add(content, definition);
                     }

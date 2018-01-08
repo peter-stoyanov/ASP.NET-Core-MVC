@@ -53,11 +53,9 @@
         <main class="@(ViewContext.IsCurrentUrl("home", "index") ? "landing-section" : "page")">
 
             @RenderBody()
-
         </main>
 
         @Html.Partial("_Footer")
-    
     </div>
 
     <environment include="Development">
@@ -79,7 +77,6 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
 
     @if (ViewBag.RegisterJqueryUi == true)
     {

@@ -315,3 +315,65 @@ Query: (null)
 
 
 
+Date: 2018-01-08 13:21:12,521 
+
+Host: DESKTOP-CQAS2KA 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [5] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LanguageBuilder.Services.Implementations.WordsService.<AddWordsWithTranslationWithUserConnectionAsync>d__11.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Services\Implementations\WordsService.cs:line 122
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at LanguageBuilder.Web.Controllers.TranslationsController.<Create>d__8.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Controllers\TranslationsController.cs:line 123
+ 
+Message: Object reference not set to an instance of an object. 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+
+Date: 2018-01-08 13:22:41,583 
+
+Host: DESKTOP-CQAS2KA 
+Url: NOT AVAILABLEspnet-request{URL} 
+Query string: NOT AVAILABLEspnet-request{QUERY_STRING} 
+Request method: NOT AVAILABLEspnet-request{REQUEST_METHOD} 
+Referer: NOT AVAILABLEspnet-request{HTTP_REFERER} 
+User: NOT AVAILABLE 
+User IP: NOT AVAILABLEspnet-request{REMOTE_ADDR} 
+User agent: NOT AVAILABLEspnet-request{HTTP_USER_AGENT} 
+
+Thread: [10] 
+Logger: LanguageBuilder.Web.Program 
+
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LanguageBuilder.Services.Implementations.WordsService.<AddWordsWithTranslationWithUserConnectionAsync>d__11.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Services\Implementations\WordsService.cs:line 122
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at LanguageBuilder.Web.Controllers.TranslationsController.<Create>d__8.MoveNext() in C:\Users\pesho\Google Drive\Programming\GitHub\ASP.NET-Core-MVC\LanguageBuilder\LanguageBuilder.Web\Controllers\TranslationsController.cs:line 123
+ 
+Message: Object reference not set to an instance of an object. 
+
+Query: (null) 
+
+
+
+--------------------------------------
+
+
+

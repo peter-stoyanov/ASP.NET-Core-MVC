@@ -1,11 +1,11 @@
 ﻿using LanguageBuilder.Data;
-using LanguageBuilder.Data.Models;
-using LanguageBuilder.Services.Implementations;
+using LanguageBuilder.Web.Controllers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+using System.Security.Claims;
 
 namespace LanguageBuilder.Tests.Web
 {
@@ -27,6 +27,24 @@ namespace LanguageBuilder.Tests.Web
                 return new LanguageBuilderDbContext(options);
             }
         }
+
+        protected void SetHttpContextWithUser(BaseController controller, string userNameClaim)
+        {
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                 new Claim(ClaimTypes.Name, userNameClaim)
+            }));
+
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = user }
+            };
+        }
+
+        protected T DeserializeFromJson<T>(object json)
+            where T : class
+        {
+            return json == null ? null : JsonConvert.DeserializeObject<T>((string)json);
+        }
     }
 }
-

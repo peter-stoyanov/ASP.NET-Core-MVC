@@ -36,10 +36,10 @@
 
                     @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.USER_ROLE))
                     {
-                        <li class="nav-item dropdown px-1 
-                            @(ViewContext.IsCurrentUrl("words", new[] { "my", "create", "search", "edit" }) 
-                                || ViewContext.IsCurrentUrl("translations", new[] { "my", "create", "search", "edit" }) 
-                            ? "active highlighted" 
+                        <li class="nav-item dropdown px-1
+                            @(ViewContext.IsCurrentUrl("words", new[] { "my", "create", "search", "edit" })
+                                || ViewContext.IsCurrentUrl("translations", new[] { "my", "create", "search", "edit" })
+                            ? "active highlighted"
                             : String.Empty)">
                             <a class="nav-link dropdown-toggle"
                                href="#" id="navbarDropdownTranslations"
@@ -47,9 +47,7 @@
                                 Vocabulary
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownTranslations">
-                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="My">My Words</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Search">Browse words</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Words" asp-action="Create">Create new Word</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" asp-area="" asp-controller="Translations" asp-action="My">My Translations</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Translations" asp-action="Search">Browse translations</a>

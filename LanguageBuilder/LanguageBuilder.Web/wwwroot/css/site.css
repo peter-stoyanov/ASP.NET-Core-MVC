@@ -45,10 +45,8 @@ h2 {
 }
 
 .long-tasks-indicator {
-    position: relative;
-    float: right;
-    /*z-index: 1000;*/
-    top: 20px;
+    position: fixed;
+    top: 80px;
     right: 0px;
     background: #3fb8fa;
     overflow-x: hidden;

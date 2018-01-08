@@ -40,13 +40,6 @@ namespace LanguageBuilder.Web.Controllers
             ViewBag.LoggedUser = this.LoggedUser;
         }
 
-        //protected IActionResult RedirectToReferrer(string defaultActionName = null, string defaultControllerName = null, object defaultRouteValues = null)
-        //{
-        //    string url = this.Request.UrlReferrer() != null ? this.Request.UrlReferrer().PathAndQuery : null;
-
-        //    return this.RedirectToLocal(url, defaultActionName, defaultControllerName: defaultControllerName, defaultRouteValues: defaultRouteValues);
-        //}
-
         protected IActionResult RedirectToLocal(string url, string defaultActionName = null, string defaultControllerName = null, object defaultRouteValues = null)
         {
             var baseUrl = this.Request.BaseUrl(addTrailingSlash: false);

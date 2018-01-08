@@ -1,9 +1,6 @@
-﻿using LanguageBuilder.Data.Models;
+﻿using LanguageBuilder.Data;
+using LanguageBuilder.Data.Models;
 using LanguageBuilder.Data.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using LanguageBuilder.Data;
 
 namespace LanguageBuilder.Tests.Services.TestDoubles
 {
@@ -12,7 +9,8 @@ namespace LanguageBuilder.Tests.Services.TestDoubles
     /// </summary>
     public class WordRepositoryTestDouble : BaseRepository<Word, int>
     {
-        public WordRepositoryTestDouble(LanguageBuilderDbContext context) : base(context)
+        public WordRepositoryTestDouble(LanguageBuilderDbContext context)
+            : base(context)
         {
         }
     }

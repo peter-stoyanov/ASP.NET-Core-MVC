@@ -1,8 +1,6 @@
 ﻿using LanguageBuilder.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LanguageBuilder.Tests.Services
 {

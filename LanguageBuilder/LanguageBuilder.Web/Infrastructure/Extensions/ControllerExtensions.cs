@@ -13,5 +13,12 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
 
             return controller.View(model);
         }
+
+        public static string ShortName(this Controller controller)
+        {
+            var name = controller.GetType().Name;
+
+            return name.EndsWith("Controller") ? name.Substring(0, name.Length - "Controller".Length) : name;
+        }
     }
 }

@@ -1,13 +1,7 @@
-﻿using LanguageBuilder.Data.Models;
-using LanguageBuilder.Services.Contracts;
+﻿using LanguageBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using OfficeOpenXml;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -42,7 +36,7 @@ namespace LanguageBuilder.Web.BackgroundTasks
                 _logger.LogDebug($"Words upload background task is stopping.");
             });
 
-           // job
+            // job
 
             _logger.LogDebug($"Words upload task has finished.");
         }
@@ -54,4 +48,3 @@ namespace LanguageBuilder.Web.BackgroundTasks
         }
     }
 }
-

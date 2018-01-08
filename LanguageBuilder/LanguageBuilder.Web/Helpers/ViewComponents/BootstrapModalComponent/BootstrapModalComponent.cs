@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.ViewComponents
@@ -11,9 +10,9 @@ namespace LanguageBuilder.Web.ViewComponents
             var viewmodel = new BootstrapModalViewModel()
             {
                 Body = model.Body,
-                Id = model.Id ?? String.Empty,
-                Title = model.Title ?? String.Empty,
-                AriaLabel = String.Format("{0}-{1}", model.Id, "lbl"),
+                Id = model.Id ?? string.Empty,
+                Title = model.Title ?? string.Empty,
+                AriaLabel = string.Format("{0}-{1}", model.Id, "lbl"),
                 ConfirmButtonName = model.ConfirmButtonName ?? "Ok",
                 ConfirmButtonId = model.ConfirmButtonId ?? "modal-confirm",
                 CancelButtonName = model.CancelButtonName ?? "Cancel",

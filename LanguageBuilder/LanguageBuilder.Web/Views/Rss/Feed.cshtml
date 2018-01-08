@@ -1,28 +1,31 @@
-﻿@model IEnumerable<Article>
+﻿@model IEnumerable<BlogArticleListingServiceModel>
 
 @{
     Layout = null;
-    //Response.ContentType = "text/xml";
 }
 
 <?xml version="1.0" encoding="utf-8" ?>
 <rss version="2.0">
     <channel>
         <title>coreComponent - Language Builder's blog</title>
+
         <link> http://www.language-builder.com </link>
+
         <description>Blog for language learning</description>
+
         <lastBuildDate>@DateTime.Now.ToUniversalTime()</lastBuildDate>
+
         <language>en-us</language>
+
         @foreach(var article in Model)
         {
-            var postLink = "/Articles/" + article.Id;
+            var postLink = "/Blog/Articles/" + article.Id;
 
             @:<item>
                 <title>@Html.Encode(article.Title)</title>
                 <link>@postLink@:</link>
                 <guid>test</guid>
                 <pubDate>@article.PublishDate.ToShortDateString()</pubDate>
-                @*<description>@Html.Encode(post.Extract)</description>*@
             @:</item>
         }
     </channel>

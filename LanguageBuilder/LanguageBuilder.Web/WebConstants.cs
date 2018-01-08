@@ -4,15 +4,18 @@
     {
         // roles
         public const string ADMINISTRATOR_ROLE = "Administrator";
+
         public const string BLOGAUTHOR_ROLE = "BlogAuthor";
         public const string USER_ROLE = "User";
 
         // areas
         public const string ADMIN_AREA = "Admin";
+
         public const string BLOG_AREA = "Blog";
 
         // bootstrap alert types
         public const string ALERTKEY = "alertKey";
+
         public const string ALERT_INFO = "info";
         public const string ALERT_SUCCESS = "success";
         public const string ALERT_WARNING = "warning";

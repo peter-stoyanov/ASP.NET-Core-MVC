@@ -6,11 +6,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Middleware\**" />
+    <Compile Remove="wwwroot\fonts\**" />
+    <Content Remove="Middleware\**" />
+    <Content Remove="wwwroot\fonts\**" />
+    <EmbeddedResource Remove="Middleware\**" />
+    <EmbeddedResource Remove="wwwroot\fonts\**" />
+    <None Remove="Middleware\**" />
+    <None Remove="wwwroot\fonts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="BackgroundTasks\BackgroundService.cs" />
+    <Compile Remove="BackgroundTasks\BulkImportWordsBackgroundService.cs" />
+    <Compile Remove="Controllers\ErrorsController.cs" />
     <Compile Remove="Hubs\ConnectionMapping.cs" />
     <Compile Remove="ViewModels\SortDirection.cs" />
     <Compile Remove="ViewModels\SortOptions.cs" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(SolutionDir)\_stylecop\StyleCopeRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.1" />
     <PackageReference Include="cloudscribe.Web.Pagination" Version="2.1.1" />
@@ -38,9 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Middleware\" />
     <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\lib\jquery-ui\css\" />
     <Folder Include="wwwroot\lib\jquery-ui\js\" />
     <Folder Include="wwwroot\lib\knockout\" />

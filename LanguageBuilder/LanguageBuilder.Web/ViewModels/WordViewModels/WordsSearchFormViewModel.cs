@@ -16,7 +16,7 @@ namespace LanguageBuilder.Web.ViewModels.WordViewModels
 
         public List<Language> Languages { get; set; }
 
-        public string SelectedLetter { get; set; } = "";
+        public string SelectedLetter { get; set; } = string.Empty;
 
         public SortOptions SortOptions { get; set; } = new SortOptions();
 

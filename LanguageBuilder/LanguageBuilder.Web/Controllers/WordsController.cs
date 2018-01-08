@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers
@@ -46,7 +45,7 @@ namespace LanguageBuilder.Web.Controllers
             else
             {
                 request.Filter = w => w.Users.Any(u => u.UserId == LoggedUser.Id)
-                                    && w.Content.StartsWith(searchForm.SelectedLetter.ToLower()) 
+                                    && w.Content.StartsWith(searchForm.SelectedLetter.ToLower())
                                     && w.Content.Contains(searchForm.Keywords);
             }
 
@@ -158,8 +157,6 @@ namespace LanguageBuilder.Web.Controllers
 
             return View(model);
         }
-
-        
 
         //// GET: Words/Edit/5
         //public async Task<IActionResult> Edit(int? id)

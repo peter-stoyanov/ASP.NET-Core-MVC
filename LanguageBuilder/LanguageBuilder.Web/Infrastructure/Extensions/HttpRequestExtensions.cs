@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
 
 namespace LanguageBuilder.Web.Infrastructure.Extensions
 {
     public static class HttpRequestExtensions
     {
-
         public static string UrlReferrer(this HttpRequest request)
         {
             return request.Headers["Referer"].ToString();
@@ -26,7 +24,7 @@ namespace LanguageBuilder.Web.Infrastructure.Extensions
 
         public static string BaseUrl(this HttpRequest request, bool addTrailingSlash = true)
         {
-            return $"{request.Scheme}://{request.Host}{request.PathBase}{(addTrailingSlash ? "/" : String.Empty)}";
+            return $"{request.Scheme}://{request.Host}{request.PathBase}{(addTrailingSlash ? "/" : string.Empty)}";
         }
     }
 }

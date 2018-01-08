@@ -17,7 +17,8 @@ namespace LanguageBuilder.Web.Controllers
         private readonly IUsersService _userService;
         private readonly IMapper _mapper;
 
-        public UsersController(IUsersService userService, IMapper mapper) : base(userService)
+        public UsersController(IUsersService userService, IMapper mapper)
+            : base(userService)
         {
             _userService = userService;
             _mapper = mapper;
@@ -68,7 +69,7 @@ namespace LanguageBuilder.Web.Controllers
 
                 TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User profile was successfully updated.", hasDismissButton: true));
 
-                return RedirectToLocal(null, nameof(UsersController.Profile), "Users", new { area = "", id = model.Username });
+                return RedirectToLocal(null, nameof(UsersController.Profile), "Users", new { area = string.Empty, id = model.Username });
             }
             catch (Exception ex)
             {

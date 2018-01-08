@@ -8,7 +8,7 @@
             connection.on('broadcastMessage', data => {
                 console.log(data);
             });
-            
+
             connection.on('initTaskNotification', data => {
                 console.log(data);
                 $notification.removeClass('notvisible');
@@ -39,7 +39,7 @@
             });
 
             connection.on('onConnected', data => {
-                console.log(data); 
+                console.log(data);
             });
 
             connection.on('onDisconnected', data => {

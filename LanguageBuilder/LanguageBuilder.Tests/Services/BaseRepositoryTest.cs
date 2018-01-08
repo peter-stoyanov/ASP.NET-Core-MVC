@@ -1,18 +1,11 @@
-﻿using LanguageBuilder.Data;
-using LanguageBuilder.Data.Models;
-using LanguageBuilder.Data.Services;
-using LanguageBuilder.Services.Implementations;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xunit;
+﻿using AutoFixture.Xunit2;
 using FluentAssertions;
+using LanguageBuilder.Data.Models;
 using LanguageBuilder.Tests.Services.TestDoubles;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
-using AutoFixture.Xunit2;
+using Xunit;
 
 namespace LanguageBuilder.Tests.Services
 {
@@ -273,7 +266,7 @@ namespace LanguageBuilder.Tests.Services
 
             // Act
             var result = await sut.GetAsync(2);
-            
+
             // Assert
             Assert.NotNull(result);
             result.Should().BeEquivalentTo(word2);
@@ -293,4 +286,3 @@ namespace LanguageBuilder.Tests.Services
         }
     }
 }
-

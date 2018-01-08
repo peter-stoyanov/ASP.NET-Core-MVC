@@ -1,11 +1,9 @@
-﻿using LanguageBuilder.Data.Models;
-using LanguageBuilder.Services.Contracts;
+﻿using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Web.Areas.Admin.Models;
 using LanguageBuilder.Web.Controllers;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.ViewComponents;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -47,7 +45,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                 SearchForm = searchForm
             };
 
-            if (!model.Data.Any())
+            if (model.Data != null && !model.Data.Any())
             {
                 TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Info, "There are no records in the database.", hasDismissButton: true));
             }
@@ -82,16 +80,19 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
             {
                 if (model.UserId == LoggedUser.Id)
                 {
-                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, "Users can not update their own roles.", hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, "Users can not update their own roles.", hasDismissButton: true));
 
                     return RedirectToLocal(model.Caller, nameof(UsersController.Search), "Users");
                 }
 
-                await _roleService.UpdateAsync(model.UserId, model.SelectedRoles);
+                if (ModelState.IsValid)
+                {
+                    await _roleService.UpdateAsync(model.UserId, model.SelectedRoles);
 
-                TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, "User roles were successfully updated.", hasDismissButton: true));
 
-                return RedirectToLocal(model.Caller, nameof(UsersController.Search), "Users");
+                    return RedirectToLocal(model.Caller, nameof(UsersController.Search), "Users");
+                }
             }
             catch (Exception ex)
             {
@@ -131,7 +132,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Controllers
                 TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Danger, WebConstants.GENERAL_ERROR, hasDismissButton: true));
             }
 
-            return RedirectToLocal("", nameof(UsersController.Search), "Users");
+            return RedirectToLocal(string.Empty, nameof(UsersController.Search), "Users");
         }
     }
 }

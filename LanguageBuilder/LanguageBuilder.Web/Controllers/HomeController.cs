@@ -9,7 +9,8 @@ namespace LanguageBuilder.Web.Controllers
     [AllowAnonymous]
     public class HomeController : BaseAnonymousController
     {
-        public HomeController(IUsersService usersService) : base(usersService)
+        public HomeController(IUsersService usersService)
+            : base(usersService)
         { }
 
         [ResponseCache(Duration = 60)]

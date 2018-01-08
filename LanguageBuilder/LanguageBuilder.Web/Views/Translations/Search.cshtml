@@ -33,7 +33,7 @@
                 </th>
                 <th>
                     <span class="mr-2">Target</span>
-                    
+
                     <a href="#" class="sort-link mr-2" onclick="submitFormWithParams('target', 'ascending')">
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
                     </a>
@@ -52,7 +52,7 @@
                     <td>@translation.TargetWord.Content</td>
                     <td>
                         <a asp-controller="Translations" asp-action="Edit" title="Edit Translation" asp-route-id="@translation.Id"><i class="fa fa-pencil contact small-icon" aria-hidden="true"></i></a>
-                    
+
                         @if (loggedUser != null && await UserManager.IsInRoleAsync(loggedUser, WebConstants.ADMINISTRATOR_ROLE))
                         {
                             <a asp-controller="Translations" asp-action="Delete" title="Delete Translation"><i class="fa fa-trash contact small-icon btn-delete" data-Id="@translation.Id" aria-hidden="true"></i></a>
@@ -133,4 +133,3 @@
         });
     </script>
 }
-

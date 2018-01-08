@@ -41,7 +41,7 @@ namespace LanguageBuilder.Web.Areas.Admin.Models
                         var sourceWord = worksheet.Cells[row, 1].Value.ToString();
                         var targetWord = worksheet.Cells[row, 2].Value.ToString();
 
-                        if (String.IsNullOrEmpty(sourceWord) || String.IsNullOrEmpty(targetWord)) { continue; }
+                        if (string.IsNullOrEmpty(sourceWord) || String.IsNullOrEmpty(targetWord)) { continue; }
 
                         dictionary.Add(sourceWord, targetWord);
                     }

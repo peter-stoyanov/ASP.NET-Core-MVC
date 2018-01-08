@@ -4,14 +4,12 @@ using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Services.Models;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.ViewComponents;
-using LanguageBuilder.Web.ViewModels;
 using LanguageBuilder.Web.ViewModels.TranslationViewModels;
 using LanguageBuilder.Web.ViewModels.WordViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Web.Controllers
@@ -38,11 +36,10 @@ namespace LanguageBuilder.Web.Controllers
             _mapper = mapper;
         }
 
-
         public async Task<IActionResult> My(TranslationsSearchFormViewModel searchForm, SortOptions sortOptions)
         {
             var request = searchForm.ToSearchRequest();
-            
+
             request.Filter = t => t.TargetWord.Users.Any(u => u.UserId == LoggedUser.Id);
 
             var response = await _translationsService.Search(request, sortOptions);
@@ -86,8 +83,8 @@ namespace LanguageBuilder.Web.Controllers
             return View(model);
         }
 
-        //public async Task<IActionResult> Details(int? id)
-        //{
+        // public async Task<IActionResult> Details(int? id)
+        // {
         //    if (id == null)
         //    {
         //        return NotFound();
@@ -103,7 +100,7 @@ namespace LanguageBuilder.Web.Controllers
         //    var model = _mapper.Map<Word, WordDetailViewModel>(word);
 
         //    return View(model);
-        //}
+        // }
 
         public async Task<IActionResult> Create()
         {
@@ -173,7 +170,7 @@ namespace LanguageBuilder.Web.Controllers
                         _mapper.Map<WordCreateViewModel, Word>(model.TargetWord),
                         this.LoggedUser.Id);
 
-                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, WebConstants.CREATED_GENERIC_MESSAGE, hasDismissButton: true));
+                    TempData.Put(WebConstants.ALERTKEY, new BootstrapAlertViewModel(BootstrapAlertType.Success, WebConstants.UPDATED_GENERIC_MESSAGE, hasDismissButton: true));
 
                     return RedirectToAction(nameof(My));
                 }

@@ -1,7 +1,6 @@
 ﻿using Hangfire;
 using LanguageBuilder.Data;
 using LanguageBuilder.Data.Models;
-using LanguageBuilder.Web.BackgroundTasks;
 using LanguageBuilder.Web.Hubs;
 using LanguageBuilder.Web.Infrastructure.Extensions;
 using LanguageBuilder.Web.Infrastructure.Filters;
@@ -10,20 +9,18 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Hosting;
 using System.IO;
 
 namespace LanguageBuilder.Web
 {
     public class Startup
     {
-        string _facebookAppId = null;
-        string _facebookAppSecret = null;
+        private string _facebookAppId = null;
+        private string _facebookAppSecret = null;
 
         public Startup(IHostingEnvironment env)
         {
@@ -48,7 +45,8 @@ namespace LanguageBuilder.Web
             services.AddDbContext<LanguageBuilderDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddHangfire(x => 
+                x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
 
             services
                 .AddIdentity<User, Role>(options =>
@@ -79,19 +77,19 @@ namespace LanguageBuilder.Web
             {
                 config.Filters.Add(new ValidateModelStateAttributeAttribute());
                 config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-                //config.SslPort = 44321;
-                //config.Filters.Add(new RequireHttpsAttribute());
+                config.SslPort = 44321;
+                config.Filters.Add(new RequireHttpsAttribute());
             });
 
-            //services.AddAntiforgery(
-            //    options =>
-            //    {
-            //        options.Cookie.Name = "_af";
-            //        options.Cookie.HttpOnly = true;
-            //        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            //        options.HeaderName = "X-XSRF-TOKEN";
-            //    }
-            //);
+            services.AddAntiforgery(
+                options =>
+                {
+                    options.Cookie.Name = "_af";
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    options.HeaderName = "X-XSRF-TOKEN";
+                }
+            );
 
             services.AddCors();
 

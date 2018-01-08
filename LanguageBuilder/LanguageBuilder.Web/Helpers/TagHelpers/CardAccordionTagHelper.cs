@@ -37,7 +37,7 @@ namespace LanguageBuilder.Web.Helpers.TagHelpers
 
             string titleText = TitleAsHtml ? Title : System.Net.WebUtility.HtmlEncode(Title);
             string bodyText = BodyAsHtml ? Body : System.Net.WebUtility.HtmlEncode(Body);
-            string image = $@"<img src=""{Image}"" class=""{(String.IsNullOrEmpty(ImageClass) ? "" : ImageClass)}"" >";
+            string image = $@"<img src=""{Image}"" class=""{(string.IsNullOrEmpty(ImageClass) ? string.Empty : ImageClass)}"" >";
             string id = context.UniqueId;
             string headerId = $"heading{id}";
             string collapseId = $"collapse{id}";
@@ -48,7 +48,7 @@ namespace LanguageBuilder.Web.Helpers.TagHelpers
             $@"<div class=""card"">
                 <div class=""card-header"" id=""{headerId}"" role=""tab"">
                     <h6 class=""mb-0"">
-                        <a aria-controls=""{collapseId}"" aria-expanded=""{(Expanded ? "true" : String.Empty )}"" data-toggle=""collapse"" href=""#{collapseId}"">{titleText}</a>
+                        <a aria-controls=""{collapseId}"" aria-expanded=""{(Expanded ? "true" : String.Empty)}"" data-toggle=""collapse"" href=""#{collapseId}"">{titleText}</a>
                     </h6>
                 </div>
                 <div aria-labelledby= ""{headerId}"" class=""{(Expanded ? String.Empty : "collapse")}"" data-parent=""#accordion"" id=""{collapseId}"" role=""tabpanel"">

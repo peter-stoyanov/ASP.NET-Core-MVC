@@ -6,10 +6,8 @@ using LanguageBuilder.Services.Contracts;
 using LanguageBuilder.Services.Models;
 using LanguageBuilder.Services.Models.TranslationsSearch;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace LanguageBuilder.Services.Implementations
@@ -59,11 +57,13 @@ namespace LanguageBuilder.Services.Implementations
                         ? query.OrderBy(t => t.SourceWord.Content)
                         : query.OrderByDescending(t => t.SourceWord.Content);
                     break;
+
                 case "target":
                     query = sortOptions.SortDirection == SortDirection.Ascending
                         ? query.OrderBy(t => t.TargetWord.Content)
                         : query.OrderByDescending(t => t.TargetWord.Content);
                     break;
+
                 default:
                     query = sortOptions.SortDirection == SortDirection.Ascending
                         ? query.OrderBy(t => t.SourceWord.Content)

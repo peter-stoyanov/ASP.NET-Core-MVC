@@ -23,7 +23,7 @@ namespace LanguageBuilder.Tests.Web
             var result = _homeController.Index();
 
             var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.Empty(viewResult.ViewName);
+            Assert.Null(viewResult.ViewName);
         }
 
         [Fact]

@@ -17,7 +17,6 @@ namespace LanguageBuilder.Web.Infrastructure.Mapping
 
             CreateMap<Translation, TranslationEditViewModel>();
             CreateMap<TranslationEditViewModel, Translation>();
-
         }
     }
 }

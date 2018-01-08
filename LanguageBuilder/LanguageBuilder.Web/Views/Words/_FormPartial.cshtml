@@ -18,7 +18,7 @@ else
 
 <h1 class="display-4 text-center mx-5">@ViewBag.Title</h1>
 
-<form asp-action="Create" class="mx-5">
+<form asp-action="@(Model is TranslationEditViewModel ? "Edit" : "Create")" class="mx-5">
     <div class="row">
 
         <div class="col-md-4 mr-5">
